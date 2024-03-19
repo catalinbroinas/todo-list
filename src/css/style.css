@@ -33,12 +33,16 @@ ul {
 .header {
     padding: 1.5rem 3rem;
     grid-column: span 2;
-    background-color: #78909C;
+    background-color: #304FFE;
+    font-size: 3rem;
+    display: flex;
+    flex-flow: row wrap;
+    gap: 1rem;
 }
 
 .sidebar {
     background-color: #ECEFF1;
-    padding: 2rem 3rem;
+    padding: 3rem;
 }
 
 .content {
@@ -46,8 +50,74 @@ ul {
 }
 
 .footer {
-    padding: 1rem 0;
-    background-color: #ECEFF1;
+    padding: 1.25rem 0;
+    background-color: #E8EAF6;
     text-align: center;
     grid-column: span 2;
+}
+
+/* Header */
+.page-title {
+    color: #FBFBFB;
+    font-size: inherit;
+    margin: 0;
+    padding: 0;
+    font-family: inherit;
+    font-weight: bold;
+}
+
+.page-logo {
+    font-size: inherit;
+    color: #FBFBFB;
+    margin: 0;
+}
+
+/* Sidebar */
+.sidebar-task, 
+.sidebar-project {
+    display: flex;
+    flex-flow: column wrap;
+}
+
+.sidebar-task {
+    margin: 0 0 2rem;
+}
+
+.sidebar-title, 
+.sidebar-title {
+    font-size: 1.5rem;
+    font-family: inherit;
+    font-weight: bold;
+    margin: 0 0 1rem;
+}
+
+.nav-item {
+    font-size: 1rem;
+    font-family: inherit;
+    margin: 0 0 1rem;
+    border: none;
+    background-color: transparent;
+    overflow: hidden;
+    display: inline-block;
+    text-align: left;
+    cursor: pointer;
+    padding: 0.5rem 4rem 0.5rem 2rem;
+    transition: background 0.3s ease;
+}
+
+.nav-item:hover,
+.nav-item:active {
+    background-color: #E0E0E0;
+}
+
+.sidebar-project {
+    margin: 2rem 0 0;
+}
+
+/* Footer */
+.footer-text {
+    font-size: 1rem;
+    font-weight: normal;
+    color: #757575;
+    font-family: inherit;
 }

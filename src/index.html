@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
+    <link rel="stylesheet" href="../node_modules/@mdi/font/css/materialdesignicons.min.css">
 </head>
 <body>
     
@@ -11,6 +12,7 @@
     <div class="page-wrapper">
         <!-- Header -->
         <header class="header">
+            <i class="mdi mdi-check-all page-logo"></i>
             <h1 class="page-title">Todo List</h1>
         </header>
         <!-- Header -->
@@ -19,9 +21,9 @@
             <!-- Tasks -->
             <ul class="sidebar-task">
                 <h6 class="sidebar-title">Tasks</h6>
-                <li class="nav-item">All</li>
-                <li class="nav-item">Today</li>
-                <li class="nav-item">This Week</li>
+                <button type="button" class="nav-item">All</button>
+                <button type="button" class="nav-item">Today</button>
+                <button type="button" class="nav-item">This Week</button>
             </ul>
             <!-- Tasks -->
             <!-- Projects -->
