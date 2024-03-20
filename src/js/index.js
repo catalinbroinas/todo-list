@@ -58,6 +58,13 @@ function UI() {
         pageContent.appendChild(addTitle('Today'));
     };
 
+    const displayWeek = () => {
+        setActiveSidebarButton('week-btn');
+        clearPageContent();
+
+        pageContent.appendChild(addTitle('This Week'));
+    };
+
     const addEvents = () => {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
@@ -67,6 +74,11 @@ function UI() {
         todayButton.addEventListener('click', (event) => {
             setTimeout(() => {
                 displayToday();
+            }, 500);
+        });
+        weekButton.addEventListener('click', () => {
+            setTimeout(() => {
+                displayWeek();
             }, 500);
         });
     };
