@@ -792,14 +792,24 @@ function UI() {
         pageContent.appendChild(inboxAddTask);
     };
 
+    const addEvents = () => {
+        inboxButton.addEventListener('click', (event) => {
+            setTimeout(() => {
+                displayInbox();
+            }, 500);
+        });
+    };
+
     return {
-        displayInbox
+        displayInbox,
+        addEvents
     };
 }
 
 window.addEventListener('load', () => {
     const ui = UI();
     ui.displayInbox();
+    ui.addEvents();
 });
 })();
 
