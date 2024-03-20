@@ -51,10 +51,22 @@ function UI() {
         pageContent.appendChild(inboxAddTask);
     };
 
+    const displayToday = () => {
+        setActiveSidebarButton('today-btn');
+        clearPageContent();
+
+        pageContent.appendChild(addTitle('Today'));
+    };
+
     const addEvents = () => {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
                 displayInbox();
+            }, 500);
+        });
+        todayButton.addEventListener('click', (event) => {
+            setTimeout(() => {
+                displayToday();
             }, 500);
         });
     };
