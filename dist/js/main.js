@@ -592,6 +592,40 @@ function styleTagTransform(css, styleElement) {
 }
 module.exports = styleTagTransform;
 
+/***/ }),
+
+/***/ "./src/js/inbox.js":
+/*!*************************!*\
+  !*** ./src/js/inbox.js ***!
+  \*************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   inboxDOM: () => (/* binding */ inboxDOM)
+/* harmony export */ });
+function inboxDOM() {
+    const addTask = () => {
+        const addTaskButton = document.createElement('button');
+        const addTaskIcon = document.createElement('i');
+
+        addTaskButton.setAttribute('type', 'button');
+        addTaskButton.classList.add('add-task-btn');
+        addTaskIcon.classList.add('mdi', 'mdi-plus', 'add-task-icon');
+
+        addTaskButton.appendChild(addTaskIcon);
+        addTaskButton.insertAdjacentText('beforeend', 'Add Task');
+
+        return addTaskButton;
+    };
+
+    return {
+        addTask
+    };
+}
+
+
+
 /***/ })
 
 /******/ 	});
@@ -675,7 +709,33 @@ var __webpack_exports__ = {};
   \*************************/
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/style.css */ "./src/css/style.css");
+/* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inbox */ "./src/js/inbox.js");
 
+
+
+function UI() {
+    const pageContent = document.querySelector('#content');
+    const inboxButton = document.querySelector('#inbox-btn');
+    const todayButton = document.querySelector('#today-btn');
+    const weekButton = document.querySelector('#week-btn');
+    const newProjectButton = document.querySelector('#new-project-btn');
+
+    const displayInbox = () => {
+        const inbox = (0,_inbox__WEBPACK_IMPORTED_MODULE_1__.inboxDOM)();
+        const inboxAddTask = inbox.addTask();
+
+        pageContent.appendChild(inboxAddTask);
+    };
+
+    return {
+        displayInbox
+    };
+}
+
+window.addEventListener('load', () => {
+    const ui = UI();
+    ui.displayInbox();
+});
 })();
 
 /******/ })()
