@@ -774,6 +774,14 @@ function UI() {
         }
     };
 
+    const clearPageContent = () => {
+        if (pageContent.hasChildNodes()) {
+            while (pageContent.firstChild) {
+                pageContent.removeChild(pageContent.firstChild);
+            }
+        }
+    };
+
     const addTitle = (setTitle) => {
         const title = document.createElement('h3');
         title.classList.add('content-title');
@@ -787,6 +795,7 @@ function UI() {
         const inboxAddTask = inbox.addTask();
 
         setActiveSidebarButton('inbox-btn');
+        clearPageContent();
 
         pageContent.appendChild(addTitle('Inbox'));
         pageContent.appendChild(inboxAddTask);
