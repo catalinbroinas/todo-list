@@ -119,6 +119,43 @@ ul {
     margin-right: 0.5rem;
 }
 
+/* Content */
+.content {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: start;
+    padding: 3rem 6rem;
+}
+
+.content-title {
+    font-size: 2rem;
+    font-family: inherit;
+    margin: 0 0 2rem;
+}
+
+.add-task-btn {
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #ECEFF1;
+    padding: 0.75rem 6rem 0.75rem 1rem;
+    border: none;
+    outline: none;
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.add-task-btn:hover,
+.add-task-btn:active {
+    background-color: #E0E0E0;
+}
+
+.add-task-icon {
+    margin-right: 1rem;
+}
+
 /* Footer */
 .footer-text {
     font-size: 1rem;

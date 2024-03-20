@@ -142,13 +142,50 @@ ul {
     margin-right: 0.5rem;
 }
 
+/* Content */
+.content {
+    display: flex;
+    flex-flow: column wrap;
+    align-items: start;
+    padding: 3rem 6rem;
+}
+
+.content-title {
+    font-size: 2rem;
+    font-family: inherit;
+    margin: 0 0 2rem;
+}
+
+.add-task-btn {
+    display: inline-block;
+    overflow: hidden;
+    cursor: pointer;
+    background-color: #ECEFF1;
+    padding: 0.75rem 6rem 0.75rem 1rem;
+    border: none;
+    outline: none;
+    margin: 0 0 1rem;
+    font-size: 1.25rem;
+    text-align: left;
+    transition: background 0.3s ease;
+}
+
+.add-task-btn:hover,
+.add-task-btn:active {
+    background-color: #E0E0E0;
+}
+
+.add-task-icon {
+    margin-right: 1rem;
+}
+
 /* Footer */
 .footer-text {
     font-size: 1rem;
     font-weight: normal;
     color: #757575;
     font-family: inherit;
-}`, "",{"version":3,"sources":["webpack://./src/css/style.css"],"names":[],"mappings":"AAAA,SAAS;AACT;IACI,4DAA4D;IAC5D,sBAAsB;IACtB,SAAS;IACT,UAAU;AACd;;AAEA;IACI,SAAS;IACT,UAAU;AACd;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,sBAAsB;AAC1B;;AAEA,WAAW;AACX;IACI,gBAAgB;IAChB,iBAAiB;IACjB,SAAS;IACT,UAAU;IACV,aAAa;IACb,iCAAiC;IACjC,+BAA+B;AACnC;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,yBAAyB;IACzB,eAAe;IACf,aAAa;IACb,mBAAmB;IACnB,SAAS;AACb;;AAEA;IACI,yBAAyB;IACzB,aAAa;AACjB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;IACI,kBAAkB;IAClB,yBAAyB;IACzB,kBAAkB;IAClB,mBAAmB;AACvB;;AAEA,WAAW;AACX;IACI,cAAc;IACd,kBAAkB;IAClB,SAAS;IACT,UAAU;IACV,oBAAoB;IACpB,iBAAiB;AACrB;;AAEA;IACI,kBAAkB;IAClB,cAAc;IACd,SAAS;AACb;;AAEA,YAAY;AACZ;;IAEI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;AACpB;;AAEA;;IAEI,iBAAiB;IACjB,oBAAoB;IACpB,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,eAAe;IACf,oBAAoB;IACpB,gBAAgB;IAChB,YAAY;IACZ,6BAA6B;IAC7B,gBAAgB;IAChB,qBAAqB;IACrB,gBAAgB;IAChB,eAAe;IACf,gCAAgC;IAChC,gCAAgC;AACpC;;AAEA;;;IAGI,yBAAyB;AAC7B;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,oBAAoB;AACxB;;AAEA,WAAW;AACX;IACI,eAAe;IACf,mBAAmB;IACnB,cAAc;IACd,oBAAoB;AACxB","sourcesContent":["/* Body */\r\nbody {\r\n    font-family: \"Roboto\", Arial, Verdana, Helvetica, sans-serif;\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul, li, h1, h6 {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul {\r\n    list-style-type: none;\r\n}\r\n\r\n* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Layout */\r\n.page-wrapper {\r\n    max-width: 100vw;\r\n    min-height: 100vh;\r\n    margin: 0;\r\n    padding: 0;\r\n    display: grid;\r\n    grid-template-rows: auto 1fr auto;\r\n    grid-template-columns: auto 1fr;\r\n}\r\n\r\n.header {\r\n    padding: 1.5rem 3rem;\r\n    grid-column: span 2;\r\n    background-color: #304FFE;\r\n    font-size: 3rem;\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    gap: 1rem;\r\n}\r\n\r\n.sidebar {\r\n    background-color: #ECEFF1;\r\n    padding: 3rem;\r\n}\r\n\r\n.content {\r\n    background-color: #FBFBFB;\r\n}\r\n\r\n.footer {\r\n    padding: 1.25rem 0;\r\n    background-color: #E8EAF6;\r\n    text-align: center;\r\n    grid-column: span 2;\r\n}\r\n\r\n/* Header */\r\n.page-title {\r\n    color: #FBFBFB;\r\n    font-size: inherit;\r\n    margin: 0;\r\n    padding: 0;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n}\r\n\r\n.page-logo {\r\n    font-size: inherit;\r\n    color: #FBFBFB;\r\n    margin: 0;\r\n}\r\n\r\n/* Sidebar */\r\n.sidebar-task, \r\n.sidebar-project {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n}\r\n\r\n.sidebar-task {\r\n    margin: 0 0 2rem;\r\n}\r\n\r\n.sidebar-title, \r\n.sidebar-title {\r\n    font-size: 1.5rem;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n    margin: 0 0 1rem;\r\n}\r\n\r\n.nav-item {\r\n    font-size: 1rem;\r\n    font-family: inherit;\r\n    margin: 0 0 1rem;\r\n    border: none;\r\n    background-color: transparent;\r\n    overflow: hidden;\r\n    display: inline-block;\r\n    text-align: left;\r\n    cursor: pointer;\r\n    padding: 0.5rem 4rem 0.5rem 2rem;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.nav-item:hover,\r\n.nav-item:active,\r\n.nav-item.active {\r\n    background-color: #E0E0E0;\r\n}\r\n\r\n.sidebar-project {\r\n    margin: 2rem 0 0;\r\n}\r\n\r\n.nav-icon {\r\n    margin-right: 0.5rem;\r\n}\r\n\r\n/* Footer */\r\n.footer-text {\r\n    font-size: 1rem;\r\n    font-weight: normal;\r\n    color: #757575;\r\n    font-family: inherit;\r\n}"],"sourceRoot":""}]);
+}`, "",{"version":3,"sources":["webpack://./src/css/style.css"],"names":[],"mappings":"AAAA,SAAS;AACT;IACI,4DAA4D;IAC5D,sBAAsB;IACtB,SAAS;IACT,UAAU;AACd;;AAEA;IACI,SAAS;IACT,UAAU;AACd;;AAEA;IACI,qBAAqB;AACzB;;AAEA;IACI,sBAAsB;AAC1B;;AAEA,WAAW;AACX;IACI,gBAAgB;IAChB,iBAAiB;IACjB,SAAS;IACT,UAAU;IACV,aAAa;IACb,iCAAiC;IACjC,+BAA+B;AACnC;;AAEA;IACI,oBAAoB;IACpB,mBAAmB;IACnB,yBAAyB;IACzB,eAAe;IACf,aAAa;IACb,mBAAmB;IACnB,SAAS;AACb;;AAEA;IACI,yBAAyB;IACzB,aAAa;AACjB;;AAEA;IACI,yBAAyB;AAC7B;;AAEA;IACI,kBAAkB;IAClB,yBAAyB;IACzB,kBAAkB;IAClB,mBAAmB;AACvB;;AAEA,WAAW;AACX;IACI,cAAc;IACd,kBAAkB;IAClB,SAAS;IACT,UAAU;IACV,oBAAoB;IACpB,iBAAiB;AACrB;;AAEA;IACI,kBAAkB;IAClB,cAAc;IACd,SAAS;AACb;;AAEA,YAAY;AACZ;;IAEI,aAAa;IACb,sBAAsB;AAC1B;;AAEA;IACI,gBAAgB;AACpB;;AAEA;;IAEI,iBAAiB;IACjB,oBAAoB;IACpB,iBAAiB;IACjB,gBAAgB;AACpB;;AAEA;IACI,eAAe;IACf,oBAAoB;IACpB,gBAAgB;IAChB,YAAY;IACZ,6BAA6B;IAC7B,gBAAgB;IAChB,qBAAqB;IACrB,gBAAgB;IAChB,eAAe;IACf,gCAAgC;IAChC,gCAAgC;AACpC;;AAEA;;;IAGI,yBAAyB;AAC7B;;AAEA;IACI,gBAAgB;AACpB;;AAEA;IACI,oBAAoB;AACxB;;AAEA,YAAY;AACZ;IACI,aAAa;IACb,sBAAsB;IACtB,kBAAkB;IAClB,kBAAkB;AACtB;;AAEA;IACI,eAAe;IACf,oBAAoB;IACpB,gBAAgB;AACpB;;AAEA;IACI,qBAAqB;IACrB,gBAAgB;IAChB,eAAe;IACf,yBAAyB;IACzB,kCAAkC;IAClC,YAAY;IACZ,aAAa;IACb,gBAAgB;IAChB,kBAAkB;IAClB,gBAAgB;IAChB,gCAAgC;AACpC;;AAEA;;IAEI,yBAAyB;AAC7B;;AAEA;IACI,kBAAkB;AACtB;;AAEA,WAAW;AACX;IACI,eAAe;IACf,mBAAmB;IACnB,cAAc;IACd,oBAAoB;AACxB","sourcesContent":["/* Body */\r\nbody {\r\n    font-family: \"Roboto\", Arial, Verdana, Helvetica, sans-serif;\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul, li, h1, h6 {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul {\r\n    list-style-type: none;\r\n}\r\n\r\n* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Layout */\r\n.page-wrapper {\r\n    max-width: 100vw;\r\n    min-height: 100vh;\r\n    margin: 0;\r\n    padding: 0;\r\n    display: grid;\r\n    grid-template-rows: auto 1fr auto;\r\n    grid-template-columns: auto 1fr;\r\n}\r\n\r\n.header {\r\n    padding: 1.5rem 3rem;\r\n    grid-column: span 2;\r\n    background-color: #304FFE;\r\n    font-size: 3rem;\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    gap: 1rem;\r\n}\r\n\r\n.sidebar {\r\n    background-color: #ECEFF1;\r\n    padding: 3rem;\r\n}\r\n\r\n.content {\r\n    background-color: #FBFBFB;\r\n}\r\n\r\n.footer {\r\n    padding: 1.25rem 0;\r\n    background-color: #E8EAF6;\r\n    text-align: center;\r\n    grid-column: span 2;\r\n}\r\n\r\n/* Header */\r\n.page-title {\r\n    color: #FBFBFB;\r\n    font-size: inherit;\r\n    margin: 0;\r\n    padding: 0;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n}\r\n\r\n.page-logo {\r\n    font-size: inherit;\r\n    color: #FBFBFB;\r\n    margin: 0;\r\n}\r\n\r\n/* Sidebar */\r\n.sidebar-task, \r\n.sidebar-project {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n}\r\n\r\n.sidebar-task {\r\n    margin: 0 0 2rem;\r\n}\r\n\r\n.sidebar-title, \r\n.sidebar-title {\r\n    font-size: 1.5rem;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n    margin: 0 0 1rem;\r\n}\r\n\r\n.nav-item {\r\n    font-size: 1rem;\r\n    font-family: inherit;\r\n    margin: 0 0 1rem;\r\n    border: none;\r\n    background-color: transparent;\r\n    overflow: hidden;\r\n    display: inline-block;\r\n    text-align: left;\r\n    cursor: pointer;\r\n    padding: 0.5rem 4rem 0.5rem 2rem;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.nav-item:hover,\r\n.nav-item:active,\r\n.nav-item.active {\r\n    background-color: #E0E0E0;\r\n}\r\n\r\n.sidebar-project {\r\n    margin: 2rem 0 0;\r\n}\r\n\r\n.nav-icon {\r\n    margin-right: 0.5rem;\r\n}\r\n\r\n/* Content */\r\n.content {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    align-items: start;\r\n    padding: 3rem 6rem;\r\n}\r\n\r\n.content-title {\r\n    font-size: 2rem;\r\n    font-family: inherit;\r\n    margin: 0 0 2rem;\r\n}\r\n\r\n.add-task-btn {\r\n    display: inline-block;\r\n    overflow: hidden;\r\n    cursor: pointer;\r\n    background-color: #ECEFF1;\r\n    padding: 0.75rem 6rem 0.75rem 1rem;\r\n    border: none;\r\n    outline: none;\r\n    margin: 0 0 1rem;\r\n    font-size: 1.25rem;\r\n    text-align: left;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.add-task-btn:hover,\r\n.add-task-btn:active {\r\n    background-color: #E0E0E0;\r\n}\r\n\r\n.add-task-icon {\r\n    margin-right: 1rem;\r\n}\r\n\r\n/* Footer */\r\n.footer-text {\r\n    font-size: 1rem;\r\n    font-weight: normal;\r\n    color: #757575;\r\n    font-family: inherit;\r\n}"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
