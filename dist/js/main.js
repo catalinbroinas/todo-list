@@ -677,7 +677,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   projectDOM: () => (/* binding */ projectDOM)
 /* harmony export */ });
 function projectDOM() {
-    const clickOnButton = () => {
+    const createNewProjectForm = () => {
         const form = document.createElement('form');
         const input = document.createElement('input');
         const groupButtons = document.createElement('div');
@@ -713,7 +713,7 @@ function projectDOM() {
     };
 
     return {
-        clickOnButton
+        createNewProjectForm
     };
 }
 
@@ -874,7 +874,7 @@ function UI() {
 
     const displayNewProjectForm = () => {
         const project =  (0,_project__WEBPACK_IMPORTED_MODULE_2__.projectDOM)();
-        const newProjectForm = project.clickOnButton();
+        const newProjectForm = project.createNewProjectForm();
         const sidebarProject = document.querySelector('#sidebar-project');
         
         sidebarProject.appendChild(newProjectForm);

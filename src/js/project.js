@@ -1,5 +1,5 @@
 function projectDOM() {
-    const clickOnButton = () => {
+    const createNewProjectForm = () => {
         const form = document.createElement('form');
         const input = document.createElement('input');
         const groupButtons = document.createElement('div');
@@ -35,7 +35,7 @@ function projectDOM() {
     };
 
     return {
-        clickOnButton
+        createNewProjectForm
     };
 }
 
