@@ -1,5 +1,6 @@
 import '../css/style.css';
 import { inboxDOM } from './inbox';
+import { projectDOM } from './project';
 
 function UI() {
     const pageContent = document.querySelector('#content');
@@ -65,6 +66,14 @@ function UI() {
         pageContent.appendChild(addTitle('This Week'));
     };
 
+    const displayNewProjectForm = () => {
+        const project =  projectDOM();
+        const newProjectForm = project.clickOnButton();
+        const sidebarProject = document.querySelector('#sidebar-project');
+        
+        sidebarProject.appendChild(newProjectForm);
+    };
+
     const addEvents = () => {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
@@ -80,6 +89,11 @@ function UI() {
             setTimeout(() => {
                 displayWeek();
             }, 500);
+        });
+        newProjectButton.addEventListener('click', (event) => {
+            setTimeout(() => {
+                displayNewProjectForm();
+            }, 300);
         });
     };
 

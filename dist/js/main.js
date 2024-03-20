@@ -664,6 +664,61 @@ function inboxDOM() {
 
 
 
+/***/ }),
+
+/***/ "./src/js/project.js":
+/*!***************************!*\
+  !*** ./src/js/project.js ***!
+  \***************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   projectDOM: () => (/* binding */ projectDOM)
+/* harmony export */ });
+function projectDOM() {
+    const clickOnButton = () => {
+        const form = document.createElement('form');
+        const input = document.createElement('input');
+        const groupButtons = document.createElement('div');
+        const addButton = document.createElement('button');
+        const addButtonIcon = document.createElement('i');
+        const cancelButton = document.createElement('button');
+        const cancelButtonIcon = document.createElement('i');
+
+        form.classList.add('new-project-form');
+        input.classList.add('form-control');
+        addButton.classList.add('add-btn');
+        addButtonIcon.classList.add('mdi', 'mdi-send', 'action-btn-icon');
+        cancelButton.classList.add('cancel-btn');
+        cancelButtonIcon.classList.add('mdi', 'mdi-cancel', 'action-btn-icon');
+
+        input.setAttribute('type', 'text');
+        input.setAttribute('id', 'set-name-project');
+        input.setAttribute('name', 'name-project');
+        input.setAttribute('placeholder', 'Name');
+        addButton.setAttribute('type', 'button');
+        cancelButton.setAttribute('type', 'button');
+
+        form.appendChild(input);
+        form.appendChild(groupButtons);
+        groupButtons.appendChild(addButton);
+        addButton.appendChild(addButtonIcon);
+        addButton.insertAdjacentText('beforeend', 'Add');
+        groupButtons.appendChild(cancelButton);
+        cancelButton.appendChild(cancelButtonIcon);
+        cancelButton.insertAdjacentText('beforeend', 'Cancel');
+
+        return form;
+    };
+
+    return {
+        clickOnButton
+    };
+}
+
+
+
 /***/ })
 
 /******/ 	});
@@ -748,6 +803,8 @@ var __webpack_exports__ = {};
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _css_style_css__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../css/style.css */ "./src/css/style.css");
 /* harmony import */ var _inbox__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./inbox */ "./src/js/inbox.js");
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./project */ "./src/js/project.js");
+
 
 
 
@@ -815,6 +872,14 @@ function UI() {
         pageContent.appendChild(addTitle('This Week'));
     };
 
+    const displayNewProjectForm = () => {
+        const project =  (0,_project__WEBPACK_IMPORTED_MODULE_2__.projectDOM)();
+        const newProjectForm = project.clickOnButton();
+        const sidebarProject = document.querySelector('#sidebar-project');
+        
+        sidebarProject.appendChild(newProjectForm);
+    };
+
     const addEvents = () => {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
@@ -830,6 +895,11 @@ function UI() {
             setTimeout(() => {
                 displayWeek();
             }, 500);
+        });
+        newProjectButton.addEventListener('click', (event) => {
+            setTimeout(() => {
+                displayNewProjectForm();
+            }, 300);
         });
     };
 

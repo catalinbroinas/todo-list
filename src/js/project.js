@@ -15,7 +15,7 @@ function projectDOM() {
         cancelButton.classList.add('cancel-btn');
         cancelButtonIcon.classList.add('mdi', 'mdi-cancel', 'action-btn-icon');
 
-        input.setAttributeNS('type', 'text');
+        input.setAttribute('type', 'text');
         input.setAttribute('id', 'set-name-project');
         input.setAttribute('name', 'name-project');
         input.setAttribute('placeholder', 'Name');
@@ -28,7 +28,7 @@ function projectDOM() {
         addButton.appendChild(addButtonIcon);
         addButton.insertAdjacentText('beforeend', 'Add');
         groupButtons.appendChild(cancelButton);
-        cancelButtonIcon.appendChild(cancelButtonIcon);
+        cancelButton.appendChild(cancelButtonIcon);
         cancelButton.insertAdjacentText('beforeend', 'Cancel');
 
         return form;
