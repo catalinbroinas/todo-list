@@ -759,7 +759,7 @@ function UI() {
     const newProjectButton = document.querySelector('#new-project-btn');
 
     const setActiveSidebarButton = (getActiveButton) => {
-        const navItems = document.querySelectorAll('nav-item');
+        const navItems = document.querySelectorAll('.nav-item');
         const setActiveItem = document.querySelector(`#${getActiveButton}`);
 
 
