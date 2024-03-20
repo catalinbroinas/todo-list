@@ -106,7 +106,8 @@ ul {
 }
 
 .nav-item:hover,
-.nav-item:active {
+.nav-item:active,
+.nav-item.active {
     background-color: #E0E0E0;
 }
 
