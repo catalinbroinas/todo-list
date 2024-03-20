@@ -119,6 +119,75 @@ ul {
     margin-right: 0.5rem;
 }
 
+.new-project-form {
+    display: flex;
+    flex-flow: column wrap;
+    gap: 1rem;
+}
+
+.form-control {
+    font-size: 1rem;
+    font-family: inherit;
+    color: #333;
+    background-color: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 8px 12px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    transition: border-color 0.3s, box-shadow 0.3s;
+}
+
+.form-control:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);
+}
+
+.group-btn {
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: center;
+    gap: 1rem;
+}
+
+.add-btn,
+.cancel-btn {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    font-size: 1rem;
+    overflow: hidden;
+    outline: none;
+    border: 0;
+    cursor: pointer;
+    color: #FBFBFB;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);
+    transition: background 0.3s ease, box-shadow 0.3s ease-in-out;
+}
+
+.add-btn {
+    background-color: #00C853;
+}
+
+.add-btn:hover,
+.add-btn:hover:active {
+    background-color: #00E676;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.cancel-btn {
+    background-color: #DD2C00;
+}
+
+.cancel-btn:hover,
+.cancel-btn:active {
+    background-color: #FF3D00;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-icon {
+    margin: 0 0.5rem 0 0;
+}
+
 /* Content */
 .content {
     display: flex;

@@ -10,6 +10,7 @@ function projectDOM() {
 
         form.classList.add('new-project-form');
         input.classList.add('form-control');
+        groupButtons.classList.add('group-btn');
         addButton.classList.add('add-btn');
         addButtonIcon.classList.add('mdi', 'mdi-send', 'action-btn-icon');
         cancelButton.classList.add('cancel-btn');
