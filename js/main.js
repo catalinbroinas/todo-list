@@ -737,12 +737,21 @@ function UI() {
         }
     };
 
+    const addTitle = (setTitle) => {
+        const title = document.createElement('h3');
+        title.classList.add('content-title');
+        title.textContent = setTitle;
+
+        return title;
+    };
+
     const displayInbox = () => {
         const inbox = (0,_inbox__WEBPACK_IMPORTED_MODULE_1__.inboxDOM)();
         const inboxAddTask = inbox.addTask();
 
         setActiveSidebarButton('inbox-btn');
 
+        pageContent.appendChild(addTitle('Inbox'));
         pageContent.appendChild(inboxAddTask);
     };
 
