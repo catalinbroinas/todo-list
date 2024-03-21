@@ -21,9 +21,7 @@ function projectDOM() {
         input.setAttribute('name', 'name-project');
         input.setAttribute('placeholder', 'Name');
         addButton.setAttribute('type', 'button');
-        addButton.setAttribute('id', 'add-project-btn');
         cancelButton.setAttribute('type', 'button');
-        cancelButton.setAttribute('id', 'cancel-project-btn');
 
         form.appendChild(input);
         form.appendChild(groupButtons);
@@ -35,7 +33,7 @@ function projectDOM() {
         cancelButton.insertAdjacentText('beforeend', 'Cancel');
 
         return form;
-    };
+    };    
 
     return {
         createNewProjectForm
