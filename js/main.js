@@ -770,6 +770,10 @@ function projectDOM() {
         addButton.setAttribute('type', 'button');
         cancelButton.setAttribute('type', 'button');
 
+        addButton.addEventListener('click', (event) => {
+            setTimeout(() => addNewProject(input.value), 500);
+        });
+
         form.appendChild(input);
         form.appendChild(groupButtons);
         groupButtons.appendChild(addButton);
@@ -780,7 +784,23 @@ function projectDOM() {
         cancelButton.insertAdjacentText('beforeend', 'Cancel');
 
         return form;
-    };    
+    };
+    
+    const addNewProject = (name) => {
+        const sidebarProject = document.querySelector('#sidebar-project');
+        const newItems = document.createElement('button');
+        const newItemsIcon = document.createElement('i');
+
+        newItems.classList.add('nav-item');
+        newItemsIcon.classList.add('mdi', 'mdi-laptop', 'nav-icon');
+
+        newItems.setAttribute('type', 'button');
+        newItems.setAttribute('id', `${name.toLowerCase()}-btn`);
+
+        newItems.appendChild(newItemsIcon);
+        newItems.insertAdjacentText('beforeend', `${name}`);
+        sidebarProject.appendChild(newItems);
+    };
 
     return {
         createNewProjectForm
