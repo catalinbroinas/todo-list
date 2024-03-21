@@ -105,6 +105,6 @@ function UI() {
 
 window.addEventListener('load', () => {
     const ui = UI();
-    ui.displayInbox();
+    // ui.displayInbox();
     ui.addEvents();
 });
