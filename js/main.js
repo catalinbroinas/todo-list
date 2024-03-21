@@ -771,6 +771,7 @@ function projectDOM() {
         cancelButton.setAttribute('type', 'button');
 
         addButton.addEventListener('click', (event) => {
+            event.preventDefault();
             setTimeout(() => {
                 addNewProject(input.value);
                 closeNewProjectForm(form);
@@ -778,7 +779,12 @@ function projectDOM() {
         });
 
         cancelButton.addEventListener('click', (event) => {
+            event.preventDefault();
             setTimeout(() => closeNewProjectForm(form), 500);
+        });
+
+        form.addEventListener('submit', (event) => {
+            event.preventDefault();
         });
 
         form.appendChild(input);
