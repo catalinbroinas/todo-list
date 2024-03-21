@@ -771,7 +771,14 @@ function projectDOM() {
         cancelButton.setAttribute('type', 'button');
 
         addButton.addEventListener('click', (event) => {
-            setTimeout(() => addNewProject(input.value), 500);
+            setTimeout(() => {
+                addNewProject(input.value);
+                closeNewProjectForm(form);
+            }, 500);
+        });
+
+        cancelButton.addEventListener('click', (event) => {
+            setTimeout(() => closeNewProjectForm(form), 500);
         });
 
         form.appendChild(input);
@@ -800,6 +807,12 @@ function projectDOM() {
         newItems.appendChild(newItemsIcon);
         newItems.insertAdjacentText('beforeend', `${name}`);
         sidebarProject.appendChild(newItems);
+    };
+
+    const closeNewProjectForm = (element) => {
+        if (element) {
+            element.remove();
+        }
     };
 
     return {
