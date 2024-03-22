@@ -1,3 +1,30 @@
+function ProjectManager() {
+    const projects = [];
+
+    const createProject = (project) => {
+
+    };
+
+    const addProject = (project) => {
+
+    };
+
+    const getProjects = () => {
+
+    };
+
+    const removeProject = (index) => {
+
+    };
+
+    return {
+        createProject,
+        addProject,
+        getProjects,
+        removeProject
+    };
+}
+
 function projectDOM() {
     const createNewProjectForm = () => {
         const form = document.createElement('form');
