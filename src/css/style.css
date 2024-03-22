@@ -6,7 +6,10 @@ body {
     padding: 0;
 }
 
-ul, li, h1, h6 {
+ul,
+li,
+h1,
+h6 {
     margin: 0;
     padding: 0;
 }
@@ -73,7 +76,7 @@ ul {
 }
 
 /* Sidebar */
-.sidebar-task, 
+.sidebar-task,
 .sidebar-project {
     display: flex;
     flex-flow: column wrap;
@@ -83,7 +86,7 @@ ul {
     margin: 0 0 2rem;
 }
 
-.sidebar-title, 
+.sidebar-title,
 .sidebar-title {
     font-size: 1.5rem;
     font-family: inherit;
@@ -223,6 +226,80 @@ ul {
 
 .add-task-icon {
     margin-right: 1rem;
+}
+
+/* Task */
+.task {
+    width: 80%;
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    background-color: #ECEFF1;
+    color: #332D2D;
+    font-size: 1rem;
+    padding: 0.5rem 1.5rem;
+    margin: 1rem 0;
+    border-radius: 1rem;
+}
+
+.task-status {
+    margin-right: 2rem;
+}
+
+.task-body {
+    margin-right: auto;
+}
+
+.task-title,
+.task-description {
+    margin: 0;
+    font-size: 1rem;
+}
+
+.task-title {
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+}
+
+.task-description {
+    font-weight: normal;
+}
+
+.task-action {
+    display: flex;
+    align-items: center;
+}
+
+.task-action-date,
+.task-action-btn {
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border: none;
+    background-color: transparent;
+    overflow: hidden;
+    transition: background 0.3s ease;
+}
+
+.task-action-date {
+    font-size: 1rem;
+    border-radius: 0.25rem;
+}
+
+.task-action-btn {
+    display: inline-block;
+    margin-left: 1rem;
+    border-radius: 0.5rem;
+}
+
+.task-action-date:hover,
+.task-action-date:active,
+.task-action-btn:hover,
+.task-action-btn:active {
+    background-color: white;
+}
+
+.task-icon {
+    font-size: 1.5rem;
 }
 
 /* Footer */
