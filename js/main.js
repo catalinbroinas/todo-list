@@ -841,6 +841,33 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   projectDOM: () => (/* binding */ projectDOM)
 /* harmony export */ });
+function ProjectManager() {
+    const projects = [];
+
+    const createProject = (project) => {
+
+    };
+
+    const addProject = (project) => {
+
+    };
+
+    const getProjects = () => {
+
+    };
+
+    const removeProject = (index) => {
+
+    };
+
+    return {
+        createProject,
+        addProject,
+        getProjects,
+        removeProject
+    };
+}
+
 function projectDOM() {
     const createNewProjectForm = () => {
         const form = document.createElement('form');
