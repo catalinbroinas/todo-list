@@ -246,6 +246,25 @@ ul {
     margin-right: 2rem;
 }
 
+.task-status-checkbox {
+    appearance: none; /* Hide the default look of the checkbox*/
+    cursor: pointer;
+    width: 1.5rem; 
+    height: 1.5rem; 
+    border: 2px solid #304FFE;
+    border-radius: 0.5rem; 
+    transition: border-color 0.3s ease; 
+}
+
+.task-status-checkbox:hover {
+    background-color: white;
+}
+
+.task-status-checkbox:checked {
+    background-color: #304FFE; 
+    border-color: #304FFE;
+}
+
 .task-body {
     margin-right: auto;
 }
