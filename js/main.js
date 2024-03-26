@@ -853,7 +853,7 @@ function ProjectManager() {
     };
 
     const addProject = (project) => {
-
+        projects.push(project);
     };
 
     const getProjects = () => {
