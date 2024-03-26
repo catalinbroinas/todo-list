@@ -77,7 +77,8 @@ ul {
 
 /* Sidebar */
 .sidebar-task,
-.sidebar-project {
+.sidebar-project,
+.sidebar-items {
     display: flex;
     flex-flow: column wrap;
 }

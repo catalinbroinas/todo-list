@@ -1,3 +1,5 @@
+import { DOMHandler } from "./utility";
+
 function ProjectManager() {
     const projects = [];
 
@@ -44,6 +46,7 @@ function ProjectManager() {
 
 function projectDOM() {
     const projectManager = ProjectManager();
+    const utilities = DOMHandler();
 
     const createNewProjectForm = () => {
         const form = document.createElement('form');
@@ -73,7 +76,10 @@ function projectDOM() {
             event.preventDefault();
             const project = projectManager.createProject(input.value);
             projectManager.addProject(project);
-            setTimeout(() => closeNewProjectForm(form), 500);
+            setTimeout(() => {
+                closeNewProjectForm(form);
+                sidebarContent();
+            }, 500);
         });
 
         cancelButton.addEventListener('click', (event) => {
@@ -114,9 +120,11 @@ function projectDOM() {
     };
 
     const sidebarContent = () => {
-        const sideBar = document.querySelector('#sidebar-project');
+        const sideBar = document.querySelector('#sidebar-items');
         const projects = projectManager.getProjects();
-        
+
+        utilities.clearPageContent(sideBar);
+
         if (projects.length) {
             projects.forEach(item => {
                 sideBar.appendChild(createNavItem(item.name));

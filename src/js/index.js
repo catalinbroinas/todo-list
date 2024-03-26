@@ -1,8 +1,10 @@
 import '../css/style.css';
 import { inboxDOM } from './inbox';
 import { projectDOM } from './project';
+import { DOMHandler } from './utility';
 
 function UI() {
+    const utilities = DOMHandler();
     const pageContent = document.querySelector('#content');
     const inboxButton = document.querySelector('#inbox-btn');
     const todayButton = document.querySelector('#today-btn');
@@ -25,14 +27,6 @@ function UI() {
         }
     };
 
-    const clearPageContent = () => {
-        if (pageContent.hasChildNodes()) {
-            while (pageContent.firstChild) {
-                pageContent.removeChild(pageContent.firstChild);
-            }
-        }
-    };
-
     const addTitle = (setTitle) => {
         const title = document.createElement('h3');
         title.classList.add('content-title');
@@ -46,7 +40,7 @@ function UI() {
         const inboxAddTask = inbox.addTask();
 
         setActiveSidebarButton('inbox-btn');
-        clearPageContent();
+        utilities.clearPageContent(pageContent);
 
         pageContent.appendChild(addTitle('Inbox'));
         pageContent.appendChild(inboxAddTask);
@@ -54,14 +48,14 @@ function UI() {
 
     const displayToday = () => {
         setActiveSidebarButton('today-btn');
-        clearPageContent();
+        utilities.clearPageContent(pageContent);
 
         pageContent.appendChild(addTitle('Today'));
     };
 
     const displayWeek = () => {
         setActiveSidebarButton('week-btn');
-        clearPageContent();
+        utilities.clearPageContent(pageContent);
 
         pageContent.appendChild(addTitle('This Week'));
     };
