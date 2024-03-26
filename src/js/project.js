@@ -1,8 +1,12 @@
 function ProjectManager() {
     const projects = [];
 
-    const createProject = (project) => {
-
+    const createProject = (projectName) => {
+        const project = {
+            name: projectName,
+            tasks: []
+        };
+        return project;
     };
 
     const addProject = (project) => {
