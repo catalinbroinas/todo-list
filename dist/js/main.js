@@ -956,6 +956,17 @@ function projectDOM() {
         return newItem;
     };
 
+    const sidebarContent = () => {
+        const sideBar = document.querySelector('#sidebar-project');
+        const projects = projectManager.getProjects();
+        
+        if (projects.length) {
+            projects.forEach(item => {
+                sideBar.appendChild(createNavItem(item.name));
+            });
+        }
+    };
+
     const closeNewProjectForm = (element) => {
         if (element) {
             element.remove();
@@ -963,7 +974,8 @@ function projectDOM() {
     };
 
     return {
-        createNewProjectForm
+        createNewProjectForm,
+        sidebarContent
     };
 }
 
@@ -1161,8 +1173,10 @@ function UI() {
 
 window.addEventListener('load', () => {
     const ui = UI();
+    const project = (0,_project__WEBPACK_IMPORTED_MODULE_2__.projectDOM)();
     // ui.displayInbox();
     ui.addEvents();
+    project.sidebarContent();
 });
 })();
 

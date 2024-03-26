@@ -113,6 +113,17 @@ function projectDOM() {
         return newItem;
     };
 
+    const sidebarContent = () => {
+        const sideBar = document.querySelector('#sidebar-project');
+        const projects = projectManager.getProjects();
+        
+        if (projects.length) {
+            projects.forEach(item => {
+                sideBar.appendChild(createNavItem(item.name));
+            });
+        }
+    };
+
     const closeNewProjectForm = (element) => {
         if (element) {
             element.remove();
@@ -120,7 +131,8 @@ function projectDOM() {
     };
 
     return {
-        createNewProjectForm
+        createNewProjectForm,
+        sidebarContent
     };
 }
 
