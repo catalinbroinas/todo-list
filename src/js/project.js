@@ -11,6 +11,7 @@ function ProjectManager() {
 
     const addProject = (project) => {
         projects.push(project);
+        saveProject();
     };
 
     const getProjects = () => {
@@ -35,6 +36,8 @@ function ProjectManager() {
 }
 
 function projectDOM() {
+    const projectManager = ProjectManager();
+
     const createNewProjectForm = () => {
         const form = document.createElement('form');
         const input = document.createElement('input');
@@ -62,6 +65,8 @@ function projectDOM() {
         addButton.addEventListener('click', (event) => {
             event.preventDefault();
             setTimeout(() => {
+                const project = projectManager.createProject(input.value);
+                projectManager.addProject(project);
                 addNewProject(input.value);
                 closeNewProjectForm(form);
             }, 500);
