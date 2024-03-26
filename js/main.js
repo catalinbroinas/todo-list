@@ -867,7 +867,14 @@ function ProjectManager() {
     };
 
     const saveProject = () => {
-        localStorage.setItem('projects', JSON.stringify(projects));
+        // Get the existing projects from localStorage
+        const existProjects = JSON.parse(localStorage.getItem('projects'));
+
+        // Adds the new project to the list of existing projects
+        existProjects.push(...projects);
+
+        // Saves the updated list of projects to localStorage
+        localStorage.setItem('projects', JSON.stringify(existProjects));
     };
 
     return {
@@ -907,12 +914,9 @@ function projectDOM() {
 
         addButton.addEventListener('click', (event) => {
             event.preventDefault();
-            setTimeout(() => {
-                const project = projectManager.createProject(input.value);
-                projectManager.addProject(project);
-                addNewProject(input.value);
-                closeNewProjectForm(form);
-            }, 500);
+            const project = projectManager.createProject(input.value);
+            projectManager.addProject(project);
+            setTimeout(() => closeNewProjectForm(form), 500);
         });
 
         cancelButton.addEventListener('click', (event) => {
