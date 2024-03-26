@@ -858,7 +858,7 @@ function ProjectManager() {
     };
 
     const getProjects = () => {
-        return projects.slice();
+        return JSON.parse(localStorage.getItem('projects'));
     };
 
     const removeProject = (index) => {
@@ -868,7 +868,7 @@ function ProjectManager() {
 
     const saveProject = () => {
         // Get the existing projects from localStorage
-        const existProjects = JSON.parse(localStorage.getItem('projects'));
+        const existProjects = getProjects();
 
         // Adds the new project to the list of existing projects
         existProjects.push(...projects);
@@ -939,8 +939,8 @@ function projectDOM() {
 
         return form;
     };
-    
-    const addNewProject = (name) => {
+
+    const createNavItem = (name) => {
         const newItem = document.createElement('button');
         const newItemIcon = document.createElement('i');
 
@@ -952,7 +952,7 @@ function projectDOM() {
 
         newItem.appendChild(newItemIcon);
         newItem.insertAdjacentText('beforeend', `${name}`);
-        
+
         return newItem;
     };
 
