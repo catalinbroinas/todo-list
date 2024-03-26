@@ -861,7 +861,8 @@ function ProjectManager() {
     };
 
     const removeProject = (index) => {
-
+        projects.splice(index, 1);
+        saveProject();
     };
 
     const saveProject = () => {
