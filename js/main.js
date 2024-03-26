@@ -857,7 +857,7 @@ function ProjectManager() {
     };
 
     const getProjects = () => {
-
+        return projects.slice();
     };
 
     const removeProject = (index) => {
