@@ -21,6 +21,10 @@ function ProjectManager() {
 
     };
 
+    const saveProject = () => {
+        localStorage.setItem('projects', JSON.stringify(projects));
+    };
+
     return {
         createProject,
         addProject,
