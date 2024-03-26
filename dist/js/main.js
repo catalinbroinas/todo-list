@@ -941,19 +941,19 @@ function projectDOM() {
     };
     
     const addNewProject = (name) => {
-        const sidebarProject = document.querySelector('#sidebar-project');
-        const newItems = document.createElement('button');
-        const newItemsIcon = document.createElement('i');
+        const newItem = document.createElement('button');
+        const newItemIcon = document.createElement('i');
 
-        newItems.classList.add('nav-item');
-        newItemsIcon.classList.add('mdi', 'mdi-laptop', 'nav-icon');
+        newItem.classList.add('nav-item');
+        newItemIcon.classList.add('mdi', 'mdi-laptop', 'nav-icon');
 
-        newItems.setAttribute('type', 'button');
-        newItems.setAttribute('id', `${name.toLowerCase()}-btn`);
+        newItem.setAttribute('type', 'button');
+        newItem.setAttribute('id', `${name.toLowerCase()}-btn`);
 
-        newItems.appendChild(newItemsIcon);
-        newItems.insertAdjacentText('beforeend', `${name}`);
-        sidebarProject.appendChild(newItems);
+        newItem.appendChild(newItemIcon);
+        newItem.insertAdjacentText('beforeend', `${name}`);
+        
+        return newItem;
     };
 
     const closeNewProjectForm = (element) => {
