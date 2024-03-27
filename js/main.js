@@ -871,8 +871,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ProjectManager() {
-    const projects = [];
-
     const createProject = (projectName) => {
         const project = {
             name: projectName,
@@ -882,8 +880,9 @@ function ProjectManager() {
     };
 
     const addProject = (project) => {
-        projects.push(project);
-        saveProject();
+        const existProjects = getProjects();
+        existProjects.push(project);
+        localStorage.setItem('projects', JSON.stringify(existProjects));
     };
 
     const getProjects = () => {
@@ -891,18 +890,8 @@ function ProjectManager() {
     };
 
     const removeProject = (index) => {
-        projects.splice(index, 1);
-        saveProject();
-    };
-
-    const saveProject = () => {
-        // Get the existing projects from localStorage
         const existProjects = getProjects();
-
-        // Adds the new project to the list of existing projects
-        existProjects.push(...projects);
-
-        // Saves the updated list of projects to localStorage
+        existProjects.splice(index, 1);
         localStorage.setItem('projects', JSON.stringify(existProjects));
     };
 
@@ -1007,6 +996,13 @@ function projectDOM() {
         newItem.addEventListener('mouseout', (event) => {
             deleteButton.style.visibility = 'hidden';
             editButton.style.visibility = 'hidden';
+        });
+
+        deleteButton.addEventListener('click', (event) => {
+            const projects = projectManager.getProjects();
+            const index = projects.findIndex(item => item.name === newItem.textContent);
+            projectManager.removeProject(index);
+            sidebarContent();
         });
 
         newItem.appendChild(navItemBody);
