@@ -127,6 +127,7 @@ ul {
     display: flex;
     flex-flow: column wrap;
     gap: 1rem;
+    margin-bottom: 2rem;
 }
 
 .form-control {
