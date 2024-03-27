@@ -78,7 +78,7 @@ ul {
 /* Sidebar */
 .sidebar-task,
 .sidebar-project,
-.sidebar-items {
+.sidebar-project-items {
     display: flex;
     flex-flow: column wrap;
 }
@@ -87,7 +87,6 @@ ul {
     margin: 0 0 2rem;
 }
 
-.sidebar-title,
 .sidebar-title {
     font-size: 1.5rem;
     font-family: inherit;

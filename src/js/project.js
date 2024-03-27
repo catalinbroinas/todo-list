@@ -107,7 +107,7 @@ function projectDOM() {
         const newItem = document.createElement('button');
         const newItemIcon = document.createElement('i');
 
-        newItem.classList.add('nav-item');
+        newItem.classList.add('nav-item', 'project-item');
         newItemIcon.classList.add('mdi', 'mdi-laptop', 'nav-icon');
 
         newItem.setAttribute('type', 'button');
@@ -120,7 +120,7 @@ function projectDOM() {
     };
 
     const sidebarContent = () => {
-        const sideBar = document.querySelector('#sidebar-items');
+        const sideBar = document.querySelector('#sidebar-project-items');
         const projects = projectManager.getProjects();
 
         utilities.clearPageContent(sideBar);
