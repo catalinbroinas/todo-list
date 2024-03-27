@@ -1169,8 +1169,10 @@ function UI() {
         const project =  (0,_project__WEBPACK_IMPORTED_MODULE_2__.projectDOM)();
         const newProjectForm = project.createNewProjectForm();
         const sidebarProject = document.querySelector('#sidebar-project');
-        
-        sidebarProject.appendChild(newProjectForm);
+
+        if (!sidebarProject.querySelector('#set-name-project')) {
+            newProjectButton.after(newProjectForm);
+        }
     };
 
     const addEvents = () => {
