@@ -64,8 +64,10 @@ function UI() {
         const project =  projectDOM();
         const newProjectForm = project.createNewProjectForm();
         const sidebarProject = document.querySelector('#sidebar-project');
-        
-        sidebarProject.appendChild(newProjectForm);
+
+        if (!sidebarProject.querySelector('#set-name-project')) {
+            newProjectButton.after(newProjectForm);
+        }
     };
 
     const addEvents = () => {
