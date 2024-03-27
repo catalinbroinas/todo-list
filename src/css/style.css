@@ -192,6 +192,31 @@ ul {
     margin: 0 0.5rem 0 0;
 }
 
+.project-item {
+    display: flex;
+    flex-flow: row wrap;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
+    font-size: 1rem;
+}
+
+.project-item-body, 
+.project-item-actions {
+    display: inline-block;
+}
+
+.project-action-btn {
+    display: inline-block;
+    visibility: hidden;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    margin-right: 0.5rem;
+    font-size: 1.25rem;
+}
+
 /* Content */
 .content {
     display: flex;

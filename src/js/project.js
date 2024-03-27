@@ -104,17 +104,49 @@ function projectDOM() {
     };
 
     const createNavItem = (name) => {
-        const newItem = document.createElement('button');
+        const newItem = document.createElement('a');
+        const navItemBody = document.createElement('div');
+        const navItemActions = document.createElement('div');
         const newItemIcon = document.createElement('i');
+        const deleteButton = document.createElement('button');
+        const deleteButtonIcon = document.createElement('i');
+        const editButton = document.createElement('button');
+        const editButtonIcon = document.createElement('i');
 
         newItem.classList.add('nav-item', 'project-item');
-        newItemIcon.classList.add('mdi', 'mdi-laptop', 'nav-icon');
+        navItemBody.classList.add('project-item-body');
+        newItemIcon.classList.add('mdi', 'mdi-format-list-bulleted', 'nav-icon');
+        navItemActions.classList.add('project-item-actions');
+        deleteButton.classList.add('project-action-btn');
+        deleteButtonIcon.classList.add('mdi', 'mdi-delete');
+        editButton.classList.add('project-action-btn');
+        editButtonIcon.classList.add('mdi', 'mdi-pencil');
 
-        newItem.setAttribute('type', 'button');
+        newItem.setAttribute('role', 'button');
         newItem.setAttribute('id', `${name.toLowerCase()}-btn`);
+        deleteButton.setAttribute('title', 'Delete item');
+        deleteButton.setAttribute('type', 'button');
+        editButton.setAttribute('title', 'Edit item');
+        editButton.setAttribute('type', 'button');
 
-        newItem.appendChild(newItemIcon);
-        newItem.insertAdjacentText('beforeend', `${name}`);
+        newItem.addEventListener('mouseover', (event) => {
+            deleteButton.style.visibility = 'visible';
+            editButton.style.visibility = 'visible';
+        });
+
+        newItem.addEventListener('mouseout', (event) => {
+            deleteButton.style.visibility = 'hidden';
+            editButton.style.visibility = 'hidden';
+        });
+
+        newItem.appendChild(navItemBody);
+        newItem.appendChild(navItemActions);
+        navItemBody.appendChild(newItemIcon);
+        navItemBody.insertAdjacentText('beforeend', `${name}`);
+        navItemActions.appendChild(deleteButton);
+        navItemActions.appendChild(editButton);
+        deleteButton.appendChild(deleteButtonIcon);
+        editButton.appendChild(editButtonIcon);
 
         return newItem;
     };
