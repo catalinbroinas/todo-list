@@ -871,29 +871,46 @@ __webpack_require__.r(__webpack_exports__);
 
 
 function ProjectManager() {
+    const getProjectsStorageKey = () => 'projects';
+
     const createProject = (projectName) => {
-        const project = {
+        return {
             name: projectName,
             tasks: []
         };
-        return project;
     };
 
     const addProject = (project) => {
         const existProjects = getProjects();
-        existProjects.push(project);
-        localStorage.setItem('projects', JSON.stringify(existProjects));
+
+        if (project.name.length > 2 && project.name.length < 20) {
+            existProjects.push(project);
+            saveProjects(existProjects);
+            return true;
+        } else {
+            return false;
+        }
     };
 
     const getProjects = () => {
-        return JSON.parse(localStorage.getItem('projects'));
+        return JSON.parse(localStorage.getItem(getProjectsStorageKey()));
     };
 
     const removeProject = (index) => {
         const existProjects = getProjects();
-        existProjects.splice(index, 1);
-        localStorage.setItem('projects', JSON.stringify(existProjects));
+
+        if (Number.isInteger(index) && index >= 0) {
+            existProjects.splice(index, 1);
+            saveProjects(existProjects);
+            return true;
+        } else {
+            return false;
+        }
     };
+
+    const saveProjects = (projects) => {
+        localStorage.setItem(getProjectsStorageKey(), JSON.stringify(projects));
+    }
 
     return {
         createProject,
