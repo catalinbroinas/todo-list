@@ -66,7 +66,7 @@ function projectDOM() {
     const projectManager = ProjectManager();
     const utilities = DOMHandler();
 
-    const createProjectForm = (action) => {
+    const createProjectForm = (action, value = '') => {
         action = action.toLowerCase();
         const actionValidate = ['add', 'edit'];
 
@@ -87,7 +87,7 @@ function projectDOM() {
         form.classList.add('project-form');
         input.classList.add('form-control');
         groupButtons.classList.add('group-btn');
-        sendButton.classList.add(`${action}-btn`);
+        sendButton.classList.add(`add-btn`);
         sendButtonIcon.classList.add('mdi', buttonClass, 'action-btn-icon');
         cancelButton.classList.add('cancel-btn');
         cancelButtonIcon.classList.add('mdi', 'mdi-cancel', 'action-btn-icon');
@@ -96,6 +96,7 @@ function projectDOM() {
         input.setAttribute('id', 'set-name-project');
         input.setAttribute('name', 'name-project');
         input.setAttribute('placeholder', 'Name');
+        input.setAttribute('value', value);
         sendButton.setAttribute('type', 'button');
         cancelButton.setAttribute('type', 'button');
 
@@ -177,6 +178,16 @@ function projectDOM() {
             const index = projects.findIndex(item => item.name === newItem.textContent);
             projectManager.removeProject(index);
             sidebarContent();
+        });
+
+        editButton.addEventListener('click', (event) => {
+            const projects = projectManager.getProjects();
+            const sidebarProject = document.querySelector('#sidebar-project');
+            const projectForm = createProjectForm('edit', newItem.textContent);
+
+            if (!sidebarProject.querySelector('#set-name-project')) {
+                newItem.after(projectForm);
+            }
         });
 
         newItem.appendChild(navItemBody);
