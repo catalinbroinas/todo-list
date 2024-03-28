@@ -38,6 +38,18 @@ function ProjectManager() {
         }
     };
 
+    const editProject = (index, setValue) => {
+        const existProjects = getProjects();
+
+        if ((Number.isInteger(index) && index >= 0 && setValue.length > 2 && setValue.length < 20)) {
+            existProjects[index].name = setValue;
+            saveProjects(existProjects);
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     const saveProjects = (projects) => {
         localStorage.setItem(getProjectsStorageKey(), JSON.stringify(projects));
     }
@@ -70,7 +82,7 @@ function projectDOM() {
         const cancelButton = document.createElement('button');
         const cancelButtonIcon = document.createElement('i');
 
-        const buttonClass = action === 'add' ? 'mdi-send' : 'mdi-pencil'; 
+        const buttonClass = action === 'add' ? 'mdi-send' : 'mdi-pencil';
 
         form.classList.add('project-form');
         input.classList.add('form-control');
@@ -108,7 +120,7 @@ function projectDOM() {
 
     const handleSendButton = (action, form) => {
         const projectName = document.querySelector('#set-name-project').value.trim();
-        if (action ==='add') {
+        if (action === 'add') {
             const project = projectManager.createProject(projectName);
             projectManager.addProject(project);
             setTimeout(() => {
@@ -116,7 +128,7 @@ function projectDOM() {
                 sidebarContent();
             }, 500);
         } else if (action === 'edit') {
-            
+
         }
     };
 
