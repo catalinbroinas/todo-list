@@ -929,13 +929,21 @@ function ProjectManager() {
         createProject,
         addProject,
         getProjects,
-        removeProject
+        removeProject,
+        editProject
     };
 }
 
 function projectDOM() {
     const projectManager = ProjectManager();
     const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.DOMHandler)();
+    let projectIndex = null;
+
+    const getProjectIndex = () => projectIndex;
+
+    const setProjectIndex = (value) => {
+        projectIndex = value;
+    };
 
     const createProjectForm = (action, value = '') => {
         action = action.toLowerCase();
@@ -1000,7 +1008,12 @@ function projectDOM() {
                 sidebarContent();
             }, 500);
         } else if (action === 'edit') {
-
+            const index = getProjectIndex();
+            projectManager.editProject(index, projectName);
+            setTimeout(() => {
+                closeProjectForm(form);
+                sidebarContent();
+            }, 500);
         }
     };
 
@@ -1028,7 +1041,7 @@ function projectDOM() {
             deleteButton.style.visibility = 'visible';
             editButton.style.visibility = 'visible';
         });
-        
+
         newItem.addEventListener('mouseout', () => {
             deleteButton.style.visibility = 'hidden';
             editButton.style.visibility = 'hidden';
@@ -1076,8 +1089,14 @@ function projectDOM() {
         const itemName = navItem.textContent.trim();
         const projectForm = createProjectForm('edit', itemName);
 
+        // Get current index of the project
+        const index = projectManager.getProjects().findIndex(item => item.name === itemName);
+
         if (!sidebarProject.querySelector('#set-name-project')) {
+            // Add editing form to DOM
             navItem.after(projectForm);
+            // Set index of the project
+            setProjectIndex(index);
         }
     };
 
