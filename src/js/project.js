@@ -54,20 +54,29 @@ function projectDOM() {
     const projectManager = ProjectManager();
     const utilities = DOMHandler();
 
-    const createNewProjectForm = () => {
+    const createProjectForm = (action) => {
+        action = action.toLowerCase();
+        const actionValidate = ['add', 'edit'];
+
+        if (!actionValidate.includes(action)) {
+            return false;
+        }
+
         const form = document.createElement('form');
         const input = document.createElement('input');
         const groupButtons = document.createElement('div');
-        const addButton = document.createElement('button');
-        const addButtonIcon = document.createElement('i');
+        const sendButton = document.createElement('button');
+        const sendButtonIcon = document.createElement('i');
         const cancelButton = document.createElement('button');
         const cancelButtonIcon = document.createElement('i');
 
-        form.classList.add('new-project-form');
+        const buttonClass = action === 'add' ? 'mdi-send' : 'mdi-pencil'; 
+
+        form.classList.add('project-form');
         input.classList.add('form-control');
         groupButtons.classList.add('group-btn');
-        addButton.classList.add('add-btn');
-        addButtonIcon.classList.add('mdi', 'mdi-send', 'action-btn-icon');
+        sendButton.classList.add(`${action}-btn`);
+        sendButtonIcon.classList.add('mdi', buttonClass, 'action-btn-icon');
         cancelButton.classList.add('cancel-btn');
         cancelButtonIcon.classList.add('mdi', 'mdi-cancel', 'action-btn-icon');
 
@@ -75,23 +84,11 @@ function projectDOM() {
         input.setAttribute('id', 'set-name-project');
         input.setAttribute('name', 'name-project');
         input.setAttribute('placeholder', 'Name');
-        addButton.setAttribute('type', 'button');
+        sendButton.setAttribute('type', 'button');
         cancelButton.setAttribute('type', 'button');
 
-        addButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            const project = projectManager.createProject(input.value);
-            projectManager.addProject(project);
-            setTimeout(() => {
-                closeNewProjectForm(form);
-                sidebarContent();
-            }, 500);
-        });
-
-        cancelButton.addEventListener('click', (event) => {
-            event.preventDefault();
-            setTimeout(() => closeNewProjectForm(form), 500);
-        });
+        sendButton.addEventListener('click', () => handleSendButton(action, form));
+        cancelButton.addEventListener('click', () => handleCancelButton(form));
 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -99,14 +96,32 @@ function projectDOM() {
 
         form.appendChild(input);
         form.appendChild(groupButtons);
-        groupButtons.appendChild(addButton);
-        addButton.appendChild(addButtonIcon);
-        addButton.insertAdjacentText('beforeend', 'Add');
+        groupButtons.appendChild(sendButton);
+        sendButton.appendChild(sendButtonIcon);
+        sendButton.insertAdjacentText('beforeend', action);
         groupButtons.appendChild(cancelButton);
         cancelButton.appendChild(cancelButtonIcon);
         cancelButton.insertAdjacentText('beforeend', 'Cancel');
 
         return form;
+    };
+
+    const handleSendButton = (action, form) => {
+        const projectName = document.querySelector('#set-name-project').value.trim();
+        if (action ==='add') {
+            const project = projectManager.createProject(projectName);
+            projectManager.addProject(project);
+            setTimeout(() => {
+                closeProjectForm(form);
+                sidebarContent();
+            }, 500);
+        } else if (action === 'edit') {
+            
+        }
+    };
+
+    const handleCancelButton = (form) => {
+        setTimeout(() => closeProjectForm(form), 500);
     };
 
     const createNavItem = (name) => {
@@ -177,14 +192,14 @@ function projectDOM() {
         }
     };
 
-    const closeNewProjectForm = (element) => {
+    const closeProjectForm = (element) => {
         if (element) {
             element.remove();
         }
     };
 
     return {
-        createNewProjectForm,
+        createProjectForm,
         sidebarContent
     };
 }
