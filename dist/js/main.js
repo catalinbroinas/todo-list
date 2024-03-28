@@ -1013,52 +1013,25 @@ function projectDOM() {
         const navItemBody = document.createElement('div');
         const navItemActions = document.createElement('div');
         const newItemIcon = document.createElement('i');
-        const deleteButton = document.createElement('button');
-        const deleteButtonIcon = document.createElement('i');
-        const editButton = document.createElement('button');
-        const editButtonIcon = document.createElement('i');
+        const deleteButton = createButton('Delete item', 'delete-btn', 'mdi-delete', handleDeleteButton);
+        const editButton = createButton('Edit item', 'edit-btn', 'mdi-pencil', handleEditButton);
 
         newItem.classList.add('nav-item', 'project-item');
         navItemBody.classList.add('project-item-body');
         newItemIcon.classList.add('mdi', 'mdi-format-list-bulleted', 'nav-icon');
         navItemActions.classList.add('project-item-actions');
-        deleteButton.classList.add('project-action-btn');
-        deleteButtonIcon.classList.add('mdi', 'mdi-delete');
-        editButton.classList.add('project-action-btn');
-        editButtonIcon.classList.add('mdi', 'mdi-pencil');
 
         newItem.setAttribute('role', 'button');
         newItem.setAttribute('id', `${name.toLowerCase()}-btn`);
-        deleteButton.setAttribute('title', 'Delete item');
-        deleteButton.setAttribute('type', 'button');
-        editButton.setAttribute('title', 'Edit item');
-        editButton.setAttribute('type', 'button');
 
-        newItem.addEventListener('mouseover', (event) => {
+        newItem.addEventListener('mouseover', () => {
             deleteButton.style.visibility = 'visible';
             editButton.style.visibility = 'visible';
         });
-
-        newItem.addEventListener('mouseout', (event) => {
+        
+        newItem.addEventListener('mouseout', () => {
             deleteButton.style.visibility = 'hidden';
             editButton.style.visibility = 'hidden';
-        });
-
-        deleteButton.addEventListener('click', (event) => {
-            const projects = projectManager.getProjects();
-            const index = projects.findIndex(item => item.name === newItem.textContent);
-            projectManager.removeProject(index);
-            sidebarContent();
-        });
-
-        editButton.addEventListener('click', (event) => {
-            const projects = projectManager.getProjects();
-            const sidebarProject = document.querySelector('#sidebar-project');
-            const projectForm = createProjectForm('edit', newItem.textContent);
-
-            if (!sidebarProject.querySelector('#set-name-project')) {
-                newItem.after(projectForm);
-            }
         });
 
         newItem.appendChild(navItemBody);
@@ -1067,10 +1040,45 @@ function projectDOM() {
         navItemBody.insertAdjacentText('beforeend', `${name}`);
         navItemActions.appendChild(deleteButton);
         navItemActions.appendChild(editButton);
-        deleteButton.appendChild(deleteButtonIcon);
-        editButton.appendChild(editButtonIcon);
 
         return newItem;
+    };
+
+    const createButton = (title, buttonClass, iconClass, clickHandler) => {
+        const button = document.createElement('button');
+        const buttonIcon = document.createElement('i');
+
+        button.classList.add('project-action-btn', buttonClass);
+        buttonIcon.classList.add('mdi', iconClass);
+
+        button.setAttribute('title', title);
+        button.setAttribute('type', 'button');
+
+        button.addEventListener('click', clickHandler);
+
+        button.appendChild(buttonIcon);
+        return button;
+    };
+
+    const handleDeleteButton = (event) => {
+        const button = event.target;
+        const navItem = button.closest('.nav-item');
+        const itemName = navItem.textContent.trim();
+        const index = projectManager.getProjects().findIndex(item => item.name === itemName);
+        projectManager.removeProject(index);
+        sidebarContent();
+    };
+
+    const handleEditButton = (event) => {
+        const sidebarProject = document.querySelector('#sidebar-project');
+        const button = event.target;
+        const navItem = button.closest('.nav-item');
+        const itemName = navItem.textContent.trim();
+        const projectForm = createProjectForm('edit', itemName);
+
+        if (!sidebarProject.querySelector('#set-name-project')) {
+            navItem.after(projectForm);
+        }
     };
 
     const sidebarContent = () => {
