@@ -132,8 +132,20 @@ function projectDOM() {
         const navItemBody = document.createElement('div');
         const navItemActions = document.createElement('div');
         const newItemIcon = document.createElement('i');
-        const deleteButton = utilities.createButton('Delete item', 'delete-btn', 'mdi-delete', handleDeleteButton);
-        const editButton = utilities.createButton('Edit item', 'edit-btn', 'mdi-pencil', handleEditButton);
+
+        const deleteButton = utilities.createButton({
+            title: 'Delete item',
+            buttonClass: ['project-action-btn', 'delete-btn'],
+            iconClass: ['mdi', 'mdi-delete'],
+            clickHandler: handleDeleteButton
+        });
+        
+        const editButton = utilities.createButton({
+            title: 'Edit item',
+            buttonClass: ['project-action-btn', 'edit-btn'],
+            iconClass: ['mdi', 'mdi-pencil'],
+            clickHandler: handleEditButton
+        });
 
         newItem.classList.add('nav-item', 'project-item');
         navItemBody.classList.add('project-item-body');

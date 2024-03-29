@@ -31,12 +31,12 @@ function DOMHandler() {
         return title;
     };
 
-    const createButton = (title, buttonClass, iconClass, clickHandler) => {
+    const createButton = ({ title, buttonClass, iconClass, clickHandler }) => {
         const button = document.createElement('button');
         const buttonIcon = document.createElement('i');
 
-        button.classList.add('project-action-btn', buttonClass);
-        buttonIcon.classList.add('mdi', iconClass);
+        buttonClass.forEach(className => button.classList.add(className));
+        iconClass.forEach(className => buttonIcon.classList.add(className));
 
         button.setAttribute('title', title);
         button.setAttribute('type', 'button');
