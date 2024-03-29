@@ -841,26 +841,18 @@ function inboxDOM() {
     const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.DOMHandler)();
     const pageContent = document.querySelector('#content');
 
-    const addTask = () => {
-        const addTaskButton = document.createElement('button');
-        const addTaskIcon = document.createElement('i');
-
-        addTaskButton.setAttribute('type', 'button');
-        addTaskButton.classList.add('add-task-btn');
-        addTaskIcon.classList.add('mdi', 'mdi-plus', 'add-task-icon');
-
-        addTaskButton.appendChild(addTaskIcon);
-        addTaskButton.insertAdjacentText('beforeend', 'Add Task');
-
-        return addTaskButton;
-    };
-
     const displayInbox = () => {
+        const addTaskButton = utilities.createButton({
+            name: 'Add Task',
+            buttonClass: ['add-task-btn'],
+            iconClass: ['mdi', 'mdi-plus', 'add-task-icon']
+        });
+
         utilities.setActiveSidebarButton('inbox-btn');
         utilities.clearPageContent(pageContent);
 
         pageContent.appendChild(utilities.addTitle('Inbox'));
-        pageContent.appendChild(addTask());
+        pageContent.appendChild(addTaskButton);
     };
 
     return {
@@ -1176,19 +1168,30 @@ function DOMHandler() {
         return title;
     };
 
-    const createButton = ({ title, buttonClass, iconClass, clickHandler }) => {
+    const createButton = ({ name, title, buttonClass, iconClass, clickHandler }) => {
         const button = document.createElement('button');
         const buttonIcon = document.createElement('i');
 
-        buttonClass.forEach(className => button.classList.add(className));
-        iconClass.forEach(className => buttonIcon.classList.add(className));
-
-        button.setAttribute('title', title);
         button.setAttribute('type', 'button');
 
-        button.addEventListener('click', clickHandler);
+        if (title) {
+            button.setAttribute('title', title);
+        }
+        if (buttonClass) {
+            buttonClass.forEach(className => button.classList.add(className));
+        }
+        if (iconClass) {
+            iconClass.forEach(className => buttonIcon.classList.add(className));
+        }
+        if (clickHandler) {
+            button.addEventListener('click', clickHandler);
+        }
 
         button.appendChild(buttonIcon);
+        if (name) {
+            button.insertAdjacentText('beforeend', name);
+        }
+
         return button;
     };
 
