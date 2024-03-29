@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Todo List</title>
     <link rel="stylesheet" href="../node_modules/@mdi/font/css/materialdesignicons.min.css">
 </head>
+
 <body>
-    
+
     <!-- Page Wrapper -->
     <div class="page-wrapper">
         <!-- Header -->
@@ -49,6 +51,7 @@
         <!-- Sidebar -->
         <!-- Content -->
         <div id="content" class="content">
+            <!-- Task -->
             <div class="task">
                 <div class="task-status">
                     <input type="checkbox" class="task-status-checkbox">
@@ -67,6 +70,9 @@
                     </button>
                 </div>
             </div>
+            <!-- Task -->
+
+            <!-- Task -->
             <div class="task">
                 <div class="task-status">
                     <input type="checkbox" class="task-status-checkbox">
@@ -85,6 +91,48 @@
                     </button>
                 </div>
             </div>
+            <!-- Task -->
+
+            <!-- Form -->
+            <form id="insert-task-form" class="insert-task-form">
+                <!-- Task Description -->
+                <div class="task-details">
+                    <input type="text" class="form-control" id="task-title" placeholder="Title">
+                    <input type="text" class="form-control" id="task-description" placeholder="Description">
+                </div>
+                <!-- Task Description -->
+
+                <!-- Task Metadata -->
+                <div class="task-metadata">
+                    <input type="date" class="form-control" id="task-date">
+                    <select type="text" class="form-control" id="task-priority">
+                        <option value="">--Priority</option>
+                        <option value="critical">Critical</option>
+                        <option value="high">High</option>
+                        <option value="medium">Medium</option>
+                        <option value="low">Low</option>
+                    </select>
+                    <select type="text" class="form-control" id="task-project">
+                        <option value="">--Project--</option>
+                        <option value="inbox">Inbox</option>
+                    </select>
+                </div>
+                <!-- Task Metadata -->
+
+                <!-- Task Actions -->
+                <div class="group-btn">
+                    <button class="add-btn" type="button">
+                        <i class="mdi mdi-send action-btn-icon"></i>
+                        add
+                    </button>
+                    <button class="cancel-btn" type="button">
+                        <i class="mdi mdi-cancel action-btn-icon"></i>
+                        Cancel
+                    </button>
+                </div>
+                <!-- Task Actions -->
+            </form>
+            <!-- Form -->
         </div>
         <!-- Content -->
         <!-- Footer -->
@@ -96,4 +144,5 @@
     <!-- Page Wrapper -->
 
 </body>
+
 </html>

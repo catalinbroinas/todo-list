@@ -58,6 +58,10 @@ function DOMHandler() {
         return button;
     };
 
+    const createAddTaskForm = (project) => {
+        
+    };
+
     const removeElement = (element) => {
         if (element) {
             element.remove();

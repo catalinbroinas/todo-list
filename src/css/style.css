@@ -255,6 +255,32 @@ ul {
     margin-right: 1rem;
 }
 
+.insert-task-form {
+    display: flex;
+    flex-flow: column wrap;
+    background-color: #ECEFF1;
+    border-radius: 1rem;
+    padding: 2rem 3rem;
+    gap: 1.5rem;
+    width: 80%;
+}
+
+.task-details,
+.task-metadata {
+    display: flex;
+    justify-content: center;
+    flex-flow: row wrap;
+    gap: 2rem;
+}
+
+.insert-task-form .form-control {
+    flex-grow: 1;
+}
+
+.insert-task-form .group-btn {
+    gap: 3rem;
+}
+
 /* Task */
 .task {
     width: 80%;
