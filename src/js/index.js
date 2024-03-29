@@ -5,22 +5,12 @@ import { DOMHandler } from './utility';
 
 function UI() {
     const utilities = DOMHandler();
+    const inbox = inboxDOM();
     const pageContent = document.querySelector('#content');
     const inboxButton = document.querySelector('#inbox-btn');
     const todayButton = document.querySelector('#today-btn');
     const weekButton = document.querySelector('#week-btn');
     const newProjectButton = document.querySelector('#new-project-btn');
-
-    const displayInbox = () => {
-        const inbox = inboxDOM();
-        const inboxAddTask = inbox.addTask();
-
-        utilities.setActiveSidebarButton('inbox-btn');
-        utilities.clearPageContent(pageContent);
-
-        pageContent.appendChild(utilities.addTitle('Inbox'));
-        pageContent.appendChild(inboxAddTask);
-    };
 
     const displayToday = () => {
         utilities.setActiveSidebarButton('today-btn');
@@ -49,7 +39,7 @@ function UI() {
     const addEvents = () => {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
-                displayInbox();
+                inbox.displayInbox();
             }, 500);
         });
         todayButton.addEventListener('click', (event) => {
@@ -70,7 +60,6 @@ function UI() {
     };
 
     return {
-        displayInbox,
         addEvents
     };
 }
@@ -78,7 +67,6 @@ function UI() {
 window.addEventListener('load', () => {
     const ui = UI();
     const project = projectDOM();
-    // ui.displayInbox();
     ui.addEvents();
     project.sidebarContent();
 });

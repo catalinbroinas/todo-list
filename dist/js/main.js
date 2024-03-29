@@ -834,7 +834,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   inboxDOM: () => (/* binding */ inboxDOM)
 /* harmony export */ });
+/* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utility */ "./src/js/utility.js");
+
+
 function inboxDOM() {
+    const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.DOMHandler)();
+    const pageContent = document.querySelector('#content');
+
     const addTask = () => {
         const addTaskButton = document.createElement('button');
         const addTaskIcon = document.createElement('i');
@@ -849,8 +855,16 @@ function inboxDOM() {
         return addTaskButton;
     };
 
+    const displayInbox = () => {
+        utilities.setActiveSidebarButton('inbox-btn');
+        utilities.clearPageContent(pageContent);
+
+        pageContent.appendChild(utilities.addTitle('Inbox'));
+        pageContent.appendChild(addTask());
+    };
+
     return {
-        addTask
+        displayInbox
     };
 }
 
@@ -1288,22 +1302,12 @@ __webpack_require__.r(__webpack_exports__);
 
 function UI() {
     const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_3__.DOMHandler)();
+    const inbox = (0,_inbox__WEBPACK_IMPORTED_MODULE_1__.inboxDOM)();
     const pageContent = document.querySelector('#content');
     const inboxButton = document.querySelector('#inbox-btn');
     const todayButton = document.querySelector('#today-btn');
     const weekButton = document.querySelector('#week-btn');
     const newProjectButton = document.querySelector('#new-project-btn');
-
-    const displayInbox = () => {
-        const inbox = (0,_inbox__WEBPACK_IMPORTED_MODULE_1__.inboxDOM)();
-        const inboxAddTask = inbox.addTask();
-
-        utilities.setActiveSidebarButton('inbox-btn');
-        utilities.clearPageContent(pageContent);
-
-        pageContent.appendChild(utilities.addTitle('Inbox'));
-        pageContent.appendChild(inboxAddTask);
-    };
 
     const displayToday = () => {
         utilities.setActiveSidebarButton('today-btn');
@@ -1332,7 +1336,7 @@ function UI() {
     const addEvents = () => {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
-                displayInbox();
+                inbox.displayInbox();
             }, 500);
         });
         todayButton.addEventListener('click', (event) => {
@@ -1353,7 +1357,6 @@ function UI() {
     };
 
     return {
-        displayInbox,
         addEvents
     };
 }
@@ -1361,7 +1364,6 @@ function UI() {
 window.addEventListener('load', () => {
     const ui = UI();
     const project = (0,_project__WEBPACK_IMPORTED_MODULE_2__.projectDOM)();
-    // ui.displayInbox();
     ui.addEvents();
     project.sidebarContent();
 });

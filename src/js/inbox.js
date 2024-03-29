@@ -1,4 +1,9 @@
+import { DOMHandler } from "./utility";
+
 function inboxDOM() {
+    const utilities = DOMHandler();
+    const pageContent = document.querySelector('#content');
+
     const addTask = () => {
         const addTaskButton = document.createElement('button');
         const addTaskIcon = document.createElement('i');
@@ -13,8 +18,16 @@ function inboxDOM() {
         return addTaskButton;
     };
 
+    const displayInbox = () => {
+        utilities.setActiveSidebarButton('inbox-btn');
+        utilities.clearPageContent(pageContent);
+
+        pageContent.appendChild(utilities.addTitle('Inbox'));
+        pageContent.appendChild(addTask());
+    };
+
     return {
-        addTask
+        displayInbox
     };
 }
 
