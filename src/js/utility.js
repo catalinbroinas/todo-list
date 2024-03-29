@@ -31,19 +31,30 @@ function DOMHandler() {
         return title;
     };
 
-    const createButton = ({ title, buttonClass, iconClass, clickHandler }) => {
+    const createButton = ({ name, title, buttonClass, iconClass, clickHandler }) => {
         const button = document.createElement('button');
         const buttonIcon = document.createElement('i');
 
-        buttonClass.forEach(className => button.classList.add(className));
-        iconClass.forEach(className => buttonIcon.classList.add(className));
-
-        button.setAttribute('title', title);
         button.setAttribute('type', 'button');
 
-        button.addEventListener('click', clickHandler);
+        if (title) {
+            button.setAttribute('title', title);
+        }
+        if (buttonClass) {
+            buttonClass.forEach(className => button.classList.add(className));
+        }
+        if (iconClass) {
+            iconClass.forEach(className => buttonIcon.classList.add(className));
+        }
+        if (clickHandler) {
+            button.addEventListener('click', clickHandler);
+        }
 
         button.appendChild(buttonIcon);
+        if (name) {
+            button.insertAdjacentText('beforeend', name);
+        }
+
         return button;
     };
 
