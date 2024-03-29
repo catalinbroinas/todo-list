@@ -127,36 +127,13 @@ function projectDOM() {
         return form;
     };
 
-    const handleSendButton = (action, form) => {
-        const projectName = document.querySelector('#set-name-project').value.trim();
-        if (action === 'add') {
-            const project = projectManager.createProject(projectName);
-            projectManager.addProject(project);
-            setTimeout(() => {
-                closeProjectForm(form);
-                sidebarContent();
-            }, 500);
-        } else if (action === 'edit') {
-            const index = getProjectIndex();
-            projectManager.editProject(index, projectName);
-            setTimeout(() => {
-                closeProjectForm(form);
-                sidebarContent();
-            }, 500);
-        }
-    };
-
-    const handleCancelButton = (form) => {
-        setTimeout(() => closeProjectForm(form), 500);
-    };
-
     const createNavItem = (name) => {
         const newItem = document.createElement('a');
         const navItemBody = document.createElement('div');
         const navItemActions = document.createElement('div');
         const newItemIcon = document.createElement('i');
-        const deleteButton = createButton('Delete item', 'delete-btn', 'mdi-delete', handleDeleteButton);
-        const editButton = createButton('Edit item', 'edit-btn', 'mdi-pencil', handleEditButton);
+        const deleteButton = utilities.createButton('Delete item', 'delete-btn', 'mdi-delete', handleDeleteButton);
+        const editButton = utilities.createButton('Edit item', 'edit-btn', 'mdi-pencil', handleEditButton);
 
         newItem.classList.add('nav-item', 'project-item');
         navItemBody.classList.add('project-item-body');
@@ -186,20 +163,40 @@ function projectDOM() {
         return newItem;
     };
 
-    const createButton = (title, buttonClass, iconClass, clickHandler) => {
-        const button = document.createElement('button');
-        const buttonIcon = document.createElement('i');
+    const sidebarContent = () => {
+        const sideBar = document.querySelector('#sidebar-project-items');
+        const projects = projectManager.getProjects();
 
-        button.classList.add('project-action-btn', buttonClass);
-        buttonIcon.classList.add('mdi', iconClass);
+        utilities.clearPageContent(sideBar);
 
-        button.setAttribute('title', title);
-        button.setAttribute('type', 'button');
+        if (projects.length) {
+            projects.forEach(item => {
+                sideBar.appendChild(createNavItem(item.name));
+            });
+        }
+    };
 
-        button.addEventListener('click', clickHandler);
+    const handleSendButton = (action, form) => {
+        const projectName = document.querySelector('#set-name-project').value.trim();
+        if (action === 'add') {
+            const project = projectManager.createProject(projectName);
+            projectManager.addProject(project);
+            setTimeout(() => {
+                utilities.removeElement(form);
+                sidebarContent();
+            }, 500);
+        } else if (action === 'edit') {
+            const index = getProjectIndex();
+            projectManager.editProject(index, projectName);
+            setTimeout(() => {
+                utilities.removeElement(form);
+                sidebarContent();
+            }, 500);
+        }
+    };
 
-        button.appendChild(buttonIcon);
-        return button;
+    const handleCancelButton = (form) => {
+        setTimeout(() => utilities.removeElement(form), 500);
     };
 
     const handleDeleteButton = (event) => {
@@ -226,25 +223,6 @@ function projectDOM() {
             navItem.after(projectForm);
             // Set index of the project
             setProjectIndex(index);
-        }
-    };
-
-    const sidebarContent = () => {
-        const sideBar = document.querySelector('#sidebar-project-items');
-        const projects = projectManager.getProjects();
-
-        utilities.clearPageContent(sideBar);
-
-        if (projects.length) {
-            projects.forEach(item => {
-                sideBar.appendChild(createNavItem(item.name));
-            });
-        }
-    };
-
-    const closeProjectForm = (element) => {
-        if (element) {
-            element.remove();
         }
     };
 

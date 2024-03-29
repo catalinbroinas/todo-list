@@ -11,53 +11,29 @@ function UI() {
     const weekButton = document.querySelector('#week-btn');
     const newProjectButton = document.querySelector('#new-project-btn');
 
-    const setActiveSidebarButton = (getActiveButton) => {
-        const navItems = document.querySelectorAll('.nav-item');
-        const setActiveItem = document.querySelector(`#${getActiveButton}`);
-
-
-        navItems.forEach((item) => {
-            if (item.classList.contains('active')) {
-                item.classList.remove('active');
-            }
-        });
-
-        if (setActiveItem) {
-            setActiveItem.classList.add('active');
-        }
-    };
-
-    const addTitle = (setTitle) => {
-        const title = document.createElement('h3');
-        title.classList.add('content-title');
-        title.textContent = setTitle;
-
-        return title;
-    };
-
     const displayInbox = () => {
         const inbox = inboxDOM();
         const inboxAddTask = inbox.addTask();
 
-        setActiveSidebarButton('inbox-btn');
+        utilities.setActiveSidebarButton('inbox-btn');
         utilities.clearPageContent(pageContent);
 
-        pageContent.appendChild(addTitle('Inbox'));
+        pageContent.appendChild(utilities.addTitle('Inbox'));
         pageContent.appendChild(inboxAddTask);
     };
 
     const displayToday = () => {
-        setActiveSidebarButton('today-btn');
+        utilities.setActiveSidebarButton('today-btn');
         utilities.clearPageContent(pageContent);
 
-        pageContent.appendChild(addTitle('Today'));
+        pageContent.appendChild(utilities.addTitle('Today'));
     };
 
     const displayWeek = () => {
-        setActiveSidebarButton('week-btn');
+        utilities.setActiveSidebarButton('week-btn');
         utilities.clearPageContent(pageContent);
 
-        pageContent.appendChild(addTitle('This Week'));
+        pageContent.appendChild(utilities.addTitle('This Week'));
     };
 
     const displayNewProjectForm = () => {

@@ -7,7 +7,59 @@ function DOMHandler() {
         }
     };
 
-    return { clearPageContent };
+    const setActiveSidebarButton = (getActiveButton) => {
+        const navItems = document.querySelectorAll('.nav-item');
+        const setActiveItem = document.querySelector(`#${getActiveButton}`);
+
+
+        navItems.forEach((item) => {
+            if (item.classList.contains('active')) {
+                item.classList.remove('active');
+            }
+        });
+
+        if (setActiveItem) {
+            setActiveItem.classList.add('active');
+        }
+    };
+
+    const addTitle = (setTitle) => {
+        const title = document.createElement('h3');
+        title.classList.add('content-title');
+        title.textContent = setTitle;
+
+        return title;
+    };
+
+    const createButton = (title, buttonClass, iconClass, clickHandler) => {
+        const button = document.createElement('button');
+        const buttonIcon = document.createElement('i');
+
+        button.classList.add('project-action-btn', buttonClass);
+        buttonIcon.classList.add('mdi', iconClass);
+
+        button.setAttribute('title', title);
+        button.setAttribute('type', 'button');
+
+        button.addEventListener('click', clickHandler);
+
+        button.appendChild(buttonIcon);
+        return button;
+    };
+
+    const removeElement = (element) => {
+        if (element) {
+            element.remove();
+        }
+    };
+
+    return { 
+        clearPageContent,
+        setActiveSidebarButton,
+        addTitle,
+        createButton,
+        removeElement
+    };
 }
 
 export { DOMHandler };
