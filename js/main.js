@@ -1003,8 +1003,20 @@ function projectDOM() {
         const navItemBody = document.createElement('div');
         const navItemActions = document.createElement('div');
         const newItemIcon = document.createElement('i');
-        const deleteButton = utilities.createButton('Delete item', 'delete-btn', 'mdi-delete', handleDeleteButton);
-        const editButton = utilities.createButton('Edit item', 'edit-btn', 'mdi-pencil', handleEditButton);
+
+        const deleteButton = utilities.createButton({
+            title: 'Delete item',
+            buttonClass: ['project-action-btn', 'delete-btn'],
+            iconClass: ['mdi', 'mdi-delete'],
+            clickHandler: handleDeleteButton
+        });
+        
+        const editButton = utilities.createButton({
+            title: 'Edit item',
+            buttonClass: ['project-action-btn', 'edit-btn'],
+            iconClass: ['mdi', 'mdi-pencil'],
+            clickHandler: handleEditButton
+        });
 
         newItem.classList.add('nav-item', 'project-item');
         navItemBody.classList.add('project-item-body');
@@ -1150,12 +1162,12 @@ function DOMHandler() {
         return title;
     };
 
-    const createButton = (title, buttonClass, iconClass, clickHandler) => {
+    const createButton = ({ title, buttonClass, iconClass, clickHandler }) => {
         const button = document.createElement('button');
         const buttonIcon = document.createElement('i');
 
-        button.classList.add('project-action-btn', buttonClass);
-        buttonIcon.classList.add('mdi', iconClass);
+        buttonClass.forEach(className => button.classList.add(className));
+        iconClass.forEach(className => buttonIcon.classList.add(className));
 
         button.setAttribute('title', title);
         button.setAttribute('type', 'button');
