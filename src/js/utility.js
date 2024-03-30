@@ -58,8 +58,152 @@ function DOMHandler() {
         return button;
     };
 
-    const createAddTaskForm = (project) => {
-        
+    const createInputElement = ({ inputType, inputId, inputClass, inputName, inputPlaceholder }) => {
+        const input = document.createElement('input');
+
+        input.setAttribute('type', inputType);
+        input.setAttribute('type', inputId);
+
+        if (inputClass) {
+            inputClass.forEach(className => input.classList.add(className));
+        }
+
+        if (inputName) {
+            input.setAttribute('name', inputName);
+        }
+
+        if (inputPlaceholder) {
+            input.setAttribute('placeholder', inputPlaceholder);
+        }
+
+        return input;
+    };
+
+    const createSelectElement = ({ selectName, selectId, selectClass }) => {
+        const select = document.createElement('select');
+
+        select.setAttribute('name', selectName);
+        select.setAttribute('id', selectId);
+
+        if (selectClass) {
+            selectClass.forEach(className => select.classList.add(className));
+        }
+
+        return select;
+    };
+
+    const createOptionElement = ({ optionValue, optionText, optionDisabled = false }) => {
+        const option = document.createElement('option');
+
+        option.setAttribute('value', optionValue);
+        option.textContent = optionText;
+
+        if (optionDisabled) {
+            option.setAttribute('disabled', 'disabled');
+        }
+
+        return option;
+    };
+
+    const createTaskForm = () => {
+        const form = document.createElement('form');
+        const taskDetails = document.createElement('div');
+        const taskMetadata = document.createElement('div');
+        const taskActions = document.createElement('div');
+
+        const taskTitleInput = createInputElement({
+            inputType: 'text',
+            inputId: 'task-title',
+            inputClass: ['form-control'],
+            inputPlaceholder: 'Title'
+        });
+        const taskDescInput = createInputElement({
+            inputType: 'text',
+            inputId: 'task-description',
+            inputClass: ['form-control'],
+            inputPlaceholder: 'Description'
+        });
+        const taskDateInput = createInputElement({
+            inputType: 'date',
+            inputId: 'task-date',
+            inputClass: ['form-control'],
+        });
+
+        const taskPriority = createSelectElement({
+            selectName: 'task-priority',
+            selectId: 'task-priority',
+            selectClass: ['form-control']
+        });
+        const taskProject = createSelectElement({
+            selectName: 'task-project',
+            selectId: 'task-project',
+            selectClass: ['form-control']
+        });
+
+        const optionPriority = createOptionElement({
+            optionValue: '',
+            optionText: 'Choose the priority',
+            optionDisabled: true
+        });
+        const optionPriorityCritical = createOptionElement({
+            optionValue: 'critical',
+            optionText: 'Critical'
+        });
+        const optionPriorityHigh = createOptionElement({
+            optionValue: 'high',
+            optionText: 'High'
+        });
+        const optionPriorityMedium = createOptionElement({
+            optionValue: 'medium',
+            optionText: 'Medium'
+        });
+        const optionPriorityLow = createOptionElement({
+            optionValue: 'low',
+            optionText: 'Low'
+        });
+
+        const optionProject = createOptionElement({
+            optionValue: '',
+            optionText: 'Include in<',
+            optionDisabled: true
+        });
+        const optionProjectInbox = createOptionElement({
+            optionValue: 'inbox',
+            optionText: 'Inbox'
+        });
+
+        const sendButton = createButton({
+            name: 'Add',
+            buttonClass: ['add-btn'],
+            iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
+            clickHandler: handleSendButton
+        });
+        const cancelButton = createButton({
+            name: 'Cancel',
+            buttonClass: ['cancel-btn'],
+            iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
+            clickHandler: handleCancelButton
+        });
+
+        form.appendChild(taskDetails);
+        form.appendChild(taskMetadata);
+        form.appendChild(taskActions);
+        taskDetails.appendChild(taskTitleInput);
+        taskDetails.appendChild(taskDescInput);
+        taskMetadata.appendChild(taskDateInput);
+        taskMetadata.appendChild(taskPriority);
+        taskMetadata.appendChild(taskProject);
+        taskActions.appendChild(sendButton);
+        taskActions.appendChild(cancelButton);
+        taskPriority.appendChild(optionPriority);
+        taskPriority.appendChild(optionPriorityCritical);
+        taskPriority.appendChild(optionPriorityHigh);
+        taskPriority.appendChild(optionPriorityMedium);
+        taskPriority.appendChild(optionPriorityLow);
+        taskProject.appendChild(optionProject);
+        taskProject.appendChild(optionProjectInbox);
+
+        return form;
     };
 
     const removeElement = (element) => {
@@ -73,6 +217,7 @@ function DOMHandler() {
         setActiveSidebarButton,
         addTitle,
         createButton,
+        createTaskForm,
         removeElement
     };
 }
