@@ -83,33 +83,34 @@ function projectDOM() {
         }
 
         const form = document.createElement('form');
-        const input = document.createElement('input');
         const groupButtons = document.createElement('div');
-        const sendButton = document.createElement('button');
-        const sendButtonIcon = document.createElement('i');
-        const cancelButton = document.createElement('button');
-        const cancelButtonIcon = document.createElement('i');
 
-        const buttonClass = action === 'add' ? 'mdi-send' : 'mdi-pencil';
+        const iconType = action === 'add' ? 'mdi-send' : 'mdi-pencil';
+
+        const input = utilities.createInputElement({
+            inputType: 'text',
+            inputId: 'set-name-project',
+            inputClass: ['form-control'],
+            inputName: 'name-project',
+            inputPlaceholder: 'Name',
+            inputValue: value
+        });
+
+        const sendButton = utilities.createButton({
+            name: action,
+            buttonClass: ['add-btn'],
+            iconClass: ['mdi', iconType, 'action-btn-icon'],
+            clickHandler: () => handleSendButton(action, form)
+        });
+        const cancelButton = utilities.createButton({
+            name: 'Cancel',
+            buttonClass: ['cancel-btn'],
+            iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
+            clickHandler: () => handleCancelButton(form)
+        });
 
         form.classList.add('project-form');
-        input.classList.add('form-control');
         groupButtons.classList.add('group-btn');
-        sendButton.classList.add(`add-btn`);
-        sendButtonIcon.classList.add('mdi', buttonClass, 'action-btn-icon');
-        cancelButton.classList.add('cancel-btn');
-        cancelButtonIcon.classList.add('mdi', 'mdi-cancel', 'action-btn-icon');
-
-        input.setAttribute('type', 'text');
-        input.setAttribute('id', 'set-name-project');
-        input.setAttribute('name', 'name-project');
-        input.setAttribute('placeholder', 'Name');
-        input.setAttribute('value', value);
-        sendButton.setAttribute('type', 'button');
-        cancelButton.setAttribute('type', 'button');
-
-        sendButton.addEventListener('click', () => handleSendButton(action, form));
-        cancelButton.addEventListener('click', () => handleCancelButton(form));
 
         form.addEventListener('submit', (event) => {
             event.preventDefault();
@@ -118,11 +119,7 @@ function projectDOM() {
         form.appendChild(input);
         form.appendChild(groupButtons);
         groupButtons.appendChild(sendButton);
-        sendButton.appendChild(sendButtonIcon);
-        sendButton.insertAdjacentText('beforeend', action);
         groupButtons.appendChild(cancelButton);
-        cancelButton.appendChild(cancelButtonIcon);
-        cancelButton.insertAdjacentText('beforeend', 'Cancel');
 
         return form;
     };

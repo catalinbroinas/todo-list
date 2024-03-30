@@ -58,11 +58,11 @@ function DOMHandler() {
         return button;
     };
 
-    const createInputElement = ({ inputType, inputId, inputClass, inputName, inputPlaceholder }) => {
+    const createInputElement = ({ inputType, inputId, inputClass, inputName, inputPlaceholder, inputValue }) => {
         const input = document.createElement('input');
 
         input.setAttribute('type', inputType);
-        input.setAttribute('type', inputId);
+        input.setAttribute('id', inputId);
 
         if (inputClass) {
             inputClass.forEach(className => input.classList.add(className));
@@ -74,6 +74,10 @@ function DOMHandler() {
 
         if (inputPlaceholder) {
             input.setAttribute('placeholder', inputPlaceholder);
+        }
+
+        if (inputValue) {
+            input.setAttribute('value', inputValue);
         }
 
         return input;
@@ -217,6 +221,7 @@ function DOMHandler() {
         setActiveSidebarButton,
         addTitle,
         createButton,
+        createInputElement,
         createTaskForm,
         removeElement
     };
