@@ -210,6 +210,47 @@ function DOMHandler() {
         return form;
     };
 
+    const createTaskModal = (modalId) => {
+        const dialog = document.createElement('dialog');
+        dialog.setAttribute('id', modalId);
+
+        const closeButton = createButton({
+            buttonClass: ['close-modal'],
+            iconClass: ['mdi', 'mdi-close'],
+            clickHandler: () => closeModal(modalId)
+        });
+
+        dialog.appendChild(closeButton);
+        return dialog;
+    };
+
+    const openModal = (modalId) => {
+        const dialog = document.querySelector(`#${modalId}`);
+        if (dialog && !dialog.open) {
+            dialog.showModal();
+            dialog.addEventListener('keydown', (event) => {
+                closeModalOnEsc(modalId, event);
+            });
+        }
+    };
+
+    const closeModal = (modalId) => {
+        const dialog = document.querySelector(`#${modalId}`);
+        if (dialog && dialog.open) {
+            dialog.close();
+            removeElement(dialog);
+            dialog.removeEventListener('keydown', (event) => {
+                closeModalOnEsc(modalId, event);
+            });
+        }
+    };
+
+    const closeModalOnEsc = (modalId, event) => {
+        if (event.key === 'Escape') {
+            closeModal(modalId);
+        }
+    };
+
     const removeElement = (element) => {
         if (element) {
             element.remove();
@@ -223,6 +264,8 @@ function DOMHandler() {
         createButton,
         createInputElement,
         createTaskForm,
+        createTaskModal,
+        openModal,
         removeElement
     };
 }

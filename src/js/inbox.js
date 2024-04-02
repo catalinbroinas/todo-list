@@ -8,7 +8,8 @@ function inboxDOM() {
         const addTaskButton = utilities.createButton({
             name: 'Add Task',
             buttonClass: ['add-task-btn'],
-            iconClass: ['mdi', 'mdi-plus', 'add-task-icon']
+            iconClass: ['mdi', 'mdi-plus', 'add-task-icon'],
+            clickHandler: () => createAndOpenModal('add-task-modal')
         });
 
         utilities.setActiveSidebarButton('inbox-btn');
@@ -17,6 +18,14 @@ function inboxDOM() {
         pageContent.appendChild(utilities.addTitle('Inbox'));
         pageContent.appendChild(addTaskButton);
     };
+
+    const createAndOpenModal = (setId) => {
+        if (!document.querySelector(`${setId}`)) {
+            const modal = utilities.createTaskModal(setId);
+            document.body.appendChild(modal);
+        }
+        utilities.openModal(setId);
+    }
 
     return {
         displayInbox

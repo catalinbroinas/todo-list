@@ -871,7 +871,8 @@ function inboxDOM() {
         const addTaskButton = utilities.createButton({
             name: 'Add Task',
             buttonClass: ['add-task-btn'],
-            iconClass: ['mdi', 'mdi-plus', 'add-task-icon']
+            iconClass: ['mdi', 'mdi-plus', 'add-task-icon'],
+            clickHandler: () => createAndOpenModal('add-task-modal')
         });
 
         utilities.setActiveSidebarButton('inbox-btn');
@@ -880,6 +881,14 @@ function inboxDOM() {
         pageContent.appendChild(utilities.addTitle('Inbox'));
         pageContent.appendChild(addTaskButton);
     };
+
+    const createAndOpenModal = (setId) => {
+        if (!document.querySelector(`${setId}`)) {
+            const modal = utilities.createTaskModal(setId);
+            document.body.appendChild(modal);
+        }
+        utilities.openModal(setId);
+    }
 
     return {
         displayInbox
@@ -1370,6 +1379,47 @@ function DOMHandler() {
         return form;
     };
 
+    const createTaskModal = (modalId) => {
+        const dialog = document.createElement('dialog');
+        dialog.setAttribute('id', modalId);
+
+        const closeButton = createButton({
+            buttonClass: ['close-modal'],
+            iconClass: ['mdi', 'mdi-close'],
+            clickHandler: () => closeModal(modalId)
+        });
+
+        dialog.appendChild(closeButton);
+        return dialog;
+    };
+
+    const openModal = (modalId) => {
+        const dialog = document.querySelector(`#${modalId}`);
+        if (dialog && !dialog.open) {
+            dialog.showModal();
+            dialog.addEventListener('keydown', (event) => {
+                closeModalOnEsc(modalId, event);
+            });
+        }
+    };
+
+    const closeModal = (modalId) => {
+        const dialog = document.querySelector(`#${modalId}`);
+        if (dialog && dialog.open) {
+            dialog.close();
+            removeElement(dialog);
+            dialog.removeEventListener('keydown', (event) => {
+                closeModalOnEsc(modalId, event);
+            });
+        }
+    };
+
+    const closeModalOnEsc = (modalId, event) => {
+        if (event.key === 'Escape') {
+            closeModal(modalId);
+        }
+    };
+
     const removeElement = (element) => {
         if (element) {
             element.remove();
@@ -1383,6 +1433,8 @@ function DOMHandler() {
         createButton,
         createInputElement,
         createTaskForm,
+        createTaskModal,
+        openModal,
         removeElement
     };
 }
