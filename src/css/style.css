@@ -374,6 +374,26 @@ ul {
     font-size: 1.5rem;
 }
 
+/* Modal */
+.task-modal {
+    width: min(500px, 90vw);
+    background-color: #FBFBFB;
+    border: none;
+    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
+    /* padding: 2rem 3rem; */
+}
+
+.task-modal .close-btn {
+    display: flex;
+    text-align: center;
+    margin-left: auto;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    font-size: 1.5rem;
+    margin-bottom: 2rem;
+}
+
 /* Footer */
 .footer-text {
     font-size: 1rem;

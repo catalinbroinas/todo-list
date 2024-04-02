@@ -213,9 +213,10 @@ function DOMHandler() {
     const createTaskModal = (modalId) => {
         const dialog = document.createElement('dialog');
         dialog.setAttribute('id', modalId);
+        dialog.classList.add('task-modal');
 
         const closeButton = createButton({
-            buttonClass: ['close-modal'],
+            buttonClass: ['close-btn'],
             iconClass: ['mdi', 'mdi-close'],
             clickHandler: () => closeModal(modalId)
         });
