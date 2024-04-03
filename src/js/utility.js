@@ -115,6 +115,11 @@ function DOMHandler() {
         const taskMetadata = document.createElement('div');
         const taskActions = document.createElement('div');
 
+        form.classList.add('insert-task-form');
+        taskDetails.classList.add('task-details');
+        taskMetadata.classList.add('task-metadata');
+        taskActions.classList.add('group-btn');
+
         const taskTitleInput = createInputElement({
             inputType: 'text',
             inputId: 'task-title',
@@ -168,7 +173,7 @@ function DOMHandler() {
 
         const optionProject = createOptionElement({
             optionValue: '',
-            optionText: 'Include in<',
+            optionText: 'Include in',
             optionDisabled: true
         });
         const optionProjectInbox = createOptionElement({
@@ -180,13 +185,13 @@ function DOMHandler() {
             name: 'Add',
             buttonClass: ['add-btn'],
             iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
-            clickHandler: handleSendButton
+            clickHandler: () => handleSendButton()
         });
         const cancelButton = createButton({
             name: 'Cancel',
             buttonClass: ['cancel-btn'],
             iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
-            clickHandler: handleCancelButton
+            clickHandler: () => handleCancelButton()
         });
 
         form.appendChild(taskDetails);
@@ -214,6 +219,7 @@ function DOMHandler() {
         const dialog = document.createElement('dialog');
         const header = document.createElement('div');
         const title = addTitle(modalTitle);
+        const form = createTaskForm();
 
         dialog.setAttribute('id', modalId);
         dialog.classList.add('task-modal');
@@ -227,8 +233,10 @@ function DOMHandler() {
         });
 
         dialog.appendChild(header);
+        dialog.appendChild(form);
         header.appendChild(title);
         header.appendChild(closeButton);
+
         return dialog;
     };
 

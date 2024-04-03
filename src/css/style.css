@@ -256,13 +256,14 @@ ul {
 }
 
 .insert-task-form {
+    width: 90%;
+    margin: 2rem auto;
     display: flex;
     flex-flow: column wrap;
     background-color: #ECEFF1;
     border-radius: 1rem;
     padding: 2rem 3rem;
     gap: 1.5rem;
-    width: 80%;
 }
 
 .task-details,
@@ -376,7 +377,7 @@ ul {
 
 /* Modal */
 .task-modal {
-    width: min(500px, 90vw);
+    width: min(800px, 98vw);
     background-color: #FBFBFB;
     border: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
@@ -386,7 +387,6 @@ ul {
 .task-modal .modal-header {
     display: flex;
     align-items: center;
-    margin-bottom: 2rem;
 }
 
 .task-modal .close-btn {
