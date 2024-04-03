@@ -210,10 +210,15 @@ function DOMHandler() {
         return form;
     };
 
-    const createTaskModal = (modalId) => {
+    const createTaskModal = (modalId, modalTitle) => {
         const dialog = document.createElement('dialog');
+        const header = document.createElement('div');
+        const title = addTitle(modalTitle);
+
         dialog.setAttribute('id', modalId);
         dialog.classList.add('task-modal');
+        header.classList.add('modal-header');
+        title.classList.add('modal-title');
 
         const closeButton = createButton({
             buttonClass: ['close-btn'],
@@ -221,7 +226,9 @@ function DOMHandler() {
             clickHandler: () => closeModal(modalId)
         });
 
-        dialog.appendChild(closeButton);
+        dialog.appendChild(header);
+        header.appendChild(title);
+        header.appendChild(closeButton);
         return dialog;
     };
 

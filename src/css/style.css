@@ -380,18 +380,47 @@ ul {
     background-color: #FBFBFB;
     border: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
-    /* padding: 2rem 3rem; */
+    padding: 1rem;
+}
+
+.task-modal .modal-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 2rem;
 }
 
 .task-modal .close-btn {
-    display: flex;
     text-align: center;
+    flex-grow: 0;
     margin-left: auto;
     cursor: pointer;
     border: none;
     background-color: transparent;
+    color: #9E9E9E;
     font-size: 1.5rem;
-    margin-bottom: 2rem;
+    transition: color 0.3s ease;
+}
+
+.task-modal .close-btn:hover,
+.task-modal .close-btn:active {
+    color: #262626;
+}
+
+.task-modal .modal-title {
+    font-weight: normal;
+    font-size: 1.5rem;
+    margin: 0;
+    text-align: center;
+    flex-grow: 1;
+}
+
+.task-modal .modal-title::first-letter {
+    text-transform: uppercase;
+}
+
+::backdrop {
+    background-color: #CFD8DC;
+    opacity: 0.5;
 }
 
 /* Footer */
