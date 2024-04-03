@@ -407,6 +407,14 @@ function projectDOM() {
         const projectSelected = projectElement.options[projectElement.selectedIndex];
         const taskProject = projectSelected.value;
 
+        const task = projectManager.createTask({
+            title: taskTitle,
+            description: taskDesc,
+            dueDate: taskDate,
+            priority: taskPriority
+        });
+        projectManager.addTask(task, taskProject);
+
         console.log(`${taskTitle} ${taskDesc} ${taskDate} ${taskPriority} ${taskProject}`);
     };
 
