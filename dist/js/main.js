@@ -1417,7 +1417,7 @@ function DOMHandler() {
             name: 'Cancel',
             buttonClass: ['cancel-btn'],
             iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
-            clickHandler: () => handleCancelButton()
+            clickHandler: () => handleCancelButton(event)
         });
 
         form.appendChild(taskDetails);
@@ -1491,6 +1491,12 @@ function DOMHandler() {
         if (event.key === 'Escape') {
             closeModal(modalId);
         }
+    };
+
+    const handleCancelButton = (event) => {
+        const button = event.target;
+        const modal = button.closest('.task-modal');
+        closeModal(modal.id);
     };
 
     const removeElement = (element) => {
