@@ -983,6 +983,20 @@ function ProjectManager() {
         }
     };
 
+    const createTask = ({
+        title,
+        description,
+        dueDate,
+        priority
+    }) => {
+        return {
+            title,
+            description,
+            dueDate,
+            priority
+        };
+    };
+
     const getProjects = () => {
         return JSON.parse(localStorage.getItem(getProjectsStorageKey()));
     };
