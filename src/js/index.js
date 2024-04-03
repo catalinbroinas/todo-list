@@ -33,6 +33,7 @@ function UI() {
 
         if (!sidebarProject.querySelector('#set-name-project')) {
             newProjectButton.after(newProjectForm);
+            document.querySelector('#set-name-project').focus();
         }
     };
 

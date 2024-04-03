@@ -1189,8 +1189,9 @@ function projectDOM() {
         const index = projectManager.getProjects().findIndex(item => item.name === itemName);
 
         if (!sidebarProject.querySelector('#set-name-project')) {
-            // Add editing form to DOM
+            // Add editing form to DOM and focus to input
             navItem.after(projectForm);
+            document.querySelector('#set-name-project').focus();
             // Set index of the project
             setProjectIndex(index);
         }
@@ -1276,7 +1277,9 @@ function DOMHandler() {
         return button;
     };
 
-    const createInputElement = ({ inputType, inputId, inputClass, inputName, inputPlaceholder, inputValue }) => {
+    const createInputElement = ({
+        inputType, inputId, inputClass, inputName, inputPlaceholder, inputValue, inputFocus
+    }) => {
         const input = document.createElement('input');
 
         input.setAttribute('type', inputType);
@@ -1296,6 +1299,10 @@ function DOMHandler() {
 
         if (inputValue) {
             input.setAttribute('value', inputValue);
+        }
+
+        if (inputFocus) {
+            input.setAttribute('autofocus', 'autofocus');
         }
 
         return input;
@@ -1342,7 +1349,8 @@ function DOMHandler() {
             inputType: 'text',
             inputId: 'task-title',
             inputClass: ['form-control'],
-            inputPlaceholder: 'Title'
+            inputPlaceholder: 'Title',
+            inputFocus: true
         });
         const taskDescInput = createInputElement({
             inputType: 'text',
@@ -1491,7 +1499,7 @@ function DOMHandler() {
         }
     };
 
-    return { 
+    return {
         clearPageContent,
         setActiveSidebarButton,
         addTitle,
@@ -1627,6 +1635,7 @@ function UI() {
 
         if (!sidebarProject.querySelector('#set-name-project')) {
             newProjectButton.after(newProjectForm);
+            document.querySelector('#set-name-project').focus();
         }
     };
 

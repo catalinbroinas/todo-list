@@ -228,8 +228,9 @@ function projectDOM() {
         const index = projectManager.getProjects().findIndex(item => item.name === itemName);
 
         if (!sidebarProject.querySelector('#set-name-project')) {
-            // Add editing form to DOM
+            // Add editing form to DOM and focus to input
             navItem.after(projectForm);
+            document.querySelector('#set-name-project').focus();
             // Set index of the project
             setProjectIndex(index);
         }
