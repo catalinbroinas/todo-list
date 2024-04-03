@@ -1,7 +1,9 @@
 import { DOMHandler } from "./utility";
+import { projectDOM } from "./project";
 
 function inboxDOM() {
     const utilities = DOMHandler();
+    const projects = projectDOM();
     const pageContent = document.querySelector('#content');
 
     const displayInbox = () => {
@@ -21,10 +23,10 @@ function inboxDOM() {
 
     const createAndOpenModal = (setId, setTitle) => {
         if (!document.querySelector(`${setId}`)) {
-            const modal = utilities.createTaskModal(setId, setTitle);
+            const modal = projects.createTaskModal(setId, setTitle);
             document.body.appendChild(modal);
         }
-        utilities.openModal(setId);
+        projects.openModal(setId);
     }
 
     return {

@@ -910,10 +910,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */   inboxDOM: () => (/* binding */ inboxDOM)
 /* harmony export */ });
 /* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utility */ "./src/js/utility.js");
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./project */ "./src/js/project.js");
+
 
 
 function inboxDOM() {
     const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.DOMHandler)();
+    const projects = (0,_project__WEBPACK_IMPORTED_MODULE_1__.projectDOM)();
     const pageContent = document.querySelector('#content');
 
     const displayInbox = () => {
@@ -933,10 +936,10 @@ function inboxDOM() {
 
     const createAndOpenModal = (setId, setTitle) => {
         if (!document.querySelector(`${setId}`)) {
-            const modal = utilities.createTaskModal(setId, setTitle);
+            const modal = projects.createTaskModal(setId, setTitle);
             document.body.appendChild(modal);
         }
-        utilities.openModal(setId);
+        projects.openModal(setId);
     }
 
     return {
@@ -956,7 +959,6 @@ function inboxDOM() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   ProjectManager: () => (/* binding */ ProjectManager),
 /* harmony export */   projectDOM: () => (/* binding */ projectDOM)
 /* harmony export */ });
 /* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utility */ "./src/js/utility.js");
@@ -1117,13 +1119,13 @@ function projectDOM() {
             name: action,
             buttonClass: ['add-btn'],
             iconClass: ['mdi', iconType, 'action-btn-icon'],
-            clickHandler: () => handleSendButton(action, form)
+            clickHandler: () => handleSendProjectButton(action, form)
         });
         const cancelButton = utilities.createButton({
             name: 'Cancel',
             buttonClass: ['cancel-btn'],
             iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
-            clickHandler: () => handleCancelButton(form)
+            clickHandler: () => handleCancelProjectButton(form)
         });
 
         form.classList.add('project-form');
@@ -1189,6 +1191,189 @@ function projectDOM() {
         return newItem;
     };
 
+    const createTaskForm = () => {
+        const form = document.createElement('form');
+        const taskDetails = document.createElement('div');
+        const taskMetadata = document.createElement('div');
+        const taskActions = document.createElement('div');
+
+        form.classList.add('insert-task-form');
+        taskDetails.classList.add('task-details');
+        taskMetadata.classList.add('task-metadata');
+        taskActions.classList.add('group-btn');
+
+        const taskTitleInput = utilities.createInputElement({
+            inputType: 'text',
+            inputId: 'task-title',
+            inputClass: ['form-control'],
+            inputPlaceholder: 'Title',
+            inputFocus: true
+        });
+        const taskDescInput = utilities.createInputElement({
+            inputType: 'text',
+            inputId: 'task-description',
+            inputClass: ['form-control'],
+            inputPlaceholder: 'Description'
+        });
+        const taskDateInput = utilities.createInputElement({
+            inputType: 'date',
+            inputId: 'task-date',
+            inputClass: ['form-control'],
+        });
+
+        const taskPriority = utilities.createSelectElement({
+            selectName: 'task-priority',
+            selectId: 'task-priority',
+            selectClass: ['form-control']
+        });
+        const taskProject = utilities.createSelectElement({
+            selectName: 'task-project',
+            selectId: 'task-project',
+            selectClass: ['form-control']
+        });
+
+        const optionPriority = utilities.createOptionElement({
+            optionValue: '',
+            optionText: 'Choose the priority',
+            optionDisabled: true
+        });
+        const optionPriorityCritical = utilities.createOptionElement({
+            optionValue: 'critical',
+            optionText: 'Critical'
+        });
+        const optionPriorityHigh = utilities.createOptionElement({
+            optionValue: 'high',
+            optionText: 'High'
+        });
+        const optionPriorityMedium = utilities.createOptionElement({
+            optionValue: 'medium',
+            optionText: 'Medium'
+        });
+        const optionPriorityLow = utilities.createOptionElement({
+            optionValue: 'low',
+            optionText: 'Low'
+        });
+
+        const optionProject = utilities.createOptionElement({
+            optionValue: '',
+            optionText: 'Include in',
+            optionDisabled: true
+        });
+        const optionProjectInbox = utilities.createOptionElement({
+            optionValue: 'inbox',
+            optionText: 'Inbox'
+        });
+
+        const sendButton = utilities.createButton({
+            name: 'Add',
+            buttonClass: ['add-btn'],
+            iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
+            clickHandler: () => handleSendTaskButton(event)
+        });
+        const cancelButton = utilities.createButton({
+            name: 'Cancel',
+            buttonClass: ['cancel-btn'],
+            iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
+            clickHandler: () => handleCancelTaskButton(event)
+        });
+
+        form.appendChild(taskDetails);
+        form.appendChild(taskMetadata);
+        form.appendChild(taskActions);
+        taskDetails.appendChild(taskTitleInput);
+        taskDetails.appendChild(taskDescInput);
+        taskMetadata.appendChild(taskDateInput);
+        taskMetadata.appendChild(taskPriority);
+        taskMetadata.appendChild(taskProject);
+        taskActions.appendChild(sendButton);
+        taskActions.appendChild(cancelButton);
+        taskPriority.appendChild(optionPriority);
+        taskPriority.appendChild(optionPriorityCritical);
+        taskPriority.appendChild(optionPriorityHigh);
+        taskPriority.appendChild(optionPriorityMedium);
+        taskPriority.appendChild(optionPriorityLow);
+        taskProject.appendChild(optionProject);
+        taskProject.appendChild(optionProjectInbox);
+
+        return form;
+    };
+
+    const createTaskModal = (modalId, modalTitle) => {
+        const dialog = document.createElement('dialog');
+        const header = document.createElement('div');
+        const title = utilities.addTitle(modalTitle);
+        const form = createTaskForm();
+
+        dialog.setAttribute('id', modalId);
+        dialog.classList.add('task-modal');
+        header.classList.add('modal-header');
+        title.classList.add('modal-title');
+
+        const closeButton = utilities.createButton({
+            buttonClass: ['close-btn'],
+            iconClass: ['mdi', 'mdi-close'],
+            clickHandler: () => closeModal(modalId)
+        });
+
+        dialog.appendChild(header);
+        dialog.appendChild(form);
+        header.appendChild(title);
+        header.appendChild(closeButton);
+
+        return dialog;
+    };
+
+    const openModal = (modalId) => {
+        const dialog = document.querySelector(`#${modalId}`);
+        if (dialog && !dialog.open) {
+            dialog.showModal();
+            dialog.addEventListener('keydown', (event) => {
+                closeModalOnEsc(modalId, event);
+            });
+        }
+    };
+
+    const closeModal = (modalId) => {
+        const dialog = document.querySelector(`#${modalId}`);
+        if (dialog && dialog.open) {
+            dialog.close();
+            utilities.removeElement(dialog);
+            dialog.removeEventListener('keydown', (event) => {
+                closeModalOnEsc(modalId, event);
+            });
+        }
+    };
+
+    const closeModalOnEsc = (modalId, event) => {
+        if (event.key === 'Escape') {
+            closeModal(modalId);
+        }
+    };
+
+    const handleCancelTaskButton = (event) => {
+        const button = event.target;
+        const modal = button.closest('.task-modal');
+        closeModal(modal.id);
+    };
+
+    const handleSendTaskButton = (event) => {
+        const button = event.target;
+
+        const taskTitle = document.querySelector('#task-title').value.trim();
+        const taskDesc = document.querySelector('#task-description').value.trim();
+        const taskDate = document.querySelector('#task-date').value.trim();
+
+        const priorityElement = document.querySelector('#task-priority');
+        const prioritySelected = priorityElement.options[priorityElement.selectedIndex];
+        const taskPriority = prioritySelected.value;
+
+        const projectElement = document.querySelector('#task-project');
+        const projectSelected = projectElement.options[projectElement.selectedIndex];
+        const taskProject = projectSelected.value;
+
+        console.log(`${taskTitle} ${taskDesc} ${taskDate} ${taskPriority} ${taskProject}`);
+    };
+
     const sidebarContent = () => {
         const sideBar = document.querySelector('#sidebar-project-items');
         const projects = projectManager.getProjects();
@@ -1202,7 +1387,7 @@ function projectDOM() {
         }
     };
 
-    const handleSendButton = (action, form) => {
+    const handleSendProjectButton = (action, form) => {
         const projectName = document.querySelector('#set-name-project').value.trim();
         if (action === 'add') {
             const project = projectManager.createProject(projectName);
@@ -1221,7 +1406,7 @@ function projectDOM() {
         }
     };
 
-    const handleCancelButton = (form) => {
+    const handleCancelProjectButton = (form) => {
         setTimeout(() => utilities.removeElement(form), 500);
     };
 
@@ -1255,7 +1440,9 @@ function projectDOM() {
 
     return {
         createProjectForm,
-        sidebarContent
+        sidebarContent,
+        createTaskModal,
+        openModal
     };
 }
 
@@ -1273,9 +1460,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DOMHandler: () => (/* binding */ DOMHandler)
 /* harmony export */ });
-/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project */ "./src/js/project.js");
-
-
 function DOMHandler() {
     const clearPageContent = (container) => {
         if (container.hasChildNodes()) {
@@ -1393,189 +1577,6 @@ function DOMHandler() {
         return option;
     };
 
-    const createTaskForm = () => {
-        const form = document.createElement('form');
-        const taskDetails = document.createElement('div');
-        const taskMetadata = document.createElement('div');
-        const taskActions = document.createElement('div');
-
-        form.classList.add('insert-task-form');
-        taskDetails.classList.add('task-details');
-        taskMetadata.classList.add('task-metadata');
-        taskActions.classList.add('group-btn');
-
-        const taskTitleInput = createInputElement({
-            inputType: 'text',
-            inputId: 'task-title',
-            inputClass: ['form-control'],
-            inputPlaceholder: 'Title',
-            inputFocus: true
-        });
-        const taskDescInput = createInputElement({
-            inputType: 'text',
-            inputId: 'task-description',
-            inputClass: ['form-control'],
-            inputPlaceholder: 'Description'
-        });
-        const taskDateInput = createInputElement({
-            inputType: 'date',
-            inputId: 'task-date',
-            inputClass: ['form-control'],
-        });
-
-        const taskPriority = createSelectElement({
-            selectName: 'task-priority',
-            selectId: 'task-priority',
-            selectClass: ['form-control']
-        });
-        const taskProject = createSelectElement({
-            selectName: 'task-project',
-            selectId: 'task-project',
-            selectClass: ['form-control']
-        });
-
-        const optionPriority = createOptionElement({
-            optionValue: '',
-            optionText: 'Choose the priority',
-            optionDisabled: true
-        });
-        const optionPriorityCritical = createOptionElement({
-            optionValue: 'critical',
-            optionText: 'Critical'
-        });
-        const optionPriorityHigh = createOptionElement({
-            optionValue: 'high',
-            optionText: 'High'
-        });
-        const optionPriorityMedium = createOptionElement({
-            optionValue: 'medium',
-            optionText: 'Medium'
-        });
-        const optionPriorityLow = createOptionElement({
-            optionValue: 'low',
-            optionText: 'Low'
-        });
-
-        const optionProject = createOptionElement({
-            optionValue: '',
-            optionText: 'Include in',
-            optionDisabled: true
-        });
-        const optionProjectInbox = createOptionElement({
-            optionValue: 'inbox',
-            optionText: 'Inbox'
-        });
-
-        const sendButton = createButton({
-            name: 'Add',
-            buttonClass: ['add-btn'],
-            iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
-            clickHandler: () => handleSendButton(event)
-        });
-        const cancelButton = createButton({
-            name: 'Cancel',
-            buttonClass: ['cancel-btn'],
-            iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
-            clickHandler: () => handleCancelButton(event)
-        });
-
-        form.appendChild(taskDetails);
-        form.appendChild(taskMetadata);
-        form.appendChild(taskActions);
-        taskDetails.appendChild(taskTitleInput);
-        taskDetails.appendChild(taskDescInput);
-        taskMetadata.appendChild(taskDateInput);
-        taskMetadata.appendChild(taskPriority);
-        taskMetadata.appendChild(taskProject);
-        taskActions.appendChild(sendButton);
-        taskActions.appendChild(cancelButton);
-        taskPriority.appendChild(optionPriority);
-        taskPriority.appendChild(optionPriorityCritical);
-        taskPriority.appendChild(optionPriorityHigh);
-        taskPriority.appendChild(optionPriorityMedium);
-        taskPriority.appendChild(optionPriorityLow);
-        taskProject.appendChild(optionProject);
-        taskProject.appendChild(optionProjectInbox);
-
-        return form;
-    };
-
-    const createTaskModal = (modalId, modalTitle) => {
-        const dialog = document.createElement('dialog');
-        const header = document.createElement('div');
-        const title = addTitle(modalTitle);
-        const form = createTaskForm();
-
-        dialog.setAttribute('id', modalId);
-        dialog.classList.add('task-modal');
-        header.classList.add('modal-header');
-        title.classList.add('modal-title');
-
-        const closeButton = createButton({
-            buttonClass: ['close-btn'],
-            iconClass: ['mdi', 'mdi-close'],
-            clickHandler: () => closeModal(modalId)
-        });
-
-        dialog.appendChild(header);
-        dialog.appendChild(form);
-        header.appendChild(title);
-        header.appendChild(closeButton);
-
-        return dialog;
-    };
-
-    const openModal = (modalId) => {
-        const dialog = document.querySelector(`#${modalId}`);
-        if (dialog && !dialog.open) {
-            dialog.showModal();
-            dialog.addEventListener('keydown', (event) => {
-                closeModalOnEsc(modalId, event);
-            });
-        }
-    };
-
-    const closeModal = (modalId) => {
-        const dialog = document.querySelector(`#${modalId}`);
-        if (dialog && dialog.open) {
-            dialog.close();
-            removeElement(dialog);
-            dialog.removeEventListener('keydown', (event) => {
-                closeModalOnEsc(modalId, event);
-            });
-        }
-    };
-
-    const closeModalOnEsc = (modalId, event) => {
-        if (event.key === 'Escape') {
-            closeModal(modalId);
-        }
-    };
-
-    const handleCancelButton = (event) => {
-        const button = event.target;
-        const modal = button.closest('.task-modal');
-        closeModal(modal.id);
-    };
-
-    const handleSendButton = (event) => {
-        const button = event.target;
-
-        const taskTitle = document.querySelector('#task-title').value.trim();
-        const taskDesc = document.querySelector('#task-description').value.trim();
-        const taskDate = document.querySelector('#task-date').value.trim();
-
-        const priorityElement = document.querySelector('#task-priority');
-        const prioritySelected = priorityElement.options[priorityElement.selectedIndex];
-        const taskPriority = prioritySelected.value;
-
-        const projectElement = document.querySelector('#task-project');
-        const projectSelected = projectElement.options[projectElement.selectedIndex];
-        const taskProject = projectSelected.value;
-
-        console.log(`${taskTitle} ${taskDesc} ${taskDate} ${taskPriority} ${taskProject}`);
-    };
-
     const removeElement = (element) => {
         if (element) {
             element.remove();
@@ -1588,9 +1589,8 @@ function DOMHandler() {
         addTitle,
         createButton,
         createInputElement,
-        createTaskForm,
-        createTaskModal,
-        openModal,
+        createSelectElement,
+        createOptionElement,
         removeElement
     };
 }
