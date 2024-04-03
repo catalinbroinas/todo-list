@@ -997,6 +997,19 @@ function ProjectManager() {
         };
     };
 
+    const addTask = (task, projectName) => {
+        const existingProjects = getProjects();
+        const projectIndex = existingProjects.findIndex(project => project.name === projectName);
+
+        if (projectIndex !== -1) {
+            existingProjects[projectIndex].tasks.push(task);
+            saveProjects(existingProjects);
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     const getProjects = () => {
         return JSON.parse(localStorage.getItem(getProjectsStorageKey()));
     };
@@ -1111,7 +1124,7 @@ function projectDOM() {
             iconClass: ['mdi', 'mdi-delete'],
             clickHandler: handleDeleteButton
         });
-        
+
         const editButton = utilities.createButton({
             title: 'Edit item',
             buttonClass: ['project-action-btn', 'edit-btn'],
