@@ -297,4 +297,7 @@ function projectDOM() {
     };
 }
 
-export { projectDOM };
+export { 
+    projectDOM,
+    ProjectManager
+ };

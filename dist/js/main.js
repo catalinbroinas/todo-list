@@ -956,6 +956,7 @@ function inboxDOM() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ProjectManager: () => (/* binding */ ProjectManager),
 /* harmony export */   projectDOM: () => (/* binding */ projectDOM)
 /* harmony export */ });
 /* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utility */ "./src/js/utility.js");
@@ -1272,6 +1273,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DOMHandler: () => (/* binding */ DOMHandler)
 /* harmony export */ });
+/* harmony import */ var _project__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./project */ "./src/js/project.js");
+
+
 function DOMHandler() {
     const clearPageContent = (container) => {
         if (container.hasChildNodes()) {
@@ -1466,7 +1470,7 @@ function DOMHandler() {
             name: 'Add',
             buttonClass: ['add-btn'],
             iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
-            clickHandler: () => handleSendButton()
+            clickHandler: () => handleSendButton(event)
         });
         const cancelButton = createButton({
             name: 'Cancel',
@@ -1552,6 +1556,24 @@ function DOMHandler() {
         const button = event.target;
         const modal = button.closest('.task-modal');
         closeModal(modal.id);
+    };
+
+    const handleSendButton = (event) => {
+        const button = event.target;
+
+        const taskTitle = document.querySelector('#task-title').value.trim();
+        const taskDesc = document.querySelector('#task-description').value.trim();
+        const taskDate = document.querySelector('#task-date').value.trim();
+
+        const priorityElement = document.querySelector('#task-priority');
+        const prioritySelected = priorityElement.options[priorityElement.selectedIndex];
+        const taskPriority = prioritySelected.value;
+
+        const projectElement = document.querySelector('#task-project');
+        const projectSelected = projectElement.options[projectElement.selectedIndex];
+        const taskProject = projectSelected.value;
+
+        console.log(`${taskTitle} ${taskDesc} ${taskDate} ${taskPriority} ${taskProject}`);
     };
 
     const removeElement = (element) => {

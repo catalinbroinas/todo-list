@@ -1,3 +1,5 @@
+import { ProjectManager } from "./project";
+
 function DOMHandler() {
     const clearPageContent = (container) => {
         if (container.hasChildNodes()) {
@@ -192,7 +194,7 @@ function DOMHandler() {
             name: 'Add',
             buttonClass: ['add-btn'],
             iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
-            clickHandler: () => handleSendButton()
+            clickHandler: () => handleSendButton(event)
         });
         const cancelButton = createButton({
             name: 'Cancel',
@@ -278,6 +280,24 @@ function DOMHandler() {
         const button = event.target;
         const modal = button.closest('.task-modal');
         closeModal(modal.id);
+    };
+
+    const handleSendButton = (event) => {
+        const button = event.target;
+
+        const taskTitle = document.querySelector('#task-title').value.trim();
+        const taskDesc = document.querySelector('#task-description').value.trim();
+        const taskDate = document.querySelector('#task-date').value.trim();
+
+        const priorityElement = document.querySelector('#task-priority');
+        const prioritySelected = priorityElement.options[priorityElement.selectedIndex];
+        const taskPriority = prioritySelected.value;
+
+        const projectElement = document.querySelector('#task-project');
+        const projectSelected = projectElement.options[projectElement.selectedIndex];
+        const taskProject = projectSelected.value;
+
+        console.log(`${taskTitle} ${taskDesc} ${taskDate} ${taskPriority} ${taskProject}`);
     };
 
     const removeElement = (element) => {
