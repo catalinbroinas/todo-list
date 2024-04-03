@@ -999,15 +999,41 @@ function ProjectManager() {
 
     const addTask = (task, projectName) => {
         const existingProjects = getProjects();
-        const projectIndex = existingProjects.findIndex(project => project.name === projectName);
+        const defaultProjectName = 'Inbox';
 
-        if (projectIndex !== -1) {
-            existingProjects[projectIndex].tasks.push(task);
-            saveProjects(existingProjects);
-            return true;
+        // Verify if project`s name is 'Inbox'
+        if (projectName.toLowerCase() === defaultProjectName.toLowerCase()) {
+            // Search 'Inbox' project
+            const inboxProjectIndex = existingProjects.findIndex(project => project.name.toLowerCase() === defaultProjectName.toLowerCase());
+
+            if (inboxProjectIndex !== -1) {
+                // Add task to 'Inbox'
+                existingProjects[inboxProjectIndex].tasks.push(task);
+            } else {
+                // Create 'Inbox' project and add task to'Inbox'
+                const inboxProject = createProject(defaultProjectName);
+                if (addProject(inboxProject)) {
+                    existingProjects.push(inboxProject);
+                    existingProjects[existingProjects.length - 1].tasks.push(task);
+                } else {
+                    return false;
+                }
+            }
         } else {
-            return false;
+            // Search `projectName` in projects array
+            const projectIndex = existingProjects.findIndex(project => project.name === projectName);
+
+            if (projectIndex !== -1) {
+                // Add task to `projectName`
+                existingProjects[projectIndex].tasks.push(task);
+            } else {
+                return false;
+            }
         }
+
+        // Update projects array
+        saveProjects(existingProjects);
+        return true;
     };
 
     const getProjects = () => {
@@ -1047,7 +1073,9 @@ function ProjectManager() {
         addProject,
         getProjects,
         removeProject,
-        editProject
+        editProject,
+        createTask,
+        addTask
     };
 }
 
