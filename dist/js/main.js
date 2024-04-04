@@ -966,6 +966,7 @@ __webpack_require__.r(__webpack_exports__);
 
 function ProjectManager() {
     const getProjectsStorageKey = () => 'projects';
+    const getDefaultProjectName = () => 'Inbox';
 
     const createProject = (projectName) => {
         return {
@@ -1002,7 +1003,7 @@ function ProjectManager() {
 
     const addTask = (task, projectName) => {
         const existingProjects = getProjects();
-        const defaultProjectName = 'Inbox';
+        const defaultProjectName = getDefaultProjectName();
 
         // Verify if project`s name is 'Inbox'
         if (projectName.toLowerCase() === defaultProjectName.toLowerCase()) {
@@ -1078,7 +1079,8 @@ function ProjectManager() {
         removeProject,
         editProject,
         createTask,
-        addTask
+        addTask,
+        getDefaultProjectName
     };
 }
 
@@ -1385,12 +1387,15 @@ function projectDOM() {
     const sidebarContent = () => {
         const sideBar = document.querySelector('#sidebar-project-items');
         const projects = projectManager.getProjects();
+        const defaultProjectName = projectManager.getDefaultProjectName();
 
         utilities.clearPageContent(sideBar);
 
         if (projects.length) {
             projects.forEach(item => {
-                sideBar.appendChild(createNavItem(item.name));
+                if (item.name.toLowerCase() !== defaultProjectName.toLocaleLowerCase()) {
+                    sideBar.appendChild(createNavItem(item.name));
+                }
             });
         }
     };
