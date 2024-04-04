@@ -1050,7 +1050,7 @@ function ProjectManager() {
     const getTasks = (projectName) => {
         const existingProjects = getProjects();
 
-        const project = existingProjects.find(project => project.name === projectName);
+        const project = existingProjects.find(project => project.name.toLocaleLowerCase() === projectName.toLocaleLowerCase());
         if (project) {
             return project.tasks;
         } else {
@@ -1608,7 +1608,7 @@ function DOMHandler() {
     const createDOMElement = ({ elementTag, elementClass, elementId, elementText }) => {
         const element = document.createElement(elementTag);
         if (elementId) {
-            element.setActiveItem('id', elementId);
+            element.setAttribute('id', elementId);
         }
         if (elementClass) {
             elementClass.forEach(className => element.classList.add(className));

@@ -118,7 +118,7 @@ function DOMHandler() {
     const createDOMElement = ({ elementTag, elementClass, elementId, elementText }) => {
         const element = document.createElement(elementTag);
         if (elementId) {
-            element.setActiveItem('id', elementId);
+            element.setAttribute('id', elementId);
         }
         if (elementClass) {
             elementClass.forEach(className => element.classList.add(className));

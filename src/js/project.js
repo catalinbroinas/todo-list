@@ -83,7 +83,7 @@ function ProjectManager() {
     const getTasks = (projectName) => {
         const existingProjects = getProjects();
 
-        const project = existingProjects.find(project => project.name === projectName);
+        const project = existingProjects.find(project => project.name.toLocaleLowerCase() === projectName.toLocaleLowerCase());
         if (project) {
             return project.tasks;
         } else {
