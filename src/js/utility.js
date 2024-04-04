@@ -115,6 +115,103 @@ function DOMHandler() {
         return option;
     };
 
+    const createDOMElement = ({ elementTag, elementClass, elementId, elementText }) => {
+        const element = document.createElement(elementTag);
+        if (elementId) {
+            element.setActiveItem('id', elementId);
+        }
+        if (elementClass) {
+            elementClass.forEach(className => element.classList.add(className));
+        }
+        if (elementText) {
+            element.textContent = elementText;
+        }
+        return element;
+    };
+
+    const createTaskItem = ({ titleText, description, dueDate, priority }) => {
+        const task = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task']
+        });
+        const taskStatus = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-status']
+        });
+        const taskBody = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-body']
+        });
+        const taskAction = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-action']
+        });
+
+        const taskStatusCheckbox = createInputElement({
+            inputType: 'checkbox',
+            inputClass: ['task-status-checkbox']
+        });
+
+        const taskTitle = createDOMElement({
+            elementTag: 'p',
+            elementClass: ['task-title'],
+            elementText: titleText
+        });
+        const taskDesc = createDOMElement({
+            elementTag: 'p',
+            elementClass: ['task-description'],
+            elementText: description ? description : ''
+        });
+
+        const taskDueDate = createInputElement({
+            inputType: 'date',
+            inputClass: ['task-action-date'],
+            inputValue: dueDate ? dueDate : ''
+        });
+
+        const editButton = createButton({
+            title: 'Edit Task',
+            buttonClass: ['task-action-btn', 'edit-btn'],
+            iconClass: ['mdi', 'mdi-pencil', 'task-icon'],
+        });
+        const deleteButton = createButton({
+            title: 'Delete Task',
+            buttonClass: ['task-action-btn', 'remove-btn'],
+            iconClass: ['mdi', 'mdi-delete', 'task-icon'],
+        });
+
+        let bgColor = '#ECEFF1';
+
+        switch (priority) {
+            case 'critical':
+                bgColor = '#FFEBEE';
+                break;
+            case 'high':
+                bgColor = '#FFFDE7';
+                break;
+            case 'medium':
+                bgColor = '#E3F2FD';
+                break;
+            case 'low':
+                bgColor = '#E8F5E9';
+                break;
+        }
+
+        task.style.backgroundColor = bgColor;
+
+        task.appendChild(taskStatus);
+        task.appendChild(taskBody);
+        task.appendChild(taskAction);
+        taskStatus.appendChild(taskStatusCheckbox);
+        taskBody.appendChild(taskTitle);
+        taskBody.appendChild(taskDesc);
+        taskAction.appendChild(taskDueDate);
+        taskAction.appendChild(editButton);
+        taskAction.appendChild(deleteButton);
+
+        return task;
+    };
+
     const removeElement = (element) => {
         if (element) {
             element.remove();
@@ -129,7 +226,8 @@ function DOMHandler() {
         createInputElement,
         createSelectElement,
         createOptionElement,
-        removeElement
+        removeElement,
+        createTaskItem
     };
 }
 
