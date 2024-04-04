@@ -914,9 +914,11 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
 function inboxDOM() {
     const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.DOMHandler)();
-    const projects = (0,_project__WEBPACK_IMPORTED_MODULE_1__.projectDOM)();
+    const projectDom = (0,_project__WEBPACK_IMPORTED_MODULE_1__.projectDOM)();
+    const projectManager = (0,_project__WEBPACK_IMPORTED_MODULE_1__.ProjectManager)();
     const pageContent = document.querySelector('#content');
 
     const displayInbox = () => {
@@ -936,11 +938,11 @@ function inboxDOM() {
 
     const createAndOpenModal = (setId, setTitle) => {
         if (!document.querySelector(`${setId}`)) {
-            const modal = projects.createTaskModal(setId, setTitle);
+            const modal = projectDom.createTaskModal(setId, setTitle);
             document.body.appendChild(modal);
         }
-        projects.openModal(setId);
-    }
+        projectDom.openModal(setId);
+    };
 
     return {
         displayInbox
@@ -959,6 +961,7 @@ function inboxDOM() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ProjectManager: () => (/* binding */ ProjectManager),
 /* harmony export */   projectDOM: () => (/* binding */ projectDOM)
 /* harmony export */ });
 /* harmony import */ var _utility__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ./utility */ "./src/js/utility.js");
@@ -1702,7 +1705,8 @@ function DOMHandler() {
         createSelectElement,
         createOptionElement,
         removeElement,
-        createTaskItem
+        createTaskItem,
+        createDOMElement
     };
 }
 

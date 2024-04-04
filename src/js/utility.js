@@ -227,7 +227,8 @@ function DOMHandler() {
         createSelectElement,
         createOptionElement,
         removeElement,
-        createTaskItem
+        createTaskItem,
+        createDOMElement
     };
 }
 
