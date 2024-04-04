@@ -283,6 +283,11 @@ ul {
 }
 
 /* Task */
+.task-container {
+    width: 100%;
+    margin-bottom: 1rem;
+}
+
 .task {
     width: 80%;
     display: flex;
@@ -294,6 +299,22 @@ ul {
     padding: 0.5rem 1.5rem;
     margin: 1rem 0;
     border-radius: 1rem;
+}
+
+.task.critical-priority {
+    background-color: #FFEBEE;
+}
+
+.task.high-priority {
+    background-color: #FFFDE7;
+}
+
+.task.medium-priority {
+    background-color: #E3F2FD;
+}
+
+.task.low-priority {
+    background-color: #E8F5E9;
 }
 
 .task-status {

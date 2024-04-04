@@ -130,9 +130,25 @@ function DOMHandler() {
     };
 
     const createTaskItem = ({ titleText, description, dueDate, priority }) => {
+        let priorityClass = '';
+        switch (priority) {
+            case 'critical':
+                priorityClass = 'critical-priority';
+                break;
+            case 'high':
+                priorityClass = 'high-priority';
+                break;
+            case 'medium':
+                priorityClass = 'medium-priority';
+                break;
+            case 'low':
+                priorityClass = 'low-priority';
+                break;
+        }
+
         const task = createDOMElement({
             elementTag: 'div',
-            elementClass: ['task']
+            elementClass: ['task', priorityClass]
         });
         const taskStatus = createDOMElement({
             elementTag: 'div',
@@ -179,25 +195,6 @@ function DOMHandler() {
             buttonClass: ['task-action-btn', 'remove-btn'],
             iconClass: ['mdi', 'mdi-delete', 'task-icon'],
         });
-
-        let bgColor = '#ECEFF1';
-
-        switch (priority) {
-            case 'critical':
-                bgColor = '#FFEBEE';
-                break;
-            case 'high':
-                bgColor = '#FFFDE7';
-                break;
-            case 'medium':
-                bgColor = '#E3F2FD';
-                break;
-            case 'low':
-                bgColor = '#E8F5E9';
-                break;
-        }
-
-        task.style.backgroundColor = bgColor;
 
         task.appendChild(taskStatus);
         task.appendChild(taskBody);
