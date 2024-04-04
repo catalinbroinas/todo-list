@@ -928,11 +928,15 @@ function inboxDOM() {
             iconClass: ['mdi', 'mdi-plus', 'add-task-icon'],
             clickHandler: () => createAndOpenModal('add-task-modal', 'Add new task')
         });
+        const inboxTasks = displayTasks('Inbox');
 
         utilities.setActiveSidebarButton('inbox-btn');
         utilities.clearPageContent(pageContent);
 
         pageContent.appendChild(utilities.addTitle('Inbox'));
+        if (inboxTasks) {
+            pageContent.appendChild(inboxTasks);
+        }
         pageContent.appendChild(addTaskButton);
     };
 
@@ -944,8 +948,33 @@ function inboxDOM() {
         projectDom.openModal(setId);
     };
 
+    const displayTasks = (projectName) => {
+        const taskContainer = utilities.createDOMElement({
+            elementTag: 'div',
+            elementId: 'inbox-tasks',
+            elementClass: ['task-container']
+        });
+        const inboxTasks = projectManager.getTasks(projectName);
+
+        if (inboxTasks) {
+            inboxTasks.forEach(task => {
+                taskContainer.appendChild(utilities.createTaskItem({
+                    titleText: task.title,
+                    description: task.description,
+                    dueDate: task.dueDate,
+                    priority: task.priority
+                }));
+            });    
+        } else {
+            return false;
+        }
+        
+        return taskContainer;
+    };
+
     return {
-        displayInbox
+        displayInbox,
+        displayTasks
     };
 }
 
