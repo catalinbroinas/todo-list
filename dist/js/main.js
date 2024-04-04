@@ -1047,6 +1047,17 @@ function ProjectManager() {
         return JSON.parse(localStorage.getItem(getProjectsStorageKey()));
     };
 
+    const getTasks = (projectName) => {
+        const existingProjects = getProjects();
+
+        const project = existingProjects.find(project => project.name === projectName);
+        if (project) {
+            return project.tasks;
+        } else {
+            return [];
+        }
+    };
+
     const removeProject = (index) => {
         const existProjects = getProjects();
 
@@ -1083,7 +1094,8 @@ function ProjectManager() {
         editProject,
         createTask,
         addTask,
-        getDefaultProjectName
+        getDefaultProjectName,
+        getTasks
     };
 }
 
