@@ -115,7 +115,7 @@ function DOMHandler() {
         return option;
     };
 
-    const createDOMElement = ({ elementTag, elementClass, elementId, elementText }) => {
+    const createDOMElement = ({ elementTag, elementClass, elementId, elementText, elementAtrType, elementAtrValue  }) => {
         const element = document.createElement(elementTag);
         if (elementId) {
             element.setAttribute('id', elementId);
@@ -125,6 +125,9 @@ function DOMHandler() {
         }
         if (elementText) {
             element.textContent = elementText;
+        }
+        if (elementAtrType) {
+            element.setAttribute(elementAtrType, elementAtrValue);
         }
         return element;
     };

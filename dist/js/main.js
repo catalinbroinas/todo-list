@@ -1135,8 +1135,14 @@ function projectDOM() {
             return false;
         }
 
-        const form = document.createElement('form');
-        const groupButtons = document.createElement('div');
+        const form = utilities.createDOMElement({
+            elementTag: 'form',
+            elementClass: ['project-form']
+        });
+        const groupButtons = utilities.createDOMElement({
+            elementTag: 'div',
+            elementClass: ['group-btn']
+        });
 
         const iconType = action === 'add' ? 'mdi-send' : 'mdi-pencil';
 
@@ -1162,9 +1168,6 @@ function projectDOM() {
             clickHandler: () => handleCancelProjectButton(form)
         });
 
-        form.classList.add('project-form');
-        groupButtons.classList.add('group-btn');
-
         form.addEventListener('submit', (event) => {
             event.preventDefault();
         });
@@ -1178,32 +1181,40 @@ function projectDOM() {
     };
 
     const createNavItem = (name) => {
-        const newItem = document.createElement('a');
-        const navItemBody = document.createElement('div');
-        const navItemActions = document.createElement('div');
-        const newItemIcon = document.createElement('i');
+        const newItem = utilities.createDOMElement({
+            elementTag: 'a',
+            elementId: `${name.toLowerCase()}-btn`,
+            elementClass: ['nav-item', 'project-item'],
+            elementAtrType: 'role',
+            elementAtrValue: 'button'
+        });
+
+        const navItemBody = utilities.createDOMElement({
+            elementTag: 'div',
+            electron: ['project-item-body']
+        });
+        const navItemActions = utilities.createDOMElement({
+            elementTag: 'div',
+            elementClass: ['project-item-actions']
+        });
+        const newItemIcon = utilities.createDOMElement({
+            elementTag: 'i',
+            elementClass: ['mdi', 'mdi-format-list-bulleted', 'nav-icon']
+        });
 
         const deleteButton = utilities.createButton({
             title: 'Delete item',
             buttonClass: ['project-action-btn', 'delete-btn'],
             iconClass: ['mdi', 'mdi-delete'],
-            clickHandler: handleDeleteButton
+            clickHandler: handleDeleteProjectButton
         });
 
         const editButton = utilities.createButton({
             title: 'Edit item',
             buttonClass: ['project-action-btn', 'edit-btn'],
             iconClass: ['mdi', 'mdi-pencil'],
-            clickHandler: handleEditButton
+            clickHandler: handleEditProjectButton
         });
-
-        newItem.classList.add('nav-item', 'project-item');
-        navItemBody.classList.add('project-item-body');
-        newItemIcon.classList.add('mdi', 'mdi-format-list-bulleted', 'nav-icon');
-        navItemActions.classList.add('project-item-actions');
-
-        newItem.setAttribute('role', 'button');
-        newItem.setAttribute('id', `${name.toLowerCase()}-btn`);
 
         newItem.addEventListener('mouseover', () => {
             deleteButton.style.visibility = 'visible';
@@ -1226,15 +1237,22 @@ function projectDOM() {
     };
 
     const createTaskForm = () => {
-        const form = document.createElement('form');
-        const taskDetails = document.createElement('div');
-        const taskMetadata = document.createElement('div');
-        const taskActions = document.createElement('div');
-
-        form.classList.add('insert-task-form');
-        taskDetails.classList.add('task-details');
-        taskMetadata.classList.add('task-metadata');
-        taskActions.classList.add('group-btn');
+        const form = utilities.createDOMElement({
+            elementTag: 'form',
+            elementClass: ['insert-task-form']
+        });
+        const taskDetails = utilities.createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-details']
+        });
+        const taskMetadata = utilities.createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-metadata']
+        });
+        const taskActions = utilities.createDOMElement({
+            elementTag: 'div',
+            elementClass: ['group-btn']
+        });
 
         const taskTitleInput = utilities.createInputElement({
             inputType: 'text',
@@ -1333,15 +1351,18 @@ function projectDOM() {
     };
 
     const createTaskModal = (modalId, modalTitle) => {
-        const dialog = document.createElement('dialog');
-        const header = document.createElement('div');
+        const dialog = utilities.createDOMElement({
+            elementTag: 'dialog',
+            elementId: modalId,
+            elementClass: ['task-modal']
+        });
+        const header = utilities.createDOMElement({
+            elementTag: 'div',
+            elementClass: ['modal-header']
+        });
         const title = utilities.addTitle(modalTitle);
-        const form = createTaskForm();
-
-        dialog.setAttribute('id', modalId);
-        dialog.classList.add('task-modal');
-        header.classList.add('modal-header');
         title.classList.add('modal-title');
+        const form = createTaskForm();
 
         const closeButton = utilities.createButton({
             buttonClass: ['close-btn'],
@@ -1509,7 +1530,7 @@ function projectDOM() {
         setTimeout(() => utilities.removeElement(form), 500);
     };
 
-    const handleDeleteButton = (event) => {
+    const handleDeleteProjectButton = (event) => {
         const button = event.target;
         const navItem = button.closest('.nav-item');
         const itemName = navItem.textContent.trim();
@@ -1518,7 +1539,7 @@ function projectDOM() {
         sidebarContent();
     };
 
-    const handleEditButton = (event) => {
+    const handleEditProjectButton = (event) => {
         const sidebarProject = document.querySelector('#sidebar-project');
         const button = event.target;
         const navItem = button.closest('.nav-item');
@@ -1678,7 +1699,7 @@ function DOMHandler() {
         return option;
     };
 
-    const createDOMElement = ({ elementTag, elementClass, elementId, elementText }) => {
+    const createDOMElement = ({ elementTag, elementClass, elementId, elementText, elementAtrType, elementAtrValue  }) => {
         const element = document.createElement(elementTag);
         if (elementId) {
             element.setAttribute('id', elementId);
@@ -1688,6 +1709,9 @@ function DOMHandler() {
         }
         if (elementText) {
             element.textContent = elementText;
+        }
+        if (elementAtrType) {
+            element.setAttribute(elementAtrType, elementAtrValue);
         }
         return element;
     };
