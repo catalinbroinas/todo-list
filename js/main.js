@@ -977,7 +977,7 @@ function inboxDOM() {
         });
         const inboxTasks = projectManager.getTasks(projectName);
 
-        if (inboxTasks) {
+        if (inboxTasks.length) {
             inboxTasks.forEach(task => {
                 taskContainer.appendChild(utilities.createTaskItem({
                     titleText: task.title,
@@ -1927,8 +1927,10 @@ function UI() {
 window.addEventListener('load', () => {
     const ui = UI();
     const project = (0,_project__WEBPACK_IMPORTED_MODULE_2__.projectDOM)();
+    const inbox = (0,_inbox__WEBPACK_IMPORTED_MODULE_1__.inboxDOM)();
     ui.addEvents();
     project.sidebarContent();
+    inbox.displayInbox();
 });
 })();
 
