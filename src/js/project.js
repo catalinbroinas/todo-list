@@ -446,13 +446,13 @@ function projectDOM() {
     const displayTasks = (projectName) => {
         const taskContainer = utilities.createDOMElement({
             elementTag: 'div',
-            elementId: 'inbox-tasks',
+            elementId: `${projectName.toLocaleLowerCase()}-task`,
             elementClass: ['task-container']
         });
-        const inboxTasks = projectManager.getTasks(projectName);
+        const taskItems = projectManager.getTasks(projectName);
 
-        if (inboxTasks.length) {
-            inboxTasks.forEach(task => {
+        if (taskItems.length) {
+            taskItems.forEach(task => {
                 taskContainer.appendChild(utilities.createTaskItem({
                     titleText: task.title,
                     description: task.description,
