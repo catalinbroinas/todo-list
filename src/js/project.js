@@ -400,6 +400,14 @@ function projectDOM() {
         }
     };
 
+    const createAndOpenModal = (setId, setTitle) => {
+        if (!document.querySelector(`${setId}`)) {
+            const modal = createTaskModal(setId, setTitle);
+            document.body.appendChild(modal);
+        }
+        openModal(setId);
+    };
+
     const displayTasks = (projectName) => {
         const taskContainer = utilities.createDOMElement({
             elementTag: 'div',

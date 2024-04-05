@@ -228,8 +228,11 @@ ul {
 
 .content-title {
     font-size: 2rem;
-    font-family: inherit;
     margin: 0 0 2rem;
+}
+
+.content-title::first-letter {
+    text-transform: uppercase;
 }
 
 .add-task-btn {
