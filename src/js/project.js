@@ -103,6 +103,19 @@ function ProjectManager() {
         }
     };
 
+    const removeTask = (projectIndex, taskIndex) => {
+        const existingProjects = getProjects();
+        const validate = (currentValue) => Number.isInteger(currentValue); 
+        
+        if (validate(projectIndex) && validate(taskIndex)) {
+            existingProjects[projectIndex].tasks.splice(taskIndex, 1);
+            saveProjects(existingProjects);
+            return true;
+        } else {
+            return false;
+        }
+    };
+
     const editProject = (index, setValue) => {
         const existProjects = getProjects();
 
@@ -128,7 +141,8 @@ function ProjectManager() {
         createTask,
         addTask,
         getDefaultProjectName,
-        getTasks
+        getTasks,
+        removeTask
     };
 }
 
