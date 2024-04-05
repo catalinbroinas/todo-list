@@ -949,7 +949,7 @@ function inboxDOM() {
             iconClass: ['mdi', 'mdi-plus', 'add-task-icon'],
             clickHandler: () => createAndOpenModal('add-task-modal', 'Add new task')
         });
-        const inboxTasks = displayTasks('Inbox');
+        const inboxTasks = projectDom.displayTasks('Inbox');
 
         utilities.setActiveSidebarButton('inbox-btn');
         utilities.clearPageContent(pageContent);
@@ -969,33 +969,8 @@ function inboxDOM() {
         projectDom.openModal(setId);
     };
 
-    const displayTasks = (projectName) => {
-        const taskContainer = utilities.createDOMElement({
-            elementTag: 'div',
-            elementId: 'inbox-tasks',
-            elementClass: ['task-container']
-        });
-        const inboxTasks = projectManager.getTasks(projectName);
-
-        if (inboxTasks.length) {
-            inboxTasks.forEach(task => {
-                taskContainer.appendChild(utilities.createTaskItem({
-                    titleText: task.title,
-                    description: task.description,
-                    dueDate: task.dueDate,
-                    priority: task.priority
-                }));
-            });    
-        } else {
-            return false;
-        }
-        
-        return taskContainer;
-    };
-
     return {
-        displayInbox,
-        displayTasks
+        displayInbox
     };
 }
 
@@ -1417,14 +1392,49 @@ function projectDOM() {
         }
     };
 
-    const handleCancelTaskButton = (event) => {
-        const button = event.target;
-        const modal = button.closest('.task-modal');
-        closeModal(modal.id);
+    const displayTasks = (projectName) => {
+        const taskContainer = utilities.createDOMElement({
+            elementTag: 'div',
+            elementId: 'inbox-tasks',
+            elementClass: ['task-container']
+        });
+        const inboxTasks = projectManager.getTasks(projectName);
+
+        if (inboxTasks.length) {
+            inboxTasks.forEach(task => {
+                taskContainer.appendChild(utilities.createTaskItem({
+                    titleText: task.title,
+                    description: task.description,
+                    dueDate: task.dueDate,
+                    priority: task.priority
+                }));
+            });    
+        } else {
+            return false;
+        }
+        
+        return taskContainer;
+    };
+
+    const sidebarContent = () => {
+        const sideBar = document.querySelector('#sidebar-project-items');
+        const projects = projectManager.getProjects();
+        const defaultProjectName = projectManager.getDefaultProjectName();
+
+        utilities.clearPageContent(sideBar);
+
+        if (projects.length) {
+            projects.forEach(item => {
+                if (item.name.toLowerCase() !== defaultProjectName.toLocaleLowerCase()) {
+                    sideBar.appendChild(createNavItem(item.name));
+                }
+            });
+        }
     };
 
     const handleSendTaskButton = (event) => {
         const button = event.target;
+        const modal = button.closest('.task-modal');
 
         const taskTitle = document.querySelector('#task-title').value.trim();
         const taskDesc = document.querySelector('#task-description').value.trim();
@@ -1446,23 +1456,13 @@ function projectDOM() {
         });
         projectManager.addTask(task, taskProject);
 
-        console.log(`${taskTitle} ${taskDesc} ${taskDate} ${taskPriority} ${taskProject}`);
+        closeModal(modal.id);
     };
 
-    const sidebarContent = () => {
-        const sideBar = document.querySelector('#sidebar-project-items');
-        const projects = projectManager.getProjects();
-        const defaultProjectName = projectManager.getDefaultProjectName();
-
-        utilities.clearPageContent(sideBar);
-
-        if (projects.length) {
-            projects.forEach(item => {
-                if (item.name.toLowerCase() !== defaultProjectName.toLocaleLowerCase()) {
-                    sideBar.appendChild(createNavItem(item.name));
-                }
-            });
-        }
+    const handleCancelTaskButton = (event) => {
+        const button = event.target;
+        const modal = button.closest('.task-modal');
+        closeModal(modal.id);
     };
 
     const handleSendProjectButton = (action, form) => {
@@ -1520,7 +1520,8 @@ function projectDOM() {
         createProjectForm,
         sidebarContent,
         createTaskModal,
-        openModal
+        openModal,
+        displayTasks
     };
 }
 
