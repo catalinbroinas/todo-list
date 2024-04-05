@@ -68,6 +68,8 @@ function UI() {
 window.addEventListener('load', () => {
     const ui = UI();
     const project = projectDOM();
+    const inbox = inboxDOM();
     ui.addEvents();
     project.sidebarContent();
+    inbox.displayInbox();
 });

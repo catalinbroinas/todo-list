@@ -43,7 +43,7 @@ function inboxDOM() {
         });
         const inboxTasks = projectManager.getTasks(projectName);
 
-        if (inboxTasks) {
+        if (inboxTasks.length) {
             inboxTasks.forEach(task => {
                 taskContainer.appendChild(utilities.createTaskItem({
                     titleText: task.title,
