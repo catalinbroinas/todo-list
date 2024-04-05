@@ -1432,6 +1432,26 @@ function projectDOM() {
         }
     };
 
+    const pageContent = (projectName) => {
+        const pageContent = document.querySelector('#content');
+        const pageTitle = utilities.addTitle(projectName);
+        const tasks = displayTasks(projectName);
+        const addTaskButton = utilities.createButton({
+            name: 'Add Task',
+            buttonClass: ['add-task-btn'],
+            iconClass: ['mdi', 'mdi-plus', 'add-task-icon'],
+            clickHandler: () => createAndOpenModal('add-task-modal', 'Add new task')
+        });
+
+        utilities.clearPageContent(pageContent);
+
+        pageContent.appendChild(pageTitle);
+        if (tasks) {
+            pageContent.appendChild(tasks);
+        }
+        pageContent.appendChild(addTaskButton);
+    }
+
     const handleSendTaskButton = (event) => {
         const button = event.target;
         const modal = button.closest('.task-modal');
@@ -1457,6 +1477,7 @@ function projectDOM() {
         projectManager.addTask(task, taskProject);
 
         closeModal(modal.id);
+        pageContent(taskProject);
     };
 
     const handleCancelTaskButton = (event) => {
@@ -1521,7 +1542,8 @@ function projectDOM() {
         sidebarContent,
         createTaskModal,
         openModal,
-        displayTasks
+        displayTasks,
+        pageContent
     };
 }
 
