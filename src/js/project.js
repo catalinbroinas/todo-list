@@ -443,6 +443,87 @@ function projectDOM() {
         openModal(setId);
     };
 
+    const createTaskItem = ({ titleText, description, dueDate, priority }) => {
+        let priorityClass = '';
+        switch (priority) {
+            case 'critical':
+                priorityClass = 'critical-priority';
+                break;
+            case 'high':
+                priorityClass = 'high-priority';
+                break;
+            case 'medium':
+                priorityClass = 'medium-priority';
+                break;
+            case 'low':
+                priorityClass = 'low-priority';
+                break;
+        }
+
+        const task = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task', priorityClass]
+        });
+        const taskStatus = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-status']
+        });
+        const taskBody = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-body']
+        });
+        const taskAction = createDOMElement({
+            elementTag: 'div',
+            elementClass: ['task-action']
+        });
+
+        const taskStatusCheckbox = createInputElement({
+            inputType: 'checkbox',
+            inputClass: ['task-status-checkbox']
+        });
+
+        const taskTitle = createDOMElement({
+            elementTag: 'p',
+            elementClass: ['task-title'],
+            elementText: titleText
+        });
+        const taskDesc = createDOMElement({
+            elementTag: 'p',
+            elementClass: ['task-description'],
+            elementText: description ? description : ''
+        });
+
+        const taskDueDate = createInputElement({
+            inputType: 'date',
+            inputClass: ['task-action-date'],
+            inputValue: dueDate ? dueDate : ''
+        });
+
+        const editButton = createButton({
+            title: 'Edit Task',
+            buttonClass: ['task-action-btn', 'edit-btn'],
+            iconClass: ['mdi', 'mdi-pencil', 'task-icon'],
+        });
+        const deleteButton = createButton({
+            title: 'Delete Task',
+            buttonClass: ['task-action-btn', 'remove-btn'],
+            iconClass: ['mdi', 'mdi-delete', 'task-icon'],
+            clickHandler: () => handleDeleteTaskButton()
+        });
+
+        task.appendChild(taskStatus);
+        task.appendChild(taskBody);
+        task.appendChild(taskAction);
+        taskStatus.appendChild(taskStatusCheckbox);
+        taskBody.appendChild(taskTitle);
+        taskBody.appendChild(taskDesc);
+        taskAction.appendChild(taskDueDate);
+        taskAction.appendChild(editButton);
+        taskAction.appendChild(deleteButton);
+
+        return task;
+    };
+
     const displayTasks = (projectName) => {
         const taskContainer = utilities.createDOMElement({
             elementTag: 'div',
@@ -453,7 +534,7 @@ function projectDOM() {
 
         if (taskItems.length) {
             taskItems.forEach(task => {
-                taskContainer.appendChild(utilities.createTaskItem({
+                taskContainer.appendChild(createTaskItem({
                     titleText: task.title,
                     description: task.description,
                     dueDate: task.dueDate,
