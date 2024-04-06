@@ -1661,7 +1661,8 @@ function projectDOM() {
         createTaskModal,
         openModal,
         displayTasks,
-        pageContent
+        pageContent,
+        setActiveProject
     };
 }
 
@@ -1939,6 +1940,7 @@ __webpack_require__.r(__webpack_exports__);
 function UI() {
     const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_3__.DOMHandler)();
     const inbox = (0,_inbox__WEBPACK_IMPORTED_MODULE_1__.inboxDOM)();
+    const projectDom = (0,_project__WEBPACK_IMPORTED_MODULE_2__.projectDOM)();
     const pageContent = document.querySelector('#content');
     const inboxButton = document.querySelector('#inbox-btn');
     const todayButton = document.querySelector('#today-btn');
@@ -1974,6 +1976,7 @@ function UI() {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
                 inbox.displayInbox();
+                projectDom.setActiveProject(event);
             }, 500);
         });
         todayButton.addEventListener('click', (event) => {
