@@ -150,11 +150,18 @@ function projectDOM() {
     const projectManager = ProjectManager();
     const utilities = DOMHandler();
     let projectIndex = null;
+    let taskIndex = null;
 
     const getProjectIndex = () => projectIndex;
 
     const setProjectIndex = (value) => {
         projectIndex = value;
+    };
+
+    const getTaskIndex = () => taskIndex;
+
+    const setTaskIndex = (value) => {
+        taskIndex = value;
     };
 
     const getCurrentProjectIndex = (element) => {

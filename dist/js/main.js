@@ -1120,11 +1120,18 @@ function projectDOM() {
     const projectManager = ProjectManager();
     const utilities = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.DOMHandler)();
     let projectIndex = null;
+    let taskIndex = null;
 
     const getProjectIndex = () => projectIndex;
 
     const setProjectIndex = (value) => {
         projectIndex = value;
+    };
+
+    const getTaskIndex = () => taskIndex;
+
+    const setTaskIndex = (value) => {
+        taskIndex = value;
     };
 
     const getCurrentProjectIndex = (element) => {
