@@ -171,6 +171,18 @@ function projectDOM() {
         return projects.findIndex(item => item.name === itemName);
     };
 
+    const getCurrentTaskIndex = (element) => {
+        const projects = projectManager.getProjects();
+        const projectName = projects[getProjectIndex()].name;
+        const tasks = projectManager.getTasks(projectName);
+
+        const taskItem = element.closest('.task');
+        const taskTitle = taskItem.querySelector('.task-title');
+        const itemTitle = taskTitle.textContent.trim();
+
+        return tasks.findIndex(task => task.title === itemTitle);
+    };
+
     const setActiveProject = (event) => {
         const button = event.target;
         const index = getCurrentProjectIndex(button);
