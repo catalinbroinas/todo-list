@@ -691,7 +691,8 @@ function projectDOM() {
         createTaskModal,
         openModal,
         displayTasks,
-        pageContent
+        pageContent,
+        setActiveProject
     };
 }
 

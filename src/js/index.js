@@ -6,6 +6,7 @@ import { DOMHandler } from './utility';
 function UI() {
     const utilities = DOMHandler();
     const inbox = inboxDOM();
+    const projectDom = projectDOM();
     const pageContent = document.querySelector('#content');
     const inboxButton = document.querySelector('#inbox-btn');
     const todayButton = document.querySelector('#today-btn');
@@ -41,6 +42,7 @@ function UI() {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
                 inbox.displayInbox();
+                projectDom.setActiveProject(event);
             }, 500);
         });
         todayButton.addEventListener('click', (event) => {
