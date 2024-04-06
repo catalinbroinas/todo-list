@@ -115,7 +115,15 @@ function DOMHandler() {
         return option;
     };
 
-    const createDOMElement = ({ elementTag, elementClass, elementId, elementText, elementAtrType, elementAtrValue  }) => {
+    const createDOMElement = ({ 
+        elementTag, 
+        elementClass, 
+        elementId, 
+        elementText, 
+        elementAtrType, 
+        elementAtrValue,
+        clickHandler
+      }) => {
         const element = document.createElement(elementTag);
         if (elementId) {
             element.setAttribute('id', elementId);
@@ -128,6 +136,9 @@ function DOMHandler() {
         }
         if (elementAtrType) {
             element.setAttribute(elementAtrType, elementAtrValue);
+        }
+        if (clickHandler) {
+            element.addEventListener('click', clickHandler);
         }
         return element;
     };

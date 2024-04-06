@@ -1075,8 +1075,8 @@ function ProjectManager() {
 
     const removeTask = (projectIndex, taskIndex) => {
         const existingProjects = getProjects();
-        const validate = (currentValue) => Number.isInteger(currentValue); 
-        
+        const validate = (currentValue) => Number.isInteger(currentValue);
+
         if (validate(projectIndex) && validate(taskIndex)) {
             existingProjects[projectIndex].tasks.splice(taskIndex, 1);
             saveProjects(existingProjects);
@@ -1125,6 +1125,21 @@ function projectDOM() {
 
     const setProjectIndex = (value) => {
         projectIndex = value;
+    };
+
+    const getCurrentProjectIndex = (element) => {
+        const navItem = element.closest('.nav-item');
+        const itemName = navItem.textContent.trim();
+        const projects = projectManager.getProjects();
+        return projects.findIndex(item => item.name === itemName);
+    };
+
+    const setActiveProject = (event) => {
+        const button = event.target;
+        const index = getCurrentProjectIndex(button);
+        if (Number.isInteger(index) && index >= 0) {
+            setProjectIndex(index);
+        }
     };
 
     const createProjectForm = (action, value = '') => {
@@ -1186,7 +1201,8 @@ function projectDOM() {
             elementId: `${name.toLowerCase()}-btn`,
             elementClass: ['nav-item', 'project-item'],
             elementAtrType: 'role',
-            elementAtrValue: 'button'
+            elementAtrValue: 'button',
+            clickHandler: () => setActiveProject(event)
         });
 
         const navItemBody = utilities.createDOMElement({
@@ -1430,51 +1446,51 @@ function projectDOM() {
                 break;
         }
 
-        const task = createDOMElement({
+        const task = utilities.createDOMElement({
             elementTag: 'div',
             elementClass: ['task', priorityClass]
         });
-        const taskStatus = createDOMElement({
+        const taskStatus = utilities.createDOMElement({
             elementTag: 'div',
             elementClass: ['task-status']
         });
-        const taskBody = createDOMElement({
+        const taskBody = utilities.createDOMElement({
             elementTag: 'div',
             elementClass: ['task-body']
         });
-        const taskAction = createDOMElement({
+        const taskAction = utilities.createDOMElement({
             elementTag: 'div',
             elementClass: ['task-action']
         });
 
-        const taskStatusCheckbox = createInputElement({
+        const taskStatusCheckbox = utilities.createInputElement({
             inputType: 'checkbox',
             inputClass: ['task-status-checkbox']
         });
 
-        const taskTitle = createDOMElement({
+        const taskTitle = utilities.createDOMElement({
             elementTag: 'p',
             elementClass: ['task-title'],
             elementText: titleText
         });
-        const taskDesc = createDOMElement({
+        const taskDesc = utilities.createDOMElement({
             elementTag: 'p',
             elementClass: ['task-description'],
             elementText: description ? description : ''
         });
 
-        const taskDueDate = createInputElement({
+        const taskDueDate = utilities.createInputElement({
             inputType: 'date',
             inputClass: ['task-action-date'],
             inputValue: dueDate ? dueDate : ''
         });
 
-        const editButton = createButton({
+        const editButton = utilities.createButton({
             title: 'Edit Task',
             buttonClass: ['task-action-btn', 'edit-btn'],
             iconClass: ['mdi', 'mdi-pencil', 'task-icon'],
         });
-        const deleteButton = createButton({
+        const deleteButton = utilities.createButton({
             title: 'Delete Task',
             buttonClass: ['task-action-btn', 'remove-btn'],
             iconClass: ['mdi', 'mdi-delete', 'task-icon'],
@@ -1510,11 +1526,11 @@ function projectDOM() {
                     dueDate: task.dueDate,
                     priority: task.priority
                 }));
-            });    
+            });
         } else {
             return false;
         }
-        
+
         return taskContainer;
     };
 
@@ -1627,8 +1643,8 @@ function projectDOM() {
         const itemName = navItem.textContent.trim();
         const projectForm = createProjectForm('edit', itemName);
 
-        // Get current index of the project
-        const index = projectManager.getProjects().findIndex(item => item.name === itemName);
+        // Get current index of te project
+        const index = getCurrentProjectIndex(button);
 
         if (!sidebarProject.querySelector('#set-name-project')) {
             // Add editing form to DOM and focus to input
@@ -1780,7 +1796,15 @@ function DOMHandler() {
         return option;
     };
 
-    const createDOMElement = ({ elementTag, elementClass, elementId, elementText, elementAtrType, elementAtrValue  }) => {
+    const createDOMElement = ({ 
+        elementTag, 
+        elementClass, 
+        elementId, 
+        elementText, 
+        elementAtrType, 
+        elementAtrValue,
+        clickHandler
+      }) => {
         const element = document.createElement(elementTag);
         if (elementId) {
             element.setAttribute('id', elementId);
@@ -1793,6 +1817,9 @@ function DOMHandler() {
         }
         if (elementAtrType) {
             element.setAttribute(elementAtrType, elementAtrValue);
+        }
+        if (clickHandler) {
+            element.addEventListener('click', clickHandler);
         }
         return element;
     };
