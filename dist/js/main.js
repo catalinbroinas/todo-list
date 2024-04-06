@@ -943,8 +943,10 @@ function inboxDOM() {
     const projectDom = (0,_project__WEBPACK_IMPORTED_MODULE_1__.projectDOM)();
 
     const displayInbox = () => {
+        const inboxButton = document.querySelector('#inbox-btn');
         utilities.setActiveSidebarButton('inbox-btn');
         projectDom.pageContent('Inbox');
+        projectDom.setActiveProject({ target: inboxButton }); // Simulate an event to set the project active
     };
 
     return {
@@ -1513,7 +1515,7 @@ function projectDOM() {
             title: 'Delete Task',
             buttonClass: ['task-action-btn', 'remove-btn'],
             iconClass: ['mdi', 'mdi-delete', 'task-icon'],
-            clickHandler: () => handleDeleteTaskButton()
+            clickHandler: () => handleDeleteTaskButton(event)
         });
 
         task.appendChild(taskStatus);
@@ -1570,7 +1572,7 @@ function projectDOM() {
     };
 
     const pageContent = (projectName) => {
-        const pageContent = document.querySelector('#content');
+        const content = document.querySelector('#content');
         const pageTitle = utilities.addTitle(projectName);
         const tasks = displayTasks(projectName);
         const addTaskButton = utilities.createButton({
@@ -1580,13 +1582,13 @@ function projectDOM() {
             clickHandler: () => createAndOpenModal('add-task-modal', 'Add new task')
         });
 
-        utilities.clearPageContent(pageContent);
+        utilities.clearPageContent(content);
 
-        pageContent.appendChild(pageTitle);
+        content.appendChild(pageTitle);
         if (tasks) {
-            pageContent.appendChild(tasks);
+            content.appendChild(tasks);
         }
-        pageContent.appendChild(addTaskButton);
+        content.appendChild(addTaskButton);
     }
 
     const handleSendTaskButton = (event) => {
@@ -1672,6 +1674,20 @@ function projectDOM() {
             // Set index of the project
             setProjectIndex(index);
         }
+    };
+
+    const handleDeleteTaskButton = (event) => {
+        const button = event.target.closest('.remove-btn');
+        const projects = projectManager.getProjects();
+
+        // Get current index of the project and task, get project name 
+        const indexOfProject = getProjectIndex();
+        const indexOfTask = getCurrentTaskIndex(button);
+        const projectName = projects[indexOfProject].name;
+
+        // Remove task and update page content
+        projectManager.removeTask(indexOfProject, indexOfTask);
+        pageContent(projectName);
     };
 
     return {
@@ -1995,7 +2011,6 @@ function UI() {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
                 inbox.displayInbox();
-                projectDom.setActiveProject(event);
             }, 500);
         });
         todayButton.addEventListener('click', (event) => {

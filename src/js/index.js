@@ -42,7 +42,6 @@ function UI() {
         inboxButton.addEventListener('click', (event) => {
             setTimeout(() => {
                 inbox.displayInbox();
-                projectDom.setActiveProject(event);
             }, 500);
         });
         todayButton.addEventListener('click', (event) => {
