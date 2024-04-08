@@ -985,8 +985,10 @@ function ProjectManager() {
 
     const addProject = (project) => {
         const existProjects = getProjects();
+        // Search if the project already exists in the array
+        const result = existProjects.find(item => item.name.toLocaleLowerCase() === project.name.toLocaleLowerCase());
 
-        if (project.name.length > 2 && project.name.length < 20) {
+        if (project.name.length > 2 && project.name.length < 20 && !result) {
             existProjects.push(project);
             saveProjects(existProjects);
             return true;
