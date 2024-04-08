@@ -1111,6 +1111,41 @@ function ProjectManager() {
         }
     };
 
+    const editTask = (projectIndex, taskIndex, {
+        title,
+        description,
+        dueDate,
+        priority
+    }) => {
+        // Get projects and tasks
+        const existingProjects = getProjects();
+        const projectName = existingProjects[projectIndex].name;
+        const existingTasks = getTasks(projectName);
+
+        // Validate dates
+        const validateIndex = (currentValue) => Number.isInteger(currentValue) && currentValue >= 0;
+        const validateText = (currentValue) => currentValue.length > 2 && currentValue.length < 20;
+        const taskDate = new Date(task.dueDate);
+
+        // Search if the task already exists in the array
+        const result = existingTasks.find(item => item.title.toLocaleLowerCase() === task.title.toLocaleLowerCase());
+
+        if (validateText(task.title) && validateText(task.description) && !isNaN(taskDate.getTime()) && !result) {
+            existingTasks[taskIndex] = {
+                title: title,
+                description: description,
+                dueDate: dueDate,
+                priority: priority
+            };
+        } else {
+            return false;
+        }
+
+        // Update projects array
+        saveProjects(existingProjects);
+        return true;
+    }
+
     const saveProjects = (projects) => {
         localStorage.setItem(getProjectsStorageKey(), JSON.stringify(projects));
     }
@@ -1125,7 +1160,8 @@ function ProjectManager() {
         addTask,
         getDefaultProjectName,
         getTasks,
-        removeTask
+        removeTask,
+        editTask
     };
 }
 
