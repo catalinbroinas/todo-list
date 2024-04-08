@@ -1014,6 +1014,15 @@ function ProjectManager() {
     const addTask = (task, projectName) => {
         const existingProjects = getProjects();
         const defaultProjectName = getDefaultProjectName();
+        const existingTasks = getTasks(projectName);
+        const validateText = (currentValue) => currentValue.length > 2 && currentValue.length < 20;
+        const taskDate = new Date(task.dueDate);
+        // Search if the task already exists in the array
+        const result = existingTasks.find(item => item.title.toLocaleLowerCase() === task.title.toLocaleLowerCase());
+
+        if (!validateText(task.title) || !validateText(task.description) || isNaN(taskDate.getTime()) || result) {
+            return false;
+        }
 
         // Verify if project`s name is 'Inbox'
         if (projectName.toLowerCase() === defaultProjectName.toLowerCase()) {
