@@ -587,6 +587,7 @@ function projectDOM() {
             title: 'Edit Task',
             buttonClass: ['task-action-btn', 'edit-btn'],
             iconClass: ['mdi', 'mdi-pencil', 'task-icon'],
+            clickHandler: () => handleEditTaskButton(event)
         });
         const deleteButton = utilities.createButton({
             title: 'Delete Task',
@@ -766,6 +767,57 @@ function projectDOM() {
         projectManager.removeTask(indexOfProject, indexOfTask);
         pageContent(projectName);
     };
+
+    const handleEditTaskButton = (event) => {
+        const button = event.target.closest('.edit-btn');
+        const projects = projectManager.getProjects(); // Get all projects
+
+        // Get current index of the project and task, get project name 
+        const indexOfProject = getProjectIndex();
+        const indexOfTask = getCurrentTaskIndex(button);
+        const projectName = projects[indexOfProject].name;
+
+        // Display modal with form
+        createAndOpenModal('edit-task-modal', 'Edit Task');
+
+        // Get input
+        const inputTitle = document.querySelector('#task-title');
+        const inputDesc = document.querySelector('#task-description');
+        const inputDate = document.querySelector('#task-date');
+
+        // Get select
+        const priorityElement = document.querySelector('#task-priority');
+        const projectElement = document.querySelector('#task-project');
+
+        // Get Values of array
+        const taskTitle = projects[indexOfProject].tasks[indexOfTask].title;
+        const taskDesc = projects[indexOfProject].tasks[indexOfTask].description;
+        const taskDate = projects[indexOfProject].tasks[indexOfTask].dueDate;
+        const taskPriority = projects[indexOfProject].tasks[indexOfTask].priority;
+        const taskProject = projectName;
+
+        // Disabled project select
+        projectElement.setAttribute('disabled', 'disabled');
+
+        // Set value to input
+        inputTitle.value = taskTitle;
+        inputDesc.value = taskDesc;
+        inputDate.value = taskDate;
+
+        // Set value to select
+        for (let i = 0; i < priorityElement.options.length; i++) {
+            if (priorityElement.options[i].value === taskPriority) {
+                priorityElement.selectedIndex = i;
+                break; 
+            }
+        }
+        for (let i = 0; i < projectElement.options.length; i++) {
+            if (projectElement.options[i].value === taskProject) {
+                projectElement.selectedIndex = i;
+                break;
+            }
+        }
+    }
 
     return {
         createProjectForm,
