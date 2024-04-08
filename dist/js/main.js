@@ -976,6 +976,9 @@ function ProjectManager() {
     const getProjectsStorageKey = () => 'projects';
     const getDefaultProjectName = () => 'Inbox';
 
+    const validateText = (currentValue) => currentValue.length > 2 && currentValue.length < 20;
+    const validateIndex = (currentValue) => Number.isInteger(currentValue) && currentValue >= 0;
+
     const createProject = (projectName) => {
         return {
             name: projectName,
@@ -988,7 +991,7 @@ function ProjectManager() {
         // Search if the project already exists in the array
         const result = existProjects.find(item => item.name.toLocaleLowerCase() === project.name.toLocaleLowerCase());
 
-        if (project.name.length > 2 && project.name.length < 20 && !result) {
+        if (validateText(project.name) && !result) {
             existProjects.push(project);
             saveProjects(existProjects);
             return true;
@@ -1015,8 +1018,8 @@ function ProjectManager() {
         const existingProjects = getProjects();
         const defaultProjectName = getDefaultProjectName();
         const existingTasks = getTasks(projectName);
-        const validateText = (currentValue) => currentValue.length > 2 && currentValue.length < 20;
         const taskDate = new Date(task.dueDate);
+        
         // Search if the task already exists in the array
         const result = existingTasks.find(item => item.title.toLocaleLowerCase() === task.title.toLocaleLowerCase());
 
@@ -1077,7 +1080,7 @@ function ProjectManager() {
     const removeProject = (index) => {
         const existProjects = getProjects();
 
-        if (Number.isInteger(index) && index >= 0) {
+        if (validateIndex(index)) {
             existProjects.splice(index, 1);
             saveProjects(existProjects);
             return true;
@@ -1088,9 +1091,8 @@ function ProjectManager() {
 
     const removeTask = (projectIndex, taskIndex) => {
         const existingProjects = getProjects();
-        const validate = (currentValue) => Number.isInteger(currentValue);
 
-        if (validate(projectIndex) && validate(taskIndex)) {
+        if (validateIndex(projectIndex) && validateIndex(taskIndex)) {
             existingProjects[projectIndex].tasks.splice(taskIndex, 1);
             saveProjects(existingProjects);
             return true;
@@ -1102,7 +1104,7 @@ function ProjectManager() {
     const editProject = (index, setValue) => {
         const existProjects = getProjects();
 
-        if ((Number.isInteger(index) && index >= 0 && setValue.length > 2 && setValue.length < 20)) {
+        if (validateIndex(index) && validateText(setValue)) {
             existProjects[index].name = setValue;
             saveProjects(existProjects);
             return true;
@@ -1117,14 +1119,14 @@ function ProjectManager() {
         dueDate,
         priority
     }) => {
+        if (!validateIndex(projectIndex) || !validateIndex(taskIndex)) {
+            return false;
+        }
+
         // Get projects and tasks
         const existingProjects = getProjects();
         const projectName = existingProjects[projectIndex].name;
         const existingTasks = getTasks(projectName);
-
-        // Validate dates
-        const validateIndex = (currentValue) => Number.isInteger(currentValue) && currentValue >= 0;
-        const validateText = (currentValue) => currentValue.length > 2 && currentValue.length < 20;
         const taskDate = new Date(task.dueDate);
 
         // Search if the task already exists in the array
