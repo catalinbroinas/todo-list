@@ -32,13 +32,15 @@ function ProjectManager() {
         title,
         description,
         dueDate,
-        priority
+        priority,
+        completed
     }) => {
         return {
             title,
             description,
             dueDate,
-            priority
+            priority,
+            completed: false
         };
     };
 
@@ -185,6 +187,27 @@ function ProjectManager() {
         return true;
     }
 
+    const toggleTaskCompletion = (projectIndex, taskIndex) => {
+        // Verify project index and task index
+        if (!validateIndex(projectIndex) || !validateIndex(taskIndex)) {
+            console.error('Index not correct!');
+            return false;
+        }
+
+        // Get projects and tasks
+        const existingProjects = getProjects();
+        const projectName = existingProjects[projectIndex].name;
+        const existingTasks = getTasks(projectName);
+
+        // Toggle task status
+        existingTasks[taskIndex].completed = !existingTasks[taskIndex].completed;
+
+        // Update projects array
+        existingProjects[projectIndex].tasks = existingTasks;
+        saveProjects(existingProjects);
+        return true;
+    };
+
     const saveProjects = (projects) => {
         localStorage.setItem(getProjectsStorageKey(), JSON.stringify(projects));
     }
@@ -200,7 +223,8 @@ function ProjectManager() {
         getDefaultProjectName,
         getTasks,
         removeTask,
-        editTask
+        editTask,
+        toggleTaskCompletion
     };
 }
 
