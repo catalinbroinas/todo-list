@@ -1546,7 +1546,7 @@ function projectDOM() {
         openModal(setId);
     };
 
-    const createTaskItem = ({ titleText, description, dueDate, priority }) => {
+    const createTaskItem = ({ titleText, description, dueDate, priority, completed }) => {
         let priorityClass = '';
         switch (priority) {
             case 'critical':
@@ -1615,6 +1615,10 @@ function projectDOM() {
             clickHandler: () => handleDeleteTaskButton(event)
         });
 
+        taskStatusCheckbox.checked = completed ? true : false;
+
+        taskStatusCheckbox.addEventListener('click', () => handleTaskStatus(event));
+
         task.appendChild(taskStatus);
         task.appendChild(taskBody);
         task.appendChild(taskAction);
@@ -1642,7 +1646,8 @@ function projectDOM() {
                     titleText: task.title,
                     description: task.description,
                     dueDate: task.dueDate,
-                    priority: task.priority
+                    priority: task.priority,
+                    completed: task.completed
                 }));
             });
         } else {
@@ -1850,6 +1855,26 @@ function projectDOM() {
             }
         }
     }
+
+    const handleTaskStatus = (event) => {
+        // Verify if the clicked element is a checkbox input
+        if (event.target.type === 'checkbox') {
+            const checkbox = event.target;
+            
+            // Get index of project and task
+            const indexOfProject = getProjectIndex();
+            const indexOfTask = getCurrentTaskIndex(checkbox);
+            
+            // Verify that the checkbox is assigned to a task
+            if (indexOfTask !== -1) {
+                const projectName = projectManager.getProjects()[indexOfProject].name;
+    
+                // Toggle task status and update page content
+                projectManager.toggleTaskCompletion(indexOfProject, indexOfTask);
+                pageContent(projectName);
+            }
+        }
+    };    
 
     return {
         createProjectForm,
