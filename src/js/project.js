@@ -47,7 +47,7 @@ function ProjectManager() {
         const defaultProjectName = getDefaultProjectName();
         const existingTasks = getTasks(projectName);
         const taskDate = new Date(task.dueDate);
-        
+
         // Search if the task already exists in the array
         const result = existingTasks.find(item => item.title.toLocaleLowerCase() === task.title.toLocaleLowerCase());
 
@@ -147,7 +147,9 @@ function ProjectManager() {
         dueDate,
         priority
     }) => {
+        // Verify project index and task index
         if (!validateIndex(projectIndex) || !validateIndex(taskIndex)) {
+            console.error('Index not correct!');
             return false;
         }
 
@@ -155,23 +157,30 @@ function ProjectManager() {
         const existingProjects = getProjects();
         const projectName = existingProjects[projectIndex].name;
         const existingTasks = getTasks(projectName);
-        const taskDate = new Date(task.dueDate);
 
-        // Search if the task already exists in the array
-        const result = existingTasks.find(item => item.title.toLocaleLowerCase() === task.title.toLocaleLowerCase());
-
-        if (validateText(task.title) && validateText(task.description) && !isNaN(taskDate.getTime()) && !result) {
-            existingTasks[taskIndex] = {
-                title: title,
-                description: description,
-                dueDate: dueDate,
-                priority: priority
-            };
-        } else {
+        // Validate task dates
+        if (!validateText(title) || !validateText(description) || isNaN(new Date(dueDate).getTime())) {
+            console.error('Invalid task data!');
             return false;
         }
 
+        // Check if another task with the same title already exists in the array
+        const result = existingTasks.find(item => item.title.toLowerCase() === title.toLowerCase());
+        if (result && result !== existingTasks[taskIndex]) {
+            console.error('Another task with the same title already exists!');
+            return false;
+        }
+
+        // Update task
+        existingTasks[taskIndex] = {
+            title: title,
+            description: description,
+            dueDate: dueDate,
+            priority: priority
+        };
+
         // Update projects array
+        existingProjects[projectIndex].tasks = existingTasks;
         saveProjects(existingProjects);
         return true;
     }
@@ -489,6 +498,20 @@ function projectDOM() {
         header.appendChild(title);
         header.appendChild(closeButton);
 
+        if (modalId === 'edit-task-modal') {
+            const buttonGroup = dialog.querySelector('.group-btn');
+            const addButton = dialog.querySelector('.add-btn');
+            const cancelButton = dialog.querySelector('.cancel-btn');
+            utilities.removeElement(addButton);
+            const sendButton = utilities.createButton({
+                name: 'Edit',
+                buttonClass: ['add-btn'],
+                iconClass: ['mdi', 'mdi-pencil', 'action-btn-icon'],
+                clickHandler: () => handleSendTaskButton(event)
+            });
+            buttonGroup.insertBefore(sendButton, cancelButton);
+        }
+
         return dialog;
     };
 
@@ -673,6 +696,7 @@ function projectDOM() {
         const button = event.target;
         const modal = button.closest('.task-modal');
 
+        // Set values by input form
         const taskTitle = document.querySelector('#task-title').value.trim();
         const taskDesc = document.querySelector('#task-description').value.trim();
         const taskDate = document.querySelector('#task-date').value.trim();
@@ -685,13 +709,22 @@ function projectDOM() {
         const projectSelected = projectElement.options[projectElement.selectedIndex];
         const taskProject = projectSelected.value;
 
-        const task = projectManager.createTask({
-            title: taskTitle,
-            description: taskDesc,
-            dueDate: taskDate,
-            priority: taskPriority
-        });
-        projectManager.addTask(task, taskProject);
+        if (modal.id === 'add-task-modal') {
+            const task = projectManager.createTask({
+                title: taskTitle,
+                description: taskDesc,
+                dueDate: taskDate,
+                priority: taskPriority
+            });
+            projectManager.addTask(task, taskProject);
+        } else if (modal.id === 'edit-task-modal') {
+            projectManager.editTask(getProjectIndex(), getTaskIndex(), {
+                title: taskTitle,
+                description: taskDesc,
+                dueDate: taskDate,
+                priority: taskPriority
+            });
+        }
 
         closeModal(modal.id);
         pageContent(taskProject);
@@ -777,6 +810,9 @@ function projectDOM() {
         const indexOfTask = getCurrentTaskIndex(button);
         const projectName = projects[indexOfProject].name;
 
+        // Set index of the task
+        setTaskIndex(indexOfTask);
+
         // Display modal with form
         createAndOpenModal('edit-task-modal', 'Edit Task');
 
@@ -789,7 +825,7 @@ function projectDOM() {
         const priorityElement = document.querySelector('#task-priority');
         const projectElement = document.querySelector('#task-project');
 
-        // Get Values of array
+        // Get Values from tasks array
         const taskTitle = projects[indexOfProject].tasks[indexOfTask].title;
         const taskDesc = projects[indexOfProject].tasks[indexOfTask].description;
         const taskDate = projects[indexOfProject].tasks[indexOfTask].dueDate;
@@ -808,7 +844,7 @@ function projectDOM() {
         for (let i = 0; i < priorityElement.options.length; i++) {
             if (priorityElement.options[i].value === taskPriority) {
                 priorityElement.selectedIndex = i;
-                break; 
+                break;
             }
         }
         for (let i = 0; i < projectElement.options.length; i++) {
