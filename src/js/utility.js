@@ -64,8 +64,10 @@ function DOMHandler() {
         const input = document.createElement('input');
 
         input.setAttribute('type', inputType);
-        input.setAttribute('id', inputId);
 
+        if (inputId) {
+            input.setAttribute('id', inputId);
+        }
         if (inputClass) {
             inputClass.forEach(className => input.classList.add(className));
         }
