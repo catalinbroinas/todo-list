@@ -1200,6 +1200,32 @@ function ProjectManager() {
         return true;
     };
 
+    const changeTaskDate = (projectIndex, taskIndex, setDueDate) => {
+        // Verify project index and task index
+        if (!validateIndex(projectIndex) || !validateIndex(taskIndex)) {
+            console.error('Index not correct!');
+            return false;
+        }
+
+        // Get projects and tasks
+        const existingProjects = getProjects();
+        const projectName = existingProjects[projectIndex].name;
+        const existingTasks = getTasks(projectName);
+
+        if (isNaN(new Date(setDueDate).getTime())) {
+            console.error('Due date is not valid');
+            return false;
+        }
+
+        // Update dueDate task
+        existingTasks[taskIndex].dueDate = setDueDate;
+
+        // Update projects array
+        existingProjects[projectIndex].tasks = existingTasks;
+        saveProjects(existingProjects);
+        return true;
+    };
+
     const saveProjects = (projects) => {
         localStorage.setItem(getProjectsStorageKey(), JSON.stringify(projects));
     }
@@ -1216,7 +1242,8 @@ function ProjectManager() {
         getTasks,
         removeTask,
         editTask,
-        toggleTaskCompletion
+        toggleTaskCompletion,
+        changeTaskDate
     };
 }
 
@@ -1635,6 +1662,8 @@ function projectDOM() {
             clickHandler: () => handleDeleteTaskButton(event)
         });
 
+        taskDueDate.addEventListener('change', () => handleTaskDate(event));
+
         taskStatusCheckbox.checked = completed ? true : false;
 
         if (completed) {
@@ -1888,21 +1917,41 @@ function projectDOM() {
         // Verify if the clicked element is a checkbox input
         if (event.target.type === 'checkbox') {
             const checkbox = event.target;
-            
+
             // Get index of project and task
             const indexOfProject = getProjectIndex();
             const indexOfTask = getCurrentTaskIndex(checkbox);
-            
+
             // Verify that the checkbox is assigned to a task
             if (indexOfTask !== -1) {
                 const projectName = projectManager.getProjects()[indexOfProject].name;
-    
+
                 // Toggle task status and update page content
                 projectManager.toggleTaskCompletion(indexOfProject, indexOfTask);
                 pageContent(projectName);
             }
         }
     };    
+
+    const handleTaskDate = (event) => {
+        if (event.target.type === 'date') {
+            const taskDate = event.target;
+
+            // Get index of project and task
+            const indexOfProject = getProjectIndex();
+            const indexOfTask = getCurrentTaskIndex(taskDate);
+
+            // Verify that the date is assigned to a task
+            if (indexOfTask !== -1) {
+                const projectName = projectManager.getProjects()[indexOfProject].name;
+                const taskDueDate = taskDate.value.trim();
+
+                // Toggle task status and update page content
+                projectManager.changeTaskDate(indexOfProject, indexOfTask, taskDueDate);
+                pageContent(projectName);
+            }
+        }
+    };
 
     return {
         createProjectForm,
