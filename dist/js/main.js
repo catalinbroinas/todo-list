@@ -1007,16 +1007,24 @@ function ProjectManager() {
     };
 
     const addProject = (project) => {
+        // Get projects array
         const existProjects = getProjects();
-        // Search if the project already exists in the array
-        const result = existProjects.find(item => item.name.toLocaleLowerCase() === project.name.toLocaleLowerCase());
+        // Verify if exist projects array
+        if (existProjects) {
+            // Search if the project already exists in the array
+            const result = existProjects.find(item => item.name.toLocaleLowerCase() === project.name.toLocaleLowerCase());
 
-        if (validateText(project.name) && !result) {
-            existProjects.push(project);
-            saveProjects(existProjects);
-            return true;
+            if (validateText(project.name) && !result) {
+                existProjects.push(project);
+                saveProjects(existProjects);
+                return true;
+            } else {
+                return false;
+            }
         } else {
-            return false;
+            // Create a new array with the first project and save it in `localStorage`
+            localStorage.setItem(getProjectsStorageKey(), JSON.stringify([project]));
+            return true;
         }
     };
 
@@ -1085,11 +1093,18 @@ function ProjectManager() {
     };
 
     const getProjects = () => {
-        return JSON.parse(localStorage.getItem(getProjectsStorageKey()));
+        if (localStorage.getItem(getProjectsStorageKey())) {
+            return JSON.parse(localStorage.getItem(getProjectsStorageKey()));
+        } else {
+            return false;
+        }
     };
 
     const getTasks = (projectName) => {
         const existingProjects = getProjects();
+        if (!existingProjects) {
+            return false;
+        }
 
         const project = existingProjects.find(project => project.name.toLocaleLowerCase() === projectName.toLocaleLowerCase());
         if (project) {
@@ -1269,7 +1284,11 @@ function projectDOM() {
         const navItem = element.closest('.nav-item');
         const itemName = navItem.textContent.trim();
         const projects = projectManager.getProjects();
-        return projects.findIndex(item => item.name === itemName);
+        if (projects) {
+            return projects.findIndex(item => item.name === itemName);
+        } else {
+            return false;
+        }
     };
 
     const getCurrentTaskIndex = (element) => {
@@ -1281,7 +1300,11 @@ function projectDOM() {
         const taskTitle = taskItem.querySelector('.task-title');
         const itemTitle = taskTitle.textContent.trim();
 
-        return tasks.findIndex(task => task.title === itemTitle);
+        if (tasks) {
+            return tasks.findIndex(task => task.title === itemTitle);
+        } else {
+            return false;
+        }
     };
 
     const setActiveProject = (event) => {
@@ -1931,7 +1954,7 @@ function projectDOM() {
                 pageContent(projectName);
             }
         }
-    };    
+    };
 
     const handleTaskDate = (event) => {
         if (event.target.type === 'date') {
