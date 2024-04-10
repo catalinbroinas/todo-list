@@ -645,6 +645,14 @@ function projectDOM() {
 
         taskStatusCheckbox.checked = completed ? true : false;
 
+        if (completed) {
+            task.classList.add('completed');
+            taskDueDate.setAttribute('disabled', 'disabled');
+            editButton.setAttribute('disabled', 'disabled');
+            editButton.removeEventListener('click', handleEditTaskButton);
+            editButton.removeAttribute('title');
+        }
+
         taskStatusCheckbox.addEventListener('click', () => handleTaskStatus(event));
 
         task.appendChild(taskStatus);

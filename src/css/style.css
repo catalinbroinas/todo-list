@@ -309,15 +309,19 @@ ul {
 }
 
 .task.high-priority {
-    background-color: #FFFDE7;
+    background-color: #FFF3E0;
 }
 
 .task.medium-priority {
-    background-color: #E3F2FD;
+    background-color: #FFFDE7;
 }
 
 .task.low-priority {
-    background-color: #E8F5E9;
+    background-color: #E3F2FD;
+}
+
+.task.completed {
+    background-color: #DCEDC8;
 }
 
 .task-status {
@@ -339,8 +343,8 @@ ul {
 }
 
 .task-status-checkbox:checked {
-    background-color: #304FFE; 
-    border-color: #304FFE;
+    background-color: #14A44D; 
+    border-color: #14A44D;
 }
 
 .task-body {
@@ -351,6 +355,11 @@ ul {
 .task-description {
     margin: 0;
     font-size: 1rem;
+}
+
+.task.completed .task-title,
+.task.completed .task-description {
+    text-decoration: line-through;
 }
 
 .task-title {
@@ -388,11 +397,22 @@ ul {
     border-radius: 0.5rem;
 }
 
+.task.completed .task-action-date,
+.task.completed .edit-btn {
+    opacity: 0.5;
+}
+
 .task-action-date:hover,
 .task-action-date:active,
 .task-action-btn:hover,
 .task-action-btn:active {
     background-color: white;
+}
+
+.task.completed .task-action-date:hover,
+.task.completed .edit-btn:hover {
+    background-color: transparent;
+    cursor: default;
 }
 
 .task-icon {
