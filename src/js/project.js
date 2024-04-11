@@ -58,11 +58,27 @@ function ProjectManager() {
         const existingTasks = getTasks(projectName);
         const taskDate = new Date(task.dueDate);
 
-        // Search if the task already exists in the array
-        const result = existingTasks.find(item => item.title.toLocaleLowerCase() === task.title.toLocaleLowerCase());
-
-        if (!validateText(task.title) || !validateText(task.description) || isNaN(taskDate.getTime()) || result) {
+        if (!validateText(task.title) || !validateText(task.description) || isNaN(taskDate.getTime())) {
             return false;
+        }
+
+        // Create inbox project and add task
+        if (!existingProjects) {
+            const defaultProject = createProject(defaultProjectName);
+            addProject(defaultProject);
+            console.log('The first project is successful added!');
+            addTask(task, projectName);
+            location.reload();
+        }
+
+        // Verify if the tasks array is not empty
+        if (existingTasks) {
+            // Search if the task already exists in the array
+            const result = existingTasks.find(item => item.title.toLocaleLowerCase() === task.title.toLocaleLowerCase());
+            if (result) {
+                console.error('This task already exists!');
+                return false;
+            }
         }
 
         // Verify if project`s name is 'Inbox'
@@ -79,6 +95,10 @@ function ProjectManager() {
                 if (addProject(inboxProject)) {
                     existingProjects.push(inboxProject);
                     existingProjects[existingProjects.length - 1].tasks.push(task);
+                    // Update content after first task added
+                    if (!existingTasks) {
+                        location.reload();
+                    }
                 } else {
                     return false;
                 }
@@ -90,6 +110,11 @@ function ProjectManager() {
             if (projectIndex !== -1) {
                 // Add task to `projectName`
                 existingProjects[projectIndex].tasks.push(task);
+                // Update content after first task added
+                if (!existingTasks) {
+                    console.log('First task!');
+                    location.reload();
+                }
             } else {
                 return false;
             }
@@ -118,7 +143,7 @@ function ProjectManager() {
         if (project) {
             return project.tasks;
         } else {
-            return [];
+            return false;
         }
     };
 
