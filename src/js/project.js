@@ -677,7 +677,8 @@ function projectDOM() {
         const taskDueDate = utilities.createInputElement({
             inputType: 'date',
             inputClass: ['task-action-date'],
-            inputValue: dueDate ? dueDate : ''
+            inputValue: dueDate ? dueDate : '',
+            inputTitle: 'Set the due date'
         });
 
         const editButton = utilities.createButton({
@@ -700,6 +701,7 @@ function projectDOM() {
         if (completed) {
             task.classList.add('completed');
             taskDueDate.setAttribute('disabled', 'disabled');
+            taskDueDate.removeAttribute('title');
             editButton.setAttribute('disabled', 'disabled');
             editButton.removeEventListener('click', handleEditTaskButton);
             editButton.removeAttribute('title');

@@ -59,7 +59,7 @@ function DOMHandler() {
     };
 
     const createInputElement = ({
-        inputType, inputId, inputClass, inputName, inputPlaceholder, inputValue, inputFocus
+        inputType, inputId, inputClass, inputName, inputPlaceholder, inputValue, inputFocus, inputTitle
     }) => {
         const input = document.createElement('input');
 
@@ -86,6 +86,9 @@ function DOMHandler() {
 
         if (inputFocus) {
             input.setAttribute('autofocus', 'autofocus');
+        }
+        if (inputTitle) {
+            input.setAttribute('title', inputTitle);
         }
 
         return input;
