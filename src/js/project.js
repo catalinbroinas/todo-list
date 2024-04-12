@@ -105,7 +105,7 @@ function ProjectManager() {
             }
         } else {
             // Search `projectName` in projects array
-            const projectIndex = existingProjects.findIndex(project => project.name === projectName);
+            const projectIndex = existingProjects.findIndex(project => project.name.toLowerCase() === projectName.toLowerCase());
 
             if (projectIndex !== -1) {
                 // Add task to `projectName`
@@ -116,6 +116,7 @@ function ProjectManager() {
                     location.reload();
                 }
             } else {
+                console.error('The project was not found!');
                 return false;
             }
         }
@@ -833,6 +834,7 @@ function projectDOM() {
     const handleSendTaskButton = (event) => {
         const button = event.target;
         const modal = button.closest('.task-modal');
+        const projects = projectManager.getProjects();
 
         // Set values by input form
         const taskTitle = document.querySelector('#task-title').value.trim();
@@ -855,6 +857,9 @@ function projectDOM() {
                 priority: taskPriority
             });
             projectManager.addTask(task, taskProject);
+            const indexOfProject = projects.findIndex(project => project.name.toLowerCase() === taskProject.toLowerCase());
+            setProjectIndex(indexOfProject);
+            utilities.setActiveSidebarButton(`${taskProject.toLowerCase()}-btn`);
         } else if (modal.id === 'edit-task-modal') {
             projectManager.editTask(getProjectIndex(), getTaskIndex(), {
                 title: taskTitle,
