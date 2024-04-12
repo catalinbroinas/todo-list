@@ -1400,7 +1400,11 @@ function projectDOM() {
             elementClass: ['nav-item', 'project-item'],
             elementAtrType: 'role',
             elementAtrValue: 'button',
-            clickHandler: () => setActiveProject(event)
+            clickHandler: () => {
+                setActiveProject(event);
+                utilities.setActiveSidebarButton(`${name.toLowerCase()}-btn`);
+                pageContent(name);
+            }
         });
 
         const navItemBody = utilities.createDOMElement({
@@ -1798,7 +1802,7 @@ function projectDOM() {
             content.appendChild(tasks);
         }
         content.appendChild(addTaskButton);
-    }
+    };
 
     const handleSendTaskButton = (event) => {
         const button = event.target;
