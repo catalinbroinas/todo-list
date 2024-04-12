@@ -1455,6 +1455,9 @@ function projectDOM() {
     };
 
     const createTaskForm = () => {
+        const projects = projectManager.getProjects();
+        const projectName = document.querySelector('.content-title').textContent;
+
         const form = utilities.createDOMElement({
             elementTag: 'form',
             elementClass: ['insert-task-form']
@@ -1533,6 +1536,23 @@ function projectDOM() {
             optionValue: 'inbox',
             optionText: 'Inbox'
         });
+        taskProject.appendChild(optionProject);
+        taskProject.appendChild(optionProjectInbox);
+
+        if (projects) {
+            projects.forEach((project) => {
+                if (project.name.toLowerCase() !== 'inbox') {
+                    const option = utilities.createOptionElement({
+                        optionValue: project.name.toLowerCase(),
+                        optionText: project.name
+                    });
+                    if (project.name.toLowerCase() === projectName.toLowerCase()) {
+                        option.setAttribute('selected', 'selected');
+                    }
+                    taskProject.appendChild(option);
+                }
+            });
+        }
 
         const sendButton = utilities.createButton({
             name: 'Add',
@@ -1562,8 +1582,6 @@ function projectDOM() {
         taskPriority.appendChild(optionPriorityHigh);
         taskPriority.appendChild(optionPriorityMedium);
         taskPriority.appendChild(optionPriorityLow);
-        taskProject.appendChild(optionProject);
-        taskProject.appendChild(optionProjectInbox);
 
         return form;
     };
