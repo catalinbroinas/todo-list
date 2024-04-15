@@ -846,19 +846,21 @@ function projectDOM() {
             });
         }
 
-        projects.forEach((item) => {
-            const tasks = displayTasks(item.name);
-            if (tasks) {
-                content.appendChild(tasks);
-            }
-        });
+        if (projects) {
+            projects.forEach((item) => {
+                const tasks = displayTasks(item.name);
+                if (tasks) {
+                    content.appendChild(tasks);
+                }
+            });
+        }
     };
 
     const handleSendTaskButton = (event) => {
         const button = event.target;
         const modal = button.closest('.task-modal');
         const projects = projectManager.getProjects();
-        const pageTitle = document.querySelector('.content-title').textContent;
+        const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
 
         // Set values by input form
         const taskTitle = document.querySelector('#task-title').value.trim();
@@ -893,8 +895,9 @@ function projectDOM() {
             });
         }
 
+        // Close modal and update page content
         closeModal(modal.id);
-        if (pageTitle.toLowerCase() === taskProject) {
+        if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
             pageContent(taskProject);
         } else {
             displayAll();
@@ -961,7 +964,7 @@ function projectDOM() {
     const handleDeleteTaskButton = (event) => {
         const button = event.target.closest('.remove-btn');
         const projects = projectManager.getProjects();
-        const pageTitle = document.querySelector('.content-title').textContent;
+        const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
 
         // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
@@ -973,7 +976,7 @@ function projectDOM() {
 
         // Remove task and update page content
         projectManager.removeTask(indexOfProject, indexOfTask);
-        if (pageTitle.toLowerCase() === projectName.toLowerCase()) {
+        if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
             pageContent(projectName);
         } else {
             displayAll();
@@ -1039,41 +1042,61 @@ function projectDOM() {
     }
 
     const handleTaskStatus = (event) => {
+        const projects = projectManager.getProjects();
+
         // Verify if the clicked element is a checkbox input
         if (event.target.type === 'checkbox') {
             const checkbox = event.target;
 
-            // Get index of project and task
-            const indexOfProject = getProjectIndex();
+            // Get project index, task index and project name
             const indexOfTask = getCurrentTaskIndex(checkbox);
+            // Each `task` has the name of the project in the id
+            const taskContainer = checkbox.closest('.task-container');
+            const projectName = taskContainer.id.split('-')[0];
+            const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
 
             // Verify that the checkbox is assigned to a task
             if (indexOfTask !== -1) {
-                const projectName = projectManager.getProjects()[indexOfProject].name;
-
                 // Toggle task status and update page content
                 projectManager.toggleTaskCompletion(indexOfProject, indexOfTask);
-                pageContent(projectName);
+                // Update page content
+                const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
+                if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
+                    pageContent(projectName);
+                } else {
+                    displayAll();
+                }
             }
         }
     };
 
     const handleTaskDate = (event) => {
+        const projects = projectManager.getProjects();
+
         if (event.target.type === 'date') {
             const taskDate = event.target;
 
-            // Get index of project and task
-            const indexOfProject = getProjectIndex();
+            // Get project index, task index and project name
             const indexOfTask = getCurrentTaskIndex(taskDate);
+            // Each `task` has the name of the project in the id
+            const taskContainer = taskDate.closest('.task-container');
+            const projectName = taskContainer.id.split('-')[0];
+            const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
 
             // Verify that the date is assigned to a task
             if (indexOfTask !== -1) {
-                const projectName = projectManager.getProjects()[indexOfProject].name;
                 const taskDueDate = taskDate.value.trim();
 
-                // Toggle task status and update page content
+                // Toggle task status
                 projectManager.changeTaskDate(indexOfProject, indexOfTask, taskDueDate);
-                pageContent(projectName);
+
+                // Update page content
+                const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
+                if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
+                    pageContent(projectName);
+                } else {
+                    displayAll();
+                }
             }
         }
     };
