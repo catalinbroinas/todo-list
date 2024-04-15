@@ -25,6 +25,7 @@ function UI() {
         utilities.clearPageContent(pageContent);
 
         pageContent.appendChild(utilities.addTitle('This Week'));
+        projectDom.displayAll();
     };
 
     const displayNewProjectForm = () => {

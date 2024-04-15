@@ -1319,12 +1319,24 @@ function projectDOM() {
 
     const getCurrentTaskIndex = (element) => {
         const projects = projectManager.getProjects();
-        const projectName = projects[getProjectIndex()].name;
-        const tasks = projectManager.getTasks(projectName);
 
+        // Get task title
         const taskItem = element.closest('.task');
         const taskTitle = taskItem.querySelector('.task-title');
         const itemTitle = taskTitle.textContent.trim();
+
+        // Get project name
+        let projectName = null;
+        if (getProjectIndex()) {
+            projectName = projects[getProjectIndex()].name;
+        } else {
+            const taskContainer = taskItem.closest('.task-container');
+            const projectNameFromId = taskContainer.id.split('-');
+            projectName = projectNameFromId[0];
+        }
+
+        // Get tasks from `projectName'
+        const tasks = projectManager.getTasks(projectName);
 
         if (tasks) {
             return tasks.findIndex(task => task.title === itemTitle);
@@ -1823,6 +1835,25 @@ function projectDOM() {
         content.appendChild(addTaskButton);
     };
 
+    const displayAll = () => {
+        const content = document.querySelector('#content');
+        const existingTask = content.querySelectorAll('.task-container');
+        const projects = projectManager.getProjects();
+
+        if (existingTask) {
+            existingTask.forEach(element => {
+                utilities.removeElement(element);
+            });
+        }
+
+        projects.forEach((item) => {
+            const tasks = displayTasks(item.name);
+            if (tasks) {
+                content.appendChild(tasks);
+            }
+        });
+    };
+
     const handleSendTaskButton = (event) => {
         const button = event.target;
         const modal = button.closest('.task-modal');
@@ -1926,14 +1957,33 @@ function projectDOM() {
         const button = event.target.closest('.remove-btn');
         const projects = projectManager.getProjects();
 
-        // Get current index of the project and task, get project name 
-        const indexOfProject = getProjectIndex();
+        let indexOfProject = null;
+        let projectName = null;
+
+        // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
-        const projectName = projects[indexOfProject].name;
+
+        // Get current index of the project and project name
+        // Verify if the functions return index of the project
+        if (getProjectIndex()) {
+            indexOfProject = getProjectIndex();
+            projectName = projects[indexOfProject].name;
+        } else {
+            // Each `task' has the name of the project in the id
+            const taskContainer = button.closest('.task-container');
+            const projectNameFromId = taskContainer.id.split('-');
+            // Get the project name from the activity container id
+            projectName = projectNameFromId[0]; 
+            indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName);
+        }
 
         // Remove task and update page content
         projectManager.removeTask(indexOfProject, indexOfTask);
-        pageContent(projectName);
+        if (getProjectIndex()) {
+            pageContent(projectName);
+        } else {
+            displayAll();
+        }
     };
 
     const handleEditTaskButton = (event) => {
@@ -2037,7 +2087,8 @@ function projectDOM() {
         openModal,
         displayTasks,
         pageContent,
-        setActiveProject
+        setActiveProject,
+        displayAll
     };
 }
 
@@ -2339,6 +2390,7 @@ function UI() {
         utilities.clearPageContent(pageContent);
 
         pageContent.appendChild(utilities.addTitle('This Week'));
+        projectDom.displayAll();
     };
 
     const displayNewProjectForm = () => {
