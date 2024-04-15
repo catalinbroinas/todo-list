@@ -8,10 +8,19 @@ function UI() {
     const inbox = inboxDOM();
     const projectDom = projectDOM();
     const pageContent = document.querySelector('#content');
+    const allButton = document.querySelector('#all-btn');
     const inboxButton = document.querySelector('#inbox-btn');
     const todayButton = document.querySelector('#today-btn');
     const weekButton = document.querySelector('#week-btn');
     const newProjectButton = document.querySelector('#new-project-btn');
+
+    const displayAll = () => {
+        utilities.setActiveSidebarButton('all-btn');
+        utilities.clearPageContent(pageContent);
+
+        pageContent.appendChild(utilities.addTitle('All tasks'));
+        projectDom.displayAll();
+    };
 
     const displayToday = () => {
         utilities.setActiveSidebarButton('today-btn');
@@ -29,7 +38,7 @@ function UI() {
     };
 
     const displayNewProjectForm = () => {
-        const project =  projectDOM();
+        const project = projectDOM();
         const newProjectForm = project.createProjectForm('add');
         const sidebarProject = document.querySelector('#sidebar-project');
 
@@ -44,6 +53,9 @@ function UI() {
             setTimeout(() => {
                 inbox.displayInbox();
             }, 500);
+        });
+        allButton.addEventListener('click', (event) => {
+            setTimeout(displayAll, 500);
         });
         todayButton.addEventListener('click', (event) => {
             setTimeout(() => {
