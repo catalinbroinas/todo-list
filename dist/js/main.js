@@ -1318,22 +1318,14 @@ function projectDOM() {
     };
 
     const getCurrentTaskIndex = (element) => {
-        const projects = projectManager.getProjects();
-
         // Get task title
         const taskItem = element.closest('.task');
         const taskTitle = taskItem.querySelector('.task-title');
         const itemTitle = taskTitle.textContent.trim();
 
         // Get project name
-        let projectName = null;
-        if (getProjectIndex()) {
-            projectName = projects[getProjectIndex()].name;
-        } else {
-            const taskContainer = taskItem.closest('.task-container');
-            const projectNameFromId = taskContainer.id.split('-');
-            projectName = projectNameFromId[0];
-        }
+        const taskContainer = taskItem.closest('.task-container');
+        const projectName = taskContainer.id.split('-')[0];
 
         // Get tasks from `projectName'
         const tasks = projectManager.getTasks(projectName);
@@ -1858,6 +1850,7 @@ function projectDOM() {
         const button = event.target;
         const modal = button.closest('.task-modal');
         const projects = projectManager.getProjects();
+        const pageTitle = document.querySelector('.content-title').textContent;
 
         // Set values by input form
         const taskTitle = document.querySelector('#task-title').value.trim();
@@ -1893,7 +1886,11 @@ function projectDOM() {
         }
 
         closeModal(modal.id);
-        pageContent(taskProject);
+        if (pageTitle.toLowerCase() === taskProject) {
+            pageContent(taskProject);
+        } else {
+            displayAll();
+        }
     };
 
     const handleCancelTaskButton = (event) => {
@@ -1956,30 +1953,19 @@ function projectDOM() {
     const handleDeleteTaskButton = (event) => {
         const button = event.target.closest('.remove-btn');
         const projects = projectManager.getProjects();
-
-        let indexOfProject = null;
-        let projectName = null;
+        const pageTitle = document.querySelector('.content-title').textContent;
 
         // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
 
-        // Get current index of the project and project name
-        // Verify if the functions return index of the project
-        if (getProjectIndex()) {
-            indexOfProject = getProjectIndex();
-            projectName = projects[indexOfProject].name;
-        } else {
-            // Each `task' has the name of the project in the id
-            const taskContainer = button.closest('.task-container');
-            const projectNameFromId = taskContainer.id.split('-');
-            // Get the project name from the activity container id
-            projectName = projectNameFromId[0]; 
-            indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName);
-        }
+        // Each `task` has the name of the project in the id
+        const taskContainer = button.closest('.task-container');
+        const projectName = taskContainer.id.split('-')[0];
+        const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
 
         // Remove task and update page content
         projectManager.removeTask(indexOfProject, indexOfTask);
-        if (getProjectIndex()) {
+        if (pageTitle.toLowerCase() === projectName.toLowerCase()) {
             pageContent(projectName);
         } else {
             displayAll();
@@ -1990,12 +1976,16 @@ function projectDOM() {
         const button = event.target.closest('.edit-btn');
         const projects = projectManager.getProjects(); // Get all projects
 
-        // Get current index of the project and task, get project name 
-        const indexOfProject = getProjectIndex();
+        // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
-        const projectName = projects[indexOfProject].name;
 
-        // Set index of the task
+        // Each `task` has the name of the project in the id
+        const taskContainer = button.closest('.task-container');
+        const projectName = taskContainer.id.split('-')[0];
+        const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
+
+        // Set project index and task index
+        setProjectIndex(indexOfProject);
         setTaskIndex(indexOfTask);
 
         // Display modal with form
