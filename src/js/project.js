@@ -1,4 +1,6 @@
 import { DOMHandler } from "./utility";
+import { isSameDay } from "date-fns";
+import { isSameWeek } from "date-fns";
 
 function ProjectManager() {
     const getProjectsStorageKey = () => 'projects';
@@ -840,20 +842,71 @@ function projectDOM() {
         const existingTask = content.querySelectorAll('.task-container');
         const projects = projectManager.getProjects();
 
+        // Clear page content
         if (existingTask) {
             existingTask.forEach(element => {
                 utilities.removeElement(element);
             });
         }
 
+        // Display all tasks
         if (projects) {
-            projects.forEach((item) => {
+            projects.forEach(item => {
                 const tasks = displayTasks(item.name);
                 if (tasks) {
                     content.appendChild(tasks);
                 }
             });
         }
+    };
+
+    const displayTasksByDate = (byDate) => {
+        if (byDate !== 'today' && byDate !== 'week') {
+            console.error('Invalid argument!');
+            return false;
+        }
+        
+        const content = document.querySelector('#content');
+        const existingTask = content.querySelectorAll('.task-container');
+        const projects = projectManager.getProjects();
+        const today = new Date();
+
+        // Clear page content
+        if (existingTask) {
+            existingTask.forEach(element => {
+                utilities.removeElement(element);
+            });
+        }
+
+        // Display tasks by date
+        if (projects) {
+            projects.forEach((item) => {
+                const taskItems = projectManager.getTasks(item.name);
+                const taskContainer = utilities.createDOMElement({
+                    elementTag: 'div',
+                    elementId: `${item.name.toLocaleLowerCase()}-task`,
+                    elementClass: ['task-container']
+                });
+                if (taskItems.length) {
+                    taskItems.forEach(task => {
+                        const taskDate = new Date(task.dueDate);
+                        const condition = byDate === 'today' ? isSameDay(taskDate, today) : isSameWeek(taskDate, today);
+                        if (condition) {
+                            taskContainer.appendChild(createTaskItem({
+                                titleText: task.title,
+                                description: task.description,
+                                dueDate: task.dueDate,
+                                priority: task.priority,
+                                completed: task.completed
+                            }));
+                        }
+                    });
+                    content.appendChild(taskContainer);
+                }
+            });
+        }
+
+        return true;
     };
 
     const handleSendTaskButton = (event) => {
@@ -1109,7 +1162,8 @@ function projectDOM() {
         displayTasks,
         pageContent,
         setActiveProject,
-        displayAll
+        displayAll,
+        displayTasksByDate
     };
 }
 
