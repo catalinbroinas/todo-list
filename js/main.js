@@ -1859,7 +1859,7 @@ function projectDOM() {
             console.error('Invalid argument!');
             return false;
         }
-        
+
         const content = document.querySelector('#content');
         const existingTask = content.querySelectorAll('.task-container');
         const projects = projectManager.getProjects();
@@ -1947,7 +1947,16 @@ function projectDOM() {
         if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
             pageContent(taskProject);
         } else {
-            displayAll();
+            switch (pageTitle) {
+                case 'today':
+                    displayTasksByDate('today');
+                    break;
+                case 'this week':
+                    displayTasksByDate('week');
+                    break;
+                default:
+                    displayAll();
+            }
         }
     };
 
@@ -2026,7 +2035,16 @@ function projectDOM() {
         if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
             pageContent(projectName);
         } else {
-            displayAll();
+            switch (pageTitle) {
+                case 'today':
+                    displayTasksByDate('today');
+                    break;
+                case 'this week':
+                    displayTasksByDate('week');
+                    break;
+                default:
+                    displayAll();
+            }
         }
     };
 
@@ -2111,7 +2129,16 @@ function projectDOM() {
                 if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
                     pageContent(projectName);
                 } else {
-                    displayAll();
+                    switch (pageTitle) {
+                        case 'today':
+                            displayTasksByDate('today');
+                            break;
+                        case 'this week':
+                            displayTasksByDate('week');
+                            break;
+                        default:
+                            displayAll();
+                    }
                 }
             }
         }
@@ -2142,7 +2169,16 @@ function projectDOM() {
                 if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
                     pageContent(projectName);
                 } else {
-                    displayAll();
+                    switch (pageTitle) {
+                        case 'today':
+                            displayTasksByDate('today');
+                            break;
+                        case 'this week':
+                            displayTasksByDate('week');
+                            break;
+                        default:
+                            displayAll();
+                    }
                 }
             }
         }
