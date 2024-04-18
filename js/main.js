@@ -1676,7 +1676,7 @@ function projectDOM() {
 
     const openModal = (modalId) => {
         const dialog = document.querySelector(`#${modalId}`);
-        
+
         if (dialog && !dialog.open) {
             dialog.showModal();
             dialog.addEventListener('keydown', (event) => {
@@ -2057,6 +2057,7 @@ function projectDOM() {
             // Add editing form to DOM and focus to input
             navItem.after(projectForm);
             document.querySelector('#set-name-project').focus();
+
             // Set index of the project
             setProjectIndex(index);
         }
@@ -2095,7 +2096,7 @@ function projectDOM() {
 
     const handleEditTaskButton = (event) => {
         const button = event.target.closest('.edit-btn');
-        const projects = projectManager.getProjects(); // Get all projects
+        const projects = projectManager.getProjects();
 
         // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
@@ -2160,6 +2161,7 @@ function projectDOM() {
 
             // Get project index, task index and project name
             const indexOfTask = getCurrentTaskIndex(checkbox);
+
             // Each `task` has the name of the project in the id
             const taskContainer = checkbox.closest('.task-container');
             const projectName = taskContainer.id.split('-')[0];
@@ -2169,6 +2171,7 @@ function projectDOM() {
             if (indexOfTask !== -1) {
                 // Toggle task status and update page content
                 projectManager.toggleTaskCompletion(indexOfProject, indexOfTask);
+
                 // Update page content
                 const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
                 if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
@@ -2197,6 +2200,7 @@ function projectDOM() {
 
             // Get project index, task index and project name
             const indexOfTask = getCurrentTaskIndex(taskDate);
+            
             // Each `task` has the name of the project in the id
             const taskContainer = taskDate.closest('.task-container');
             const projectName = taskContainer.id.split('-')[0];
