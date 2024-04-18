@@ -1,8 +1,10 @@
-import { DOMHandler } from "./utility";
+import { DOMHandler, WebStorage } from "./utility";
 import { isSameDay } from "date-fns";
 import { isSameWeek } from "date-fns";
 
 function ProjectManager() {
+    const storage = WebStorage();
+
     const getProjectsStorageKey = () => 'projects';
     const getDefaultProjectName = () => 'Inbox';
 
@@ -18,8 +20,15 @@ function ProjectManager() {
     };
 
     const addProject = (project) => {
+        // Checks if localStorage is available and accessible
+        if (!storage.storageAvailable('localStorage')) {
+            console.error('localStorage is not available.');
+            return false;
+        }
+
         // Get projects array
         const existProjects = getProjects();
+
         // Verify if exist projects array
         if (existProjects) {
             // Search if the project already exists in the array
@@ -56,6 +65,12 @@ function ProjectManager() {
     };
 
     const addTask = (task, projectName) => {
+        // Checks if localStorage is available and accessible
+        if (!storage.storageAvailable('localStorage')) {
+            console.error('localStorage is not available.');
+            return false;
+        }
+        
         const existingProjects = getProjects();
         const defaultProjectName = getDefaultProjectName();
         const existingTasks = getTasks(projectName);
