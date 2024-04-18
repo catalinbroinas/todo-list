@@ -2267,7 +2267,6 @@ function DOMHandler() {
         const navItems = document.querySelectorAll('.nav-item');
         const setActiveItem = document.querySelector(`#${getActiveButton}`);
 
-
         navItems.forEach((item) => {
             if (item.classList.contains('active')) {
                 item.classList.remove('active');
@@ -2291,17 +2290,18 @@ function DOMHandler() {
         const button = document.createElement('button');
         const buttonIcon = document.createElement('i');
 
-        button.setAttribute('type', 'button');
-
-        if (title) {
-            button.setAttribute('title', title);
-        }
         if (buttonClass) {
             buttonClass.forEach(className => button.classList.add(className));
         }
         if (iconClass) {
             iconClass.forEach(className => buttonIcon.classList.add(className));
         }
+
+        button.setAttribute('type', 'button');
+        if (title) {
+            button.setAttribute('title', title);
+        }
+
         if (clickHandler) {
             button.addEventListener('click', clickHandler);
         }
@@ -2324,22 +2324,20 @@ function DOMHandler() {
         if (inputId) {
             input.setAttribute('id', inputId);
         }
-        if (inputClass) {
-            inputClass.forEach(className => input.classList.add(className));
-        }
-
         if (inputName) {
             input.setAttribute('name', inputName);
+        }
+
+        if (inputClass) {
+            inputClass.forEach(className => input.classList.add(className));
         }
 
         if (inputPlaceholder) {
             input.setAttribute('placeholder', inputPlaceholder);
         }
-
         if (inputValue) {
             input.setAttribute('value', inputValue);
         }
-
         if (inputFocus) {
             input.setAttribute('autofocus', 'autofocus');
         }
@@ -2386,21 +2384,27 @@ function DOMHandler() {
         clickHandler
     }) => {
         const element = document.createElement(elementTag);
-        if (elementId) {
-            element.setAttribute('id', elementId);
-        }
+
         if (elementClass) {
             elementClass.forEach(className => element.classList.add(className));
         }
-        if (elementText) {
-            element.textContent = elementText;
+
+        if (elementId) {
+            element.setAttribute('id', elementId);
         }
+
         if (elementAtrType) {
             element.setAttribute(elementAtrType, elementAtrValue);
         }
+        
+        if (elementText) {
+            element.textContent = elementText;
+        }
+
         if (clickHandler) {
             element.addEventListener('click', clickHandler);
         }
+        
         return element;
     };
 
