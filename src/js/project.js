@@ -1,6 +1,5 @@
 import { DOMHandler, WebStorage } from "./utility";
-import { isSameDay } from "date-fns";
-import { isSameWeek } from "date-fns";
+import { isSameDay, isSameWeek } from "date-fns";
 
 function ProjectManager() {
     const storage = WebStorage();
@@ -37,15 +36,16 @@ function ProjectManager() {
             if (validateTitle(project.name) && !result) {
                 existProjects.push(project);
                 saveProjects(existProjects);
-                return true;
             } else {
+                console.error('The project already exist or his name was very short.');
                 return false;
             }
         } else {
             // Create a new array with the first project and save it in `localStorage`
             localStorage.setItem(getProjectsStorageKey(), JSON.stringify([project]));
-            return true;
         }
+
+        return true;
     };
 
     const createTask = ({
@@ -70,15 +70,17 @@ function ProjectManager() {
             console.error('localStorage is not available.');
             return false;
         }
-        
+
+        // Check that the data entered is correct
+        const taskDate = new Date(task.dueDate);
+        if (!validateTitle(task.title) || !validateText(task.description) || isNaN(taskDate.getTime())) {
+            console.error('The data entered is incorrect.');
+            return false;
+        }
+
         const existingProjects = getProjects();
         const defaultProjectName = getDefaultProjectName();
         const existingTasks = getTasks(projectName);
-        const taskDate = new Date(task.dueDate);
-
-        if (!validateTitle(task.title) || !validateText(task.description) || isNaN(taskDate.getTime())) {
-            return false;
-        }
 
         // Create inbox project and add task
         if (!existingProjects) {
@@ -118,6 +120,7 @@ function ProjectManager() {
                         location.reload();
                     }
                 } else {
+                    console.error('The task has not been added.');
                     return false;
                 }
             }
@@ -130,7 +133,6 @@ function ProjectManager() {
                 existingProjects[projectIndex].tasks.push(task);
                 // Update content after first task added
                 if (!existingTasks) {
-                    console.log('First task!');
                     location.reload();
                 }
             } else {
@@ -153,11 +155,13 @@ function ProjectManager() {
     };
 
     const getTasks = (projectName) => {
+        // Project array is empty
         const existingProjects = getProjects();
         if (!existingProjects) {
             return false;
         }
 
+        // Check if the project exists
         const project = existingProjects.find(project => project.name.toLocaleLowerCase() === projectName.toLocaleLowerCase());
         if (project) {
             return project.tasks;
@@ -171,11 +175,14 @@ function ProjectManager() {
 
         if (validateIndex(index)) {
             existProjects.splice(index, 1);
-            saveProjects(existProjects);
-            return true;
         } else {
+            console.error('The project was not removed.');
             return false;
         }
+
+        // Update project array
+        saveProjects(existProjects);
+        return true;
     };
 
     const removeTask = (projectIndex, taskIndex) => {
@@ -183,11 +190,14 @@ function ProjectManager() {
 
         if (validateIndex(projectIndex) && validateIndex(taskIndex)) {
             existingProjects[projectIndex].tasks.splice(taskIndex, 1);
-            saveProjects(existingProjects);
-            return true;
         } else {
+            console.error('The task was not removed.');
             return false;
         }
+
+        // Update project array
+        saveProjects(existProjects);
+        return true;
     };
 
     const editProject = (index, setValue) => {
@@ -195,11 +205,14 @@ function ProjectManager() {
 
         if (validateIndex(index) && validateTitle(setValue)) {
             existProjects[index].name = setValue;
-            saveProjects(existProjects);
-            return true;
         } else {
+            console.error('The project was not edited.');
             return false;
         }
+
+        // Update project array
+        saveProjects(existProjects);
+        return true;
     };
 
     const editTask = (projectIndex, taskIndex, {
@@ -214,16 +227,16 @@ function ProjectManager() {
             return false;
         }
 
-        // Get projects and tasks
-        const existingProjects = getProjects();
-        const projectName = existingProjects[projectIndex].name;
-        const existingTasks = getTasks(projectName);
-
         // Validate task dates
         if (!validateTitle(title) || !validateText(description) || isNaN(new Date(dueDate).getTime())) {
             console.error('Invalid task data!');
             return false;
         }
+
+        // Get projects and tasks
+        const existingProjects = getProjects();
+        const projectName = existingProjects[projectIndex].name;
+        const existingTasks = getTasks(projectName);
 
         // Check if another task with the same title already exists in the array
         const result = existingTasks.find(item => item.title.toLowerCase() === title.toLowerCase());
