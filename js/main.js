@@ -2210,7 +2210,8 @@ function projectDOM() {
 
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
-/* harmony export */   DOMHandler: () => (/* binding */ DOMHandler)
+/* harmony export */   DOMHandler: () => (/* binding */ DOMHandler),
+/* harmony export */   WebStorage: () => (/* binding */ WebStorage)
 /* harmony export */ });
 function DOMHandler() {
     const clearPageContent = (container) => {
@@ -2334,15 +2335,15 @@ function DOMHandler() {
         return option;
     };
 
-    const createDOMElement = ({ 
-        elementTag, 
-        elementClass, 
-        elementId, 
-        elementText, 
-        elementAtrType, 
+    const createDOMElement = ({
+        elementTag,
+        elementClass,
+        elementId,
+        elementText,
+        elementAtrType,
         elementAtrValue,
         clickHandler
-      }) => {
+    }) => {
         const element = document.createElement(elementTag);
         if (elementId) {
             element.setAttribute('id', elementId);
@@ -2378,6 +2379,43 @@ function DOMHandler() {
         createOptionElement,
         removeElement,
         createDOMElement
+    };
+}
+
+function WebStorage() {
+    /**
+      * Checks if localStorage or sessionStorage is available and accessible.
+      * Based on the example from MDN web docs.
+    */
+    function storageAvailable(type) {
+        let storage;
+        try {
+            storage = window[type];
+            const x = "__storage_test__";
+            storage.setItem(x, x);
+            storage.removeItem(x);
+            return true;
+        } catch (e) {
+            return (
+                e instanceof DOMException &&
+                // everything except Firefox
+                (e.code === 22 ||
+                    // Firefox
+                    e.code === 1014 ||
+                    // test name field too, because code might not be present
+                    // everything except Firefox
+                    e.name === "QuotaExceededError" ||
+                    // Firefox
+                    e.name === "NS_ERROR_DOM_QUOTA_REACHED") &&
+                // acknowledge QuotaExceededError only if there's something already stored
+                storage &&
+                storage.length !== 0
+            );
+        }
+    }
+
+    return {
+        storageAvailable
     };
 }
 
