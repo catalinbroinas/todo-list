@@ -1343,11 +1343,12 @@ function projectDOM() {
         const navItem = element.closest('.nav-item');
         const itemName = navItem.textContent.trim();
         const projects = projectManager.getProjects();
+
         if (projects) {
             return projects.findIndex(item => item.name === itemName);
-        } else {
-            return false;
         }
+
+        return false;
     };
 
     const getCurrentTaskIndex = (element) => {
@@ -1365,17 +1366,21 @@ function projectDOM() {
 
         if (tasks) {
             return tasks.findIndex(task => task.title === itemTitle);
-        } else {
-            return false;
         }
+
+        return false;
     };
 
     const setActiveProject = (event) => {
         const button = event.target;
         const index = getCurrentProjectIndex(button);
+
         if (Number.isInteger(index) && index >= 0) {
             setProjectIndex(index);
+            return true;
         }
+
+        return false;
     };
 
     const createProjectForm = (action, value = '') => {
@@ -1668,6 +1673,7 @@ function projectDOM() {
 
     const openModal = (modalId) => {
         const dialog = document.querySelector(`#${modalId}`);
+        
         if (dialog && !dialog.open) {
             dialog.showModal();
             dialog.addEventListener('keydown', (event) => {
@@ -1678,6 +1684,7 @@ function projectDOM() {
 
     const closeModal = (modalId) => {
         const dialog = document.querySelector(`#${modalId}`);
+
         if (dialog && dialog.open) {
             dialog.close();
             utilities.removeElement(dialog);
@@ -1698,6 +1705,7 @@ function projectDOM() {
             const modal = createTaskModal(setId, setTitle);
             document.body.appendChild(modal);
         }
+
         openModal(setId);
     };
 
@@ -1773,7 +1781,7 @@ function projectDOM() {
 
         taskDueDate.addEventListener('change', () => handleTaskDate(event));
 
-        taskStatusCheckbox.checked = completed ? true : false;
+        taskStatusCheckbox.checked = completed;
 
         if (completed) {
             task.classList.add('completed');
@@ -1800,12 +1808,13 @@ function projectDOM() {
     };
 
     const displayTasks = (projectName) => {
+        const taskItems = projectManager.getTasks(projectName);
+
         const taskContainer = utilities.createDOMElement({
             elementTag: 'div',
             elementId: `${projectName.toLocaleLowerCase()}-task`,
             elementClass: ['task-container']
         });
-        const taskItems = projectManager.getTasks(projectName);
 
         if (taskItems.length) {
             taskItems.forEach(task => {
@@ -1844,6 +1853,7 @@ function projectDOM() {
         const content = document.querySelector('#content');
         const pageTitle = utilities.addTitle(projectName);
         const tasks = displayTasks(projectName);
+
         const addTaskButton = utilities.createButton({
             name: 'Add Task',
             buttonClass: ['add-task-btn'],
@@ -1992,11 +2002,13 @@ function projectDOM() {
     const handleCancelTaskButton = (event) => {
         const button = event.target;
         const modal = button.closest('.task-modal');
+
         closeModal(modal.id);
     };
 
     const handleSendProjectButton = (action, form) => {
         const projectName = document.querySelector('#set-name-project').value.trim();
+
         if (action === 'add') {
             const project = projectManager.createProject(projectName);
             projectManager.addProject(project);
@@ -2023,6 +2035,7 @@ function projectDOM() {
         const navItem = button.closest('.nav-item');
         const itemName = navItem.textContent.trim();
         const index = projectManager.getProjects().findIndex(item => item.name === itemName);
+
         projectManager.removeProject(index);
         sidebarContent();
     };
