@@ -1000,7 +1000,8 @@ function ProjectManager() {
     const getProjectsStorageKey = () => 'projects';
     const getDefaultProjectName = () => 'Inbox';
 
-    const validateText = (currentValue) => currentValue.length > 2 && currentValue.length < 20;
+    const validateTitle = (currentValue) => currentValue.length > 2 && currentValue.length < 21;
+    const validateText = (currentValue) => currentValue.length > 2 && currentValue.length < 101;
     const validateIndex = (currentValue) => Number.isInteger(currentValue) && currentValue >= 0;
 
     const createProject = (projectName) => {
@@ -1018,7 +1019,7 @@ function ProjectManager() {
             // Search if the project already exists in the array
             const result = existProjects.find(item => item.name.toLocaleLowerCase() === project.name.toLocaleLowerCase());
 
-            if (validateText(project.name) && !result) {
+            if (validateTitle(project.name) && !result) {
                 existProjects.push(project);
                 saveProjects(existProjects);
                 return true;
@@ -1054,7 +1055,7 @@ function ProjectManager() {
         const existingTasks = getTasks(projectName);
         const taskDate = new Date(task.dueDate);
 
-        if (!validateText(task.title) || !validateText(task.description) || isNaN(taskDate.getTime())) {
+        if (!validateTitle(task.title) || !validateText(task.description) || isNaN(taskDate.getTime())) {
             return false;
         }
 
@@ -1171,7 +1172,7 @@ function ProjectManager() {
     const editProject = (index, setValue) => {
         const existProjects = getProjects();
 
-        if (validateIndex(index) && validateText(setValue)) {
+        if (validateIndex(index) && validateTitle(setValue)) {
             existProjects[index].name = setValue;
             saveProjects(existProjects);
             return true;
@@ -1198,7 +1199,7 @@ function ProjectManager() {
         const existingTasks = getTasks(projectName);
 
         // Validate task dates
-        if (!validateText(title) || !validateText(description) || isNaN(new Date(dueDate).getTime())) {
+        if (!validateTitle(title) || !validateText(description) || isNaN(new Date(dueDate).getTime())) {
             console.error('Invalid task data!');
             return false;
         }
