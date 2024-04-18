@@ -2946,29 +2946,11 @@ function UI() {
     };
 
     const addEvents = () => {
-        inboxButton.addEventListener('click', (event) => {
-            setTimeout(() => {
-                inbox.displayInbox();
-            }, 500);
-        });
-        allButton.addEventListener('click', (event) => {
-            setTimeout(displayAll, 500);
-        });
-        todayButton.addEventListener('click', (event) => {
-            setTimeout(() => {
-                displayToday();
-            }, 500);
-        });
-        weekButton.addEventListener('click', () => {
-            setTimeout(() => {
-                displayWeek();
-            }, 500);
-        });
-        newProjectButton.addEventListener('click', (event) => {
-            setTimeout(() => {
-                displayNewProjectForm();
-            }, 300);
-        });
+        inboxButton.addEventListener('click', inbox.displayInbox);
+        allButton.addEventListener('click', displayAll);
+        todayButton.addEventListener('click', displayToday);
+        weekButton.addEventListener('click', displayWeek);
+        newProjectButton.addEventListener('click', displayNewProjectForm);
     };
 
     return {
