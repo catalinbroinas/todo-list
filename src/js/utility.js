@@ -224,4 +224,5 @@ function StringMethods() {
         wordsUnderlineSeparate
     }
 }
+
 export { DOMHandler, WebStorage, StringMethods };
