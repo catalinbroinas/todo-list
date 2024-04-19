@@ -1014,22 +1014,21 @@ function projectDOM() {
 
     const handleSendProjectButton = (action, form) => {
         const projectName = document.querySelector('#set-name-project').value.trim();
+        const pageTitle = document.querySelector('.content-title').textContent.trim();
 
         if (action === 'add') {
             const project = projectManager.createProject(projectName);
             projectManager.addProject(project);
-            setTimeout(() => {
-                utilities.removeElement(form);
-                sidebarContent();
-            }, 500);
+            utilities.removeElement(form);
         } else if (action === 'edit') {
             const index = getProjectIndex();
             projectManager.editProject(index, projectName);
-            setTimeout(() => {
-                utilities.removeElement(form);
-                sidebarContent();
-            }, 500);
+            utilities.removeElement(form);
         }
+
+        // Update sidebar content
+        sidebarContent();
+        utilities.setActiveSidebarButton(`${pageTitle.toLowerCase()}-btn`);
     };
 
     const handleCancelProjectButton = (form) => {
@@ -1037,16 +1036,33 @@ function projectDOM() {
     };
 
     const handleDeleteProjectButton = (event) => {
+        event.stopPropagation();
+
         const button = event.target;
+        const pageTitle = document.querySelector('.content-title').textContent.trim();
         const navItem = button.closest('.nav-item');
         const itemName = navItem.textContent.trim();
+        const defaultProjectName = projectManager.getDefaultProjectName();
         const index = projectManager.getProjects().findIndex(item => item.name === itemName);
 
+        // Remove project
         projectManager.removeProject(index);
+
+        // Update sidebar content
         sidebarContent();
+
+        // Update page content
+        if (pageTitle === itemName) {
+            utilities.setActiveSidebarButton(`${defaultProjectName.toLowerCase()}-btn`);
+            pageContent(defaultProjectName);
+        } else {
+            utilities.setActiveSidebarButton(`${pageTitle.toLowerCase()}-btn`);
+        }
     };
 
     const handleEditProjectButton = (event) => {
+        event.stopPropagation();
+
         const sidebarProject = document.querySelector('#sidebar-project');
         const button = event.target;
         const navItem = button.closest('.nav-item');
