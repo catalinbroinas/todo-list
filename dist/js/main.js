@@ -1193,7 +1193,7 @@ function ProjectManager() {
         }
 
         // Update project array
-        saveProjects(existProjects);
+        saveProjects(existingProjects);
         return true;
     };
 
