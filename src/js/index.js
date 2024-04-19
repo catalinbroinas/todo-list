@@ -18,7 +18,7 @@ function UI() {
         utilities.setActiveSidebarButton('all-btn');
         utilities.clearPageContent(pageContent);
 
-        pageContent.appendChild(utilities.addTitle('All tasks'));
+        pageContent.appendChild(utilities.addTitle('All Tasks'));
         projectDom.displayAll();
     };
 

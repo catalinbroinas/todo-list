@@ -208,4 +208,20 @@ function WebStorage() {
     };
 }
 
-export { DOMHandler, WebStorage };
+function StringMethods() {
+    const wordsCount = (str) => {
+        const array = str.trim().split(/\s+/); 
+        return array.length; 
+    }
+
+    const wordsUnderlineSeparate = (str) => {
+        const array = str.trim().split(/\s+/); 
+        return array.join('-');
+    }
+
+    return {
+        wordsCount,
+        wordsUnderlineSeparate
+    }
+}
+export { DOMHandler, WebStorage, StringMethods };

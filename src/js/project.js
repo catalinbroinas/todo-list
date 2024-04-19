@@ -1,4 +1,4 @@
-import { DOMHandler, WebStorage } from "./utility";
+import { DOMHandler, WebStorage, StringMethods } from "./utility";
 import { isSameDay, isSameWeek } from "date-fns";
 
 function ProjectManager() {
@@ -443,15 +443,22 @@ function projectDOM() {
     };
 
     const createNavItem = (name) => {
+        const string = StringMethods();
+        let itemId = `${name.toLowerCase()}-btn`;
+
+        if (string.wordsCount(name) > 1) {
+            itemId = `${string.wordsUnderlineSeparate(name).toLowerCase()}-btn`;
+        }
+        
         const newItem = utilities.createDOMElement({
             elementTag: 'a',
-            elementId: `${name.toLowerCase()}-btn`,
+            elementId: itemId,
             elementClass: ['nav-item', 'project-item'],
             elementAtrType: 'role',
             elementAtrValue: 'button',
             clickHandler: () => {
                 setActiveProject(event);
-                utilities.setActiveSidebarButton(`${name.toLowerCase()}-btn`);
+                utilities.setActiveSidebarButton(itemId);
                 pageContent(name);
             }
         });
