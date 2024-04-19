@@ -2023,6 +2023,7 @@ function projectDOM() {
         const projects = projectManager.getProjects();
         const index = getProjectIndex();
 
+        // Set the value based on the id in the sidebar element
         let navItemId = `${pageTitle.toLowerCase()}-btn`;
         if (string.wordsCount(pageTitle) > 1) {
             navItemId = `${string.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
@@ -2032,11 +2033,10 @@ function projectDOM() {
             const project = projectManager.createProject(projectName);
             projectManager.addProject(project);
             utilities.removeElement(form);
-            sidebarContent();
-            utilities.setActiveSidebarButton(navItemId);
         } else if (action === 'edit') {
             projectManager.editProject(index, projectName);
             utilities.removeElement(form);
+            // Check if the current project is edited and refresh the page
             if (pageTitle === projects[index].name) {
                 navItemId = `${projectName.toLowerCase()}-btn`;
                 if (string.wordsCount(projectName) > 1) {
@@ -2044,9 +2044,11 @@ function projectDOM() {
                 }
                 pageContent(projectName);
             }
-            sidebarContent();
-            utilities.setActiveSidebarButton(navItemId);
         }
+
+        // Update sidebar content
+        sidebarContent();
+        utilities.setActiveSidebarButton(navItemId);
     };
 
     const handleCancelProjectButton = (form) => {
@@ -2064,6 +2066,7 @@ function projectDOM() {
         const index = projectManager.getProjects().findIndex(item => item.name === itemName);
         const string = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.StringMethods)();
 
+        // Set the value based on the id in the sidebar element
         let navItemId = `${pageTitle.toLowerCase()}-btn`;
         if (string.wordsCount(pageTitle) > 1) {
             navItemId = `${string.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
@@ -2531,6 +2534,7 @@ function StringMethods() {
         wordsUnderlineSeparate
     }
 }
+
 
 
 /***/ }),
