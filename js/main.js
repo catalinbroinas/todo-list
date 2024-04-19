@@ -1440,15 +1440,22 @@ function projectDOM() {
     };
 
     const createNavItem = (name) => {
+        const string = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.StringMethods)();
+        let itemId = `${name.toLowerCase()}-btn`;
+
+        if (string.wordsCount(name) > 1) {
+            itemId = `${string.wordsUnderlineSeparate(name).toLowerCase()}-btn`;
+        }
+        
         const newItem = utilities.createDOMElement({
             elementTag: 'a',
-            elementId: `${name.toLowerCase()}-btn`,
+            elementId: itemId,
             elementClass: ['nav-item', 'project-item'],
             elementAtrType: 'role',
             elementAtrValue: 'button',
             clickHandler: () => {
                 setActiveProject(event);
-                utilities.setActiveSidebarButton(`${name.toLowerCase()}-btn`);
+                utilities.setActiveSidebarButton(itemId);
                 pageContent(name);
             }
         });
@@ -2275,6 +2282,7 @@ function projectDOM() {
 __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   DOMHandler: () => (/* binding */ DOMHandler),
+/* harmony export */   StringMethods: () => (/* binding */ StringMethods),
 /* harmony export */   WebStorage: () => (/* binding */ WebStorage)
 /* harmony export */ });
 function DOMHandler() {
@@ -2487,6 +2495,22 @@ function WebStorage() {
     };
 }
 
+function StringMethods() {
+    const wordsCount = (str) => {
+        const array = str.trim().split(/\s+/); 
+        return array.length; 
+    }
+
+    const wordsUnderlineSeparate = (str) => {
+        const array = str.trim().split(/\s+/); 
+        return array.join('-');
+    }
+
+    return {
+        wordsCount,
+        wordsUnderlineSeparate
+    }
+}
 
 
 /***/ }),
@@ -2930,7 +2954,7 @@ function UI() {
         utilities.setActiveSidebarButton('all-btn');
         utilities.clearPageContent(pageContent);
 
-        pageContent.appendChild(utilities.addTitle('All tasks'));
+        pageContent.appendChild(utilities.addTitle('All Tasks'));
         projectDom.displayAll();
     };
 
