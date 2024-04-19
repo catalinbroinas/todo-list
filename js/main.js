@@ -1446,7 +1446,7 @@ function projectDOM() {
         if (string.wordsCount(name) > 1) {
             itemId = `${string.wordsUnderlineSeparate(name).toLowerCase()}-btn`;
         }
-        
+
         const newItem = utilities.createDOMElement({
             elementTag: 'a',
             elementId: itemId,
@@ -2019,20 +2019,34 @@ function projectDOM() {
     const handleSendProjectButton = (action, form) => {
         const projectName = document.querySelector('#set-name-project').value.trim();
         const pageTitle = document.querySelector('.content-title').textContent.trim();
+        const string = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.StringMethods)();
+        const projects = projectManager.getProjects();
+        const index = getProjectIndex();
+
+        let navItemId = `${pageTitle.toLowerCase()}-btn`;
+        if (string.wordsCount(pageTitle) > 1) {
+            navItemId = `${string.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
+        }
 
         if (action === 'add') {
             const project = projectManager.createProject(projectName);
             projectManager.addProject(project);
             utilities.removeElement(form);
+            sidebarContent();
+            utilities.setActiveSidebarButton(navItemId);
         } else if (action === 'edit') {
-            const index = getProjectIndex();
             projectManager.editProject(index, projectName);
             utilities.removeElement(form);
+            if (pageTitle === projects[index].name) {
+                navItemId = `${projectName.toLowerCase()}-btn`;
+                if (string.wordsCount(projectName) > 1) {
+                    navItemId = `${string.wordsUnderlineSeparate(projectName).toLowerCase()}-btn`;
+                }
+                pageContent(projectName);
+            }
+            sidebarContent();
+            utilities.setActiveSidebarButton(navItemId);
         }
-
-        // Update sidebar content
-        sidebarContent();
-        utilities.setActiveSidebarButton(`${pageTitle.toLowerCase()}-btn`);
     };
 
     const handleCancelProjectButton = (form) => {
@@ -2048,6 +2062,12 @@ function projectDOM() {
         const itemName = navItem.textContent.trim();
         const defaultProjectName = projectManager.getDefaultProjectName();
         const index = projectManager.getProjects().findIndex(item => item.name === itemName);
+        const string = (0,_utility__WEBPACK_IMPORTED_MODULE_0__.StringMethods)();
+
+        let navItemId = `${pageTitle.toLowerCase()}-btn`;
+        if (string.wordsCount(pageTitle) > 1) {
+            navItemId = `${string.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
+        }
 
         // Remove project
         projectManager.removeProject(index);
@@ -2060,7 +2080,7 @@ function projectDOM() {
             utilities.setActiveSidebarButton(`${defaultProjectName.toLowerCase()}-btn`);
             pageContent(defaultProjectName);
         } else {
-            utilities.setActiveSidebarButton(`${pageTitle.toLowerCase()}-btn`);
+            utilities.setActiveSidebarButton(navItemId);
         }
     };
 
@@ -2223,7 +2243,7 @@ function projectDOM() {
 
             // Get project index, task index and project name
             const indexOfTask = getCurrentTaskIndex(taskDate);
-            
+
             // Each `task` has the name of the project in the id
             const taskContainer = taskDate.closest('.task-container');
             const projectName = taskContainer.id.split('-')[0];
