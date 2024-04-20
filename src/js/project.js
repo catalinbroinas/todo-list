@@ -514,7 +514,7 @@ function projectDOM() {
     };
 
     const createTaskForm = () => {
-        const projectName = document.querySelector('.content-title').textContent;
+        const projectName = document.querySelector('.content-title').textContent.trim();
         const projects = projectManager.getProjects();
 
         const form = utilities.createDOMElement({
@@ -973,7 +973,7 @@ function projectDOM() {
     const handleSendTaskButton = (event) => {
         const button = event.target;
         const modal = button.closest('.task-modal');
-        const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
+        const pageTitle = document.querySelector('.content-title').textContent.trim();
         const projects = projectManager.getProjects();
 
         // Set values by input form
@@ -1018,10 +1018,10 @@ function projectDOM() {
         // Close modal and update page content
         utilities.rippleEffect(event.target);
         setTimeout(() => closeModal(modal.id), 500);
-        if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
+        if (projects.some(item => item.name.toLowerCase() === pageTitle.toLowerCase())) {
             pageContent(taskProject);
         } else {
-            switch (pageTitle) {
+            switch (pageTitle.toLowerCase()) {
                 case 'today':
                     displayTasksByDate('today');
                     break;
@@ -1140,7 +1140,7 @@ function projectDOM() {
 
     const handleDeleteTaskButton = (event) => {
         const button = event.target.closest('.remove-btn');
-        const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
+        const pageTitle = document.querySelector('.content-title').textContent.trim();
         const projects = projectManager.getProjects();
 
         // Get current index of the task
@@ -1154,10 +1154,10 @@ function projectDOM() {
 
         // Remove task and update page content
         projectManager.removeTask(indexOfProject, indexOfTask);
-        if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
+        if (projects.some(item => item.name.toLowerCase() === pageTitle.toLowerCase())) {
             pageContent(projectName);
         } else {
-            switch (pageTitle) {
+            switch (pageTitle.toLowerCase()) {
                 case 'today':
                     displayTasksByDate('today');
                     break;
@@ -1250,11 +1250,11 @@ function projectDOM() {
                 projectManager.toggleTaskCompletion(indexOfProject, indexOfTask);
 
                 // Update page content
-                const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
-                if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
+                const pageTitle = document.querySelector('.content-title').textContent.trim();
+                if (projects.some(item => item.name.toLowerCase() === pageTitle.toLowerCase())) {
                     pageContent(projectName);
                 } else {
-                    switch (pageTitle) {
+                    switch (pageTitle.toLowerCase()) {
                         case 'today':
                             displayTasksByDate('today');
                             break;
@@ -1291,11 +1291,11 @@ function projectDOM() {
                 projectManager.changeTaskDate(indexOfProject, indexOfTask, taskDueDate);
 
                 // Update page content
-                const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
-                if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
+                const pageTitle = document.querySelector('.content-title').textContent.trim();
+                if (projects.some(item => item.name.toLowerCase() === pageTitle.toLowerCase())) {
                     pageContent(projectName);
                 } else {
-                    switch (pageTitle) {
+                    switch (pageTitle.toLowerCase()) {
                         case 'today':
                             displayTasksByDate('today');
                             break;
