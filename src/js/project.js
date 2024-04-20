@@ -329,10 +329,10 @@ function ProjectManager() {
 
 function projectDOM() {
     const projectManager = ProjectManager();
-    const projects = projectManager.getProjects();
     const defaultProjectName = projectManager.getDefaultProjectName();
     const utilities = DOMHandler();
     const content = document.querySelector('#content');
+    const stringMethods = StringMethods();
 
     let projectIndex = null;
     let taskIndex = null;
@@ -352,6 +352,7 @@ function projectDOM() {
     const getCurrentProjectIndex = (element) => {
         const navItem = element.closest('.nav-item');
         const itemName = navItem.textContent.trim();
+        const projects = projectManager.getProjects();
 
         if (projects) {
             return projects.findIndex(item => item.name === itemName);
@@ -363,18 +364,18 @@ function projectDOM() {
     const getCurrentTaskIndex = (element) => {
         // Get task title
         const taskItem = element.closest('.task');
-        const taskTitle = taskItem.querySelector('.task-title');
-        const itemTitle = taskTitle.textContent.trim();
+        const taskTitle = taskItem.querySelector('.task-title').textContent.trim();
 
         // Get project name
         const taskContainer = taskItem.closest('.task-container');
-        const projectName = taskContainer.id.split('-')[0];
+        const taskName = stringMethods.stringTrimEnd(taskContainer.id, '-task');
+        const projectName = stringMethods.wordsWhiteSpaceSeparate(taskName);
 
         // Get tasks from `projectName'
         const tasks = projectManager.getTasks(projectName);
 
         if (tasks) {
-            return tasks.findIndex(task => task.title === itemTitle);
+            return tasks.findIndex(task => task.title === taskTitle);
         }
 
         return false;
@@ -446,11 +447,10 @@ function projectDOM() {
     };
 
     const createNavItem = (name) => {
-        const string = StringMethods();
         let itemId = `${name.toLowerCase()}-btn`;
 
-        if (string.wordsCount(name) > 1) {
-            itemId = `${string.wordsUnderlineSeparate(name).toLowerCase()}-btn`;
+        if (stringMethods.wordsCount(name) > 1) {
+            itemId = `${stringMethods.wordsUnderlineSeparate(name).toLowerCase()}-btn`;
         }
 
         const newItem = utilities.createDOMElement({
@@ -515,6 +515,7 @@ function projectDOM() {
 
     const createTaskForm = () => {
         const projectName = document.querySelector('.content-title').textContent;
+        const projects = projectManager.getProjects();
 
         const form = utilities.createDOMElement({
             elementTag: 'form',
@@ -825,9 +826,14 @@ function projectDOM() {
     const displayTasks = (projectName) => {
         const taskItems = projectManager.getTasks(projectName);
 
+        let taskId = `${projectName.toLocaleLowerCase()}-task`;
+        if (stringMethods.wordsCount(projectName) > 1) {
+            taskId = `${stringMethods.wordsUnderlineSeparate(projectName.toLowerCase())}-task`;
+        }
+
         const taskContainer = utilities.createDOMElement({
             elementTag: 'div',
-            elementId: `${projectName.toLocaleLowerCase()}-task`,
+            elementId: taskId,
             elementClass: ['task-container']
         });
 
@@ -850,6 +856,7 @@ function projectDOM() {
 
     const sidebarContent = () => {
         const sideBar = document.querySelector('#sidebar-project-items');
+        const projects = projectManager.getProjects();
 
         utilities.clearPageContent(sideBar);
 
@@ -863,7 +870,6 @@ function projectDOM() {
     };
 
     const pageContent = (projectName) => {
-
         const pageTitle = utilities.addTitle(projectName);
         const tasks = displayTasks(projectName);
 
@@ -889,8 +895,8 @@ function projectDOM() {
     };
 
     const displayAll = () => {
-
         const existingTask = content.querySelectorAll('.task-container');
+        const projects = projectManager.getProjects();
 
         // Clear page content
         if (existingTask) {
@@ -911,6 +917,8 @@ function projectDOM() {
     };
 
     const displayTasksByDate = (byDate) => {
+        const projects = projectManager.getProjects();
+
         if (byDate !== 'today' && byDate !== 'week') {
             console.error('Invalid argument!');
             return false;
@@ -931,9 +939,13 @@ function projectDOM() {
         if (projects) {
             projects.forEach((item) => {
                 const taskItems = projectManager.getTasks(item.name);
+                let taskId = `${item.name.toLocaleLowerCase()}-task`;
+                if (stringMethods.wordsCount(item.name) > 1) {
+                    taskId = `${stringMethods.wordsUnderlineSeparate(item.name.toLowerCase())}-task`;
+                }
                 const taskContainer = utilities.createDOMElement({
                     elementTag: 'div',
-                    elementId: `${item.name.toLocaleLowerCase()}-task`,
+                    elementId: taskId,
                     elementClass: ['task-container']
                 });
                 if (taskItems.length) {
@@ -962,6 +974,7 @@ function projectDOM() {
         const button = event.target;
         const modal = button.closest('.task-modal');
         const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
+        const projects = projectManager.getProjects();
 
         // Set values by input form
         const taskTitle = document.querySelector('#task-title').value.trim();
@@ -986,7 +999,13 @@ function projectDOM() {
             projectManager.addTask(task, taskProject);
             const indexOfProject = projects.findIndex(project => project.name.toLowerCase() === taskProject.toLowerCase());
             setProjectIndex(indexOfProject);
-            utilities.setActiveSidebarButton(`${taskProject.toLowerCase()}-btn`);
+
+            // Set active sidebar item based active project
+            let navItemId = `${taskProject.toLowerCase()}-btn`;
+            if (stringMethods.wordsCount(taskProject) > 1) {
+                navItemId = `${stringMethods.wordsUnderlineSeparate(taskProject).toLowerCase()}-btn`;
+            }
+            utilities.setActiveSidebarButton(navItemId);
         } else if (modal.id === 'edit-task-modal') {
             projectManager.editTask(getProjectIndex(), getTaskIndex(), {
                 title: taskTitle,
@@ -1026,13 +1045,13 @@ function projectDOM() {
     const handleSendProjectButton = (action, form) => {
         const projectName = document.querySelector('#set-name-project').value.trim();
         const pageTitle = document.querySelector('.content-title').textContent.trim();
-        const string = StringMethods();
         const index = getProjectIndex();
+        const projects = projectManager.getProjects();
 
         // Set the value based on the id in the sidebar element
         let navItemId = `${pageTitle.toLowerCase()}-btn`;
-        if (string.wordsCount(pageTitle) > 1) {
-            navItemId = `${string.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
+        if (stringMethods.wordsCount(pageTitle) > 1) {
+            navItemId = `${stringMethods.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
         }
 
         if (action === 'add') {
@@ -1047,8 +1066,8 @@ function projectDOM() {
             // Check if the current project is edited and refresh the page
             if (pageTitle === projects[index].name) {
                 navItemId = `${projectName.toLowerCase()}-btn`;
-                if (string.wordsCount(projectName) > 1) {
-                    navItemId = `${string.wordsUnderlineSeparate(projectName).toLowerCase()}-btn`;
+                if (stringMethods.wordsCount(projectName) > 1) {
+                    navItemId = `${stringMethods.wordsUnderlineSeparate(projectName).toLowerCase()}-btn`;
                 }
                 pageContent(projectName);
             }
@@ -1075,12 +1094,11 @@ function projectDOM() {
         const itemName = navItem.textContent.trim();
         const defaultProjectName = projectManager.getDefaultProjectName();
         const index = projectManager.getProjects().findIndex(item => item.name === itemName);
-        const string = StringMethods();
 
         // Set the value based on the id in the sidebar element
         let navItemId = `${pageTitle.toLowerCase()}-btn`;
-        if (string.wordsCount(pageTitle) > 1) {
-            navItemId = `${string.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
+        if (stringMethods.wordsCount(pageTitle) > 1) {
+            navItemId = `${stringMethods.wordsUnderlineSeparate(pageTitle).toLowerCase()}-btn`;
         }
 
         // Remove project
@@ -1123,13 +1141,15 @@ function projectDOM() {
     const handleDeleteTaskButton = (event) => {
         const button = event.target.closest('.remove-btn');
         const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
+        const projects = projectManager.getProjects();
 
         // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
 
         // Each `task` has the name of the project in the id
         const taskContainer = button.closest('.task-container');
-        const projectName = taskContainer.id.split('-')[0];
+        const taskName = stringMethods.stringTrimEnd(taskContainer.id, '-task');
+        const projectName = stringMethods.wordsWhiteSpaceSeparate(taskName);
         const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
 
         // Remove task and update page content
@@ -1152,13 +1172,15 @@ function projectDOM() {
 
     const handleEditTaskButton = (event) => {
         const button = event.target.closest('.edit-btn');
+        const projects = projectManager.getProjects();
 
         // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
 
         // Each `task` has the name of the project in the id
         const taskContainer = button.closest('.task-container');
-        const projectName = taskContainer.id.split('-')[0];
+        const taskName = stringMethods.stringTrimEnd(taskContainer.id, '-task');
+        const projectName = stringMethods.wordsWhiteSpaceSeparate(taskName);
         const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
 
         // Set project index and task index
@@ -1211,13 +1233,15 @@ function projectDOM() {
         // Verify if the clicked element is a checkbox input
         if (event.target.type === 'checkbox') {
             const checkbox = event.target;
+            const projects = projectManager.getProjects();
 
             // Get project index, task index and project name
             const indexOfTask = getCurrentTaskIndex(checkbox);
 
             // Each `task` has the name of the project in the id
             const taskContainer = checkbox.closest('.task-container');
-            const projectName = taskContainer.id.split('-')[0];
+            const taskName = stringMethods.stringTrimEnd(taskContainer.id, '-task');
+            const projectName = stringMethods.wordsWhiteSpaceSeparate(taskName);
             const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
 
             // Verify that the checkbox is assigned to a task
@@ -1248,13 +1272,15 @@ function projectDOM() {
     const handleTaskDate = (event) => {
         if (event.target.type === 'date') {
             const taskDate = event.target;
+            const projects = projectManager.getProjects();
 
             // Get project index, task index and project name
             const indexOfTask = getCurrentTaskIndex(taskDate);
 
             // Each `task` has the name of the project in the id
             const taskContainer = taskDate.closest('.task-container');
-            const projectName = taskContainer.id.split('-')[0];
+            const taskName = stringMethods.stringTrimEnd(taskContainer.id, '-task');
+            const projectName = stringMethods.wordsWhiteSpaceSeparate(taskName);
             const indexOfProject = projects.findIndex(item => item.name.toLowerCase() === projectName.toLowerCase());
 
             // Verify that the date is assigned to a task

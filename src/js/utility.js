@@ -237,16 +237,27 @@ function StringMethods() {
     const wordsCount = (str) => {
         const array = str.trim().split(/\s+/); 
         return array.length; 
-    }
+    };
 
     const wordsUnderlineSeparate = (str) => {
         const array = str.trim().split(/\s+/); 
         return array.join('-');
-    }
+    };
+
+    const wordsWhiteSpaceSeparate = (str) => {
+        const array = str.trim().split('-');
+        return array.join(' ');
+    };
+
+    const stringTrimEnd = (str, trim) => {
+        return str.replace(new RegExp(`${trim}$`), '');
+    };
 
     return {
         wordsCount,
-        wordsUnderlineSeparate
+        wordsUnderlineSeparate,
+        wordsWhiteSpaceSeparate,
+        stringTrimEnd
     }
 }
 
