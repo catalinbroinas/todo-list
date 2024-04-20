@@ -419,13 +419,13 @@ function projectDOM() {
 
         const sendButton = utilities.createButton({
             name: action,
-            buttonClass: ['add-btn'],
+            buttonClass: ['btn', 'add-btn'],
             iconClass: ['mdi', iconType, 'action-btn-icon'],
             clickHandler: () => handleSendProjectButton(action, form)
         });
         const cancelButton = utilities.createButton({
             name: 'Cancel',
-            buttonClass: ['cancel-btn'],
+            buttonClass: ['btn', 'cancel-btn'],
             iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
             clickHandler: () => handleCancelProjectButton(form)
         });
@@ -612,13 +612,13 @@ function projectDOM() {
 
         const sendButton = utilities.createButton({
             name: 'Add',
-            buttonClass: ['add-btn'],
+            buttonClass: ['btn', 'add-btn'],
             iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
             clickHandler: () => handleSendTaskButton(event)
         });
         const cancelButton = utilities.createButton({
             name: 'Cancel',
-            buttonClass: ['cancel-btn'],
+            buttonClass: ['btn', 'cancel-btn'],
             iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
             clickHandler: () => handleCancelTaskButton(event)
         });
@@ -674,7 +674,7 @@ function projectDOM() {
             utilities.removeElement(addButton);
             const sendButton = utilities.createButton({
                 name: 'Edit',
-                buttonClass: ['add-btn'],
+                buttonClass: ['btn', 'add-btn'],
                 iconClass: ['mdi', 'mdi-pencil', 'action-btn-icon'],
                 clickHandler: () => handleSendTaskButton(event)
             });
@@ -869,9 +869,14 @@ function projectDOM() {
 
         const addTaskButton = utilities.createButton({
             name: 'Add Task',
-            buttonClass: ['add-task-btn'],
+            buttonClass: ['btn', 'add-task-btn'],
             iconClass: ['mdi', 'mdi-plus', 'add-task-icon'],
-            clickHandler: () => createAndOpenModal('add-task-modal', 'Add new task')
+            clickHandler: () => {
+                utilities.rippleEffect(event.target);
+                setTimeout(() => {
+                    createAndOpenModal('add-task-modal', 'Add new task');
+                }, 500);
+            }
         });
 
         utilities.clearPageContent(content);
@@ -995,7 +1000,8 @@ function projectDOM() {
         }
 
         // Close modal and update page content
-        closeModal(modal.id);
+        utilities.rippleEffect(event.target);
+        setTimeout(() => closeModal(modal.id), 500);
         if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
             pageContent(taskProject);
         } else {
@@ -1016,7 +1022,8 @@ function projectDOM() {
         const button = event.target;
         const modal = button.closest('.task-modal');
 
-        closeModal(modal.id);
+        utilities.rippleEffect(event.target);
+        setTimeout(() => closeModal(modal.id), 500);
     };
 
     const handleSendProjectButton = (action, form) => {
@@ -1035,10 +1042,12 @@ function projectDOM() {
         if (action === 'add') {
             const project = projectManager.createProject(projectName);
             projectManager.addProject(project);
-            utilities.removeElement(form);
+            utilities.rippleEffect(event.target);
+            setTimeout(() => utilities.removeElement(form), 500);
         } else if (action === 'edit') {
             projectManager.editProject(index, projectName);
-            utilities.removeElement(form);
+            utilities.rippleEffect(event.target);
+            setTimeout(() => utilities.removeElement(form), 500);
             // Check if the current project is edited and refresh the page
             if (pageTitle === projects[index].name) {
                 navItemId = `${projectName.toLowerCase()}-btn`;
@@ -1050,11 +1059,14 @@ function projectDOM() {
         }
 
         // Update sidebar content
-        sidebarContent();
-        utilities.setActiveSidebarButton(navItemId);
+        setTimeout(() => {
+            sidebarContent();
+            utilities.setActiveSidebarButton(navItemId);
+        }, 500);
     };
 
     const handleCancelProjectButton = (form) => {
+        utilities.rippleEffect(event.target);
         setTimeout(() => utilities.removeElement(form), 500);
     };
 

@@ -496,7 +496,39 @@ ul {
     font-weight: normal;
     color: #757575;
     font-family: inherit;
-}`, "",{"version":3,"sources":["webpack://./src/css/style.css"],"names":[],"mappings":"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","sourcesContent":["/* Body */\r\nbody {\r\n    font-family: \"Roboto\", Arial, Verdana, Helvetica, sans-serif;\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul,\r\nli,\r\nh1,\r\nh6 {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul {\r\n    list-style-type: none;\r\n}\r\n\r\n* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Layout */\r\n.page-wrapper {\r\n    max-width: 100vw;\r\n    min-height: 100vh;\r\n    margin: 0;\r\n    padding: 0;\r\n    display: grid;\r\n    grid-template-rows: auto 1fr auto;\r\n    grid-template-columns: auto 1fr;\r\n}\r\n\r\n.header {\r\n    padding: 1.5rem 3rem;\r\n    grid-column: span 2;\r\n    background-color: #304FFE;\r\n    font-size: 3rem;\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    gap: 1rem;\r\n}\r\n\r\n.sidebar {\r\n    background-color: #ECEFF1;\r\n    padding: 3rem;\r\n}\r\n\r\n.content {\r\n    background-color: #FBFBFB;\r\n}\r\n\r\n.footer {\r\n    padding: 1.25rem 0;\r\n    background-color: #E8EAF6;\r\n    text-align: center;\r\n    grid-column: span 2;\r\n}\r\n\r\n/* Header */\r\n.page-title {\r\n    color: #FBFBFB;\r\n    font-size: inherit;\r\n    margin: 0;\r\n    padding: 0;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n}\r\n\r\n.page-logo {\r\n    font-size: inherit;\r\n    color: #FBFBFB;\r\n    margin: 0;\r\n}\r\n\r\n/* Sidebar */\r\n.sidebar-task,\r\n.sidebar-project,\r\n.sidebar-project-items {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n}\r\n\r\n.sidebar-task {\r\n    margin: 0 0 2rem;\r\n}\r\n\r\n.sidebar-title {\r\n    font-size: 1.5rem;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n    margin: 0 0 1rem;\r\n}\r\n\r\n.nav-item {\r\n    font-size: 1rem;\r\n    font-family: inherit;\r\n    margin: 0 0 1rem;\r\n    border: none;\r\n    background-color: transparent;\r\n    overflow: hidden;\r\n    display: inline-block;\r\n    text-align: left;\r\n    cursor: pointer;\r\n    padding: 0.5rem 4rem 0.5rem 2rem;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.nav-item:hover,\r\n.nav-item:active,\r\n.nav-item.active {\r\n    background-color: #E0E0E0;\r\n}\r\n\r\n.sidebar-project {\r\n    margin: 2rem 0 0;\r\n}\r\n\r\n.nav-icon {\r\n    margin-right: 0.5rem;\r\n}\r\n\r\n.project-form {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    gap: 1rem;\r\n    margin-bottom: 2rem;\r\n}\r\n\r\n.form-control {\r\n    font-size: 1rem;\r\n    font-family: inherit;\r\n    color: #333;\r\n    background-color: #fff;\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    padding: 8px 12px;\r\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n    transition: border-color 0.3s, box-shadow 0.3s;\r\n}\r\n\r\n.form-control:focus {\r\n    outline: none;\r\n    border-color: #007bff;\r\n    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);\r\n}\r\n\r\n.group-btn {\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    justify-content: center;\r\n    gap: 1rem;\r\n}\r\n\r\n.add-btn,\r\n.cancel-btn {\r\n    display: inline-block;\r\n    padding: 0.5rem 1rem;\r\n    font-size: 1rem;\r\n    overflow: hidden;\r\n    outline: none;\r\n    border: 0;\r\n    cursor: pointer;\r\n    color: #FBFBFB;\r\n    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);\r\n    text-transform: capitalize;\r\n    transition: background 0.3s ease, box-shadow 0.3s ease-in-out;\r\n}\r\n\r\n.add-btn {\r\n    background-color: #00C853;\r\n}\r\n\r\n.add-btn:hover,\r\n.add-btn:hover:active {\r\n    background-color: #00E676;\r\n    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.cancel-btn {\r\n    background-color: #DD2C00;\r\n}\r\n\r\n.cancel-btn:hover,\r\n.cancel-btn:active {\r\n    background-color: #FF3D00;\r\n    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.action-btn-icon {\r\n    margin: 0 0.5rem 0 0;\r\n}\r\n\r\n.project-item {\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    padding: 0.5rem 0.5rem 0.5rem 1rem;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    gap: 2rem;\r\n    font-size: 1rem;\r\n}\r\n\r\n.project-item-body, \r\n.project-item-actions {\r\n    display: inline-block;\r\n}\r\n\r\n.project-action-btn {\r\n    display: inline-block;\r\n    visibility: hidden;\r\n    cursor: pointer;\r\n    border: none;\r\n    background-color: transparent;\r\n    margin-right: 0.5rem;\r\n    font-size: 1.25rem;\r\n}\r\n\r\n/* Content */\r\n.content {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    align-items: start;\r\n    padding: 3rem 6rem;\r\n}\r\n\r\n.content-title {\r\n    font-size: 2rem;\r\n    margin: 0 0 2rem;\r\n}\r\n\r\n.content-title::first-letter {\r\n    text-transform: uppercase;\r\n}\r\n\r\n.add-task-btn {\r\n    display: inline-block;\r\n    overflow: hidden;\r\n    cursor: pointer;\r\n    background-color: #ECEFF1;\r\n    padding: 0.75rem 6rem 0.75rem 1rem;\r\n    border: none;\r\n    outline: none;\r\n    margin: 1rem 0;\r\n    font-size: 1.25rem;\r\n    text-align: left;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.add-task-btn:hover,\r\n.add-task-btn:active {\r\n    background-color: #E0E0E0;\r\n}\r\n\r\n.add-task-icon {\r\n    margin-right: 1rem;\r\n}\r\n\r\n.insert-task-form {\r\n    width: 90%;\r\n    margin: 2rem auto;\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    background-color: #ECEFF1;\r\n    border-radius: 1rem;\r\n    padding: 2rem 3rem;\r\n    gap: 1.5rem;\r\n}\r\n\r\n.task-details,\r\n.task-metadata {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-flow: row wrap;\r\n    gap: 2rem;\r\n}\r\n\r\n.insert-task-form .form-control {\r\n    flex-grow: 1;\r\n}\r\n\r\n.insert-task-form .group-btn {\r\n    gap: 3rem;\r\n}\r\n\r\n/* Task */\r\n.task-container {\r\n    width: 100%;\r\n    margin: 0;\r\n}\r\n\r\n.task {\r\n    width: 80%;\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    align-items: center;\r\n    background-color: #ECEFF1;\r\n    color: #332D2D;\r\n    font-size: 1rem;\r\n    padding: 0.5rem 1.5rem;\r\n    margin: 1rem 0;\r\n    border-radius: 1rem;\r\n}\r\n\r\n.task.critical-priority {\r\n    background-color: #FFEBEE;\r\n}\r\n\r\n.task.high-priority {\r\n    background-color: #FFF3E0;\r\n}\r\n\r\n.task.medium-priority {\r\n    background-color: #FFFDE7;\r\n}\r\n\r\n.task.low-priority {\r\n    background-color: #E3F2FD;\r\n}\r\n\r\n.task.completed {\r\n    background-color: #DCEDC8;\r\n}\r\n\r\n.task-status {\r\n    margin-right: 2rem;\r\n}\r\n\r\n.task-status-checkbox {\r\n    appearance: none; /* Hide the default look of the checkbox*/\r\n    cursor: pointer;\r\n    width: 1.5rem; \r\n    height: 1.5rem; \r\n    border: 2px solid #304FFE;\r\n    border-radius: 0.5rem; \r\n    transition: border-color 0.3s ease; \r\n}\r\n\r\n.task-status-checkbox:hover {\r\n    background-color: white;\r\n}\r\n\r\n.task-status-checkbox:checked {\r\n    background-color: #14A44D; \r\n    border-color: #14A44D;\r\n}\r\n\r\n.task-body {\r\n    margin-right: auto;\r\n}\r\n\r\n.task-title,\r\n.task-description {\r\n    margin: 0;\r\n    font-size: 1rem;\r\n}\r\n\r\n.task.completed .task-title,\r\n.task.completed .task-description {\r\n    text-decoration: line-through;\r\n}\r\n\r\n.task-title {\r\n    font-weight: bold;\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.task-description {\r\n    font-weight: normal;\r\n}\r\n\r\n.task-action {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.task-action-date,\r\n.task-action-btn {\r\n    cursor: pointer;\r\n    padding: 0.5rem 1rem;\r\n    border: none;\r\n    background-color: transparent;\r\n    overflow: hidden;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.task-action-date {\r\n    font-size: 1rem;\r\n    border-radius: 0.25rem;\r\n}\r\n\r\n.task-action-btn {\r\n    display: inline-block;\r\n    margin-left: 1rem;\r\n    border-radius: 0.5rem;\r\n}\r\n\r\n.task.completed .task-action-date,\r\n.task.completed .edit-btn {\r\n    opacity: 0.5;\r\n}\r\n\r\n.task-action-date:hover,\r\n.task-action-date:active,\r\n.task-action-btn:hover,\r\n.task-action-btn:active {\r\n    background-color: white;\r\n}\r\n\r\n.task.completed .task-action-date:hover,\r\n.task.completed .edit-btn:hover {\r\n    background-color: transparent;\r\n    cursor: default;\r\n}\r\n\r\n.task-icon {\r\n    font-size: 1.5rem;\r\n}\r\n\r\n/* Modal */\r\n.task-modal {\r\n    width: min(800px, 98vw);\r\n    background-color: #FBFBFB;\r\n    border: none;\r\n    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);\r\n    padding: 1rem;\r\n}\r\n\r\n.task-modal .modal-header {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.task-modal .close-btn {\r\n    text-align: center;\r\n    flex-grow: 0;\r\n    margin-left: auto;\r\n    cursor: pointer;\r\n    border: none;\r\n    background-color: transparent;\r\n    color: #9E9E9E;\r\n    font-size: 1.5rem;\r\n    transition: color 0.3s ease;\r\n}\r\n\r\n.task-modal .close-btn:hover,\r\n.task-modal .close-btn:active {\r\n    color: #262626;\r\n}\r\n\r\n.task-modal .modal-title {\r\n    font-weight: normal;\r\n    font-size: 1.5rem;\r\n    margin: 0;\r\n    text-align: center;\r\n    flex-grow: 1;\r\n}\r\n\r\n.task-modal .modal-title::first-letter {\r\n    text-transform: uppercase;\r\n}\r\n\r\n::backdrop {\r\n    background-color: #CFD8DC;\r\n    opacity: 0.5;\r\n}\r\n\r\n/* Footer */\r\n.footer-text {\r\n    font-size: 1rem;\r\n    font-weight: normal;\r\n    color: #757575;\r\n    font-family: inherit;\r\n}"],"sourceRoot":""}]);
+}
+
+/* Animation */
+.btn {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn span {
+    position: absolute;
+    border-radius: 50%;
+    background-color: rgba(255, 255, 255, 0.8);
+    width: 100px;
+    height: 100px;
+    margin-top: -50px;
+    margin-left: -50px;
+    animation: ripple 1s;
+    opacity: 0;
+}
+
+/* Add animation */
+@keyframes ripple {
+    from {
+        opacity: 1;
+        transform: scale(0);
+    }
+
+    to {
+        opacity: 0;
+        transform: scale(10);
+    }
+}
+`, "",{"version":3,"sources":["webpack://./src/css/style.css"],"names":[],"mappings":"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","sourcesContent":["/* Body */\r\nbody {\r\n    font-family: \"Roboto\", Arial, Verdana, Helvetica, sans-serif;\r\n    box-sizing: border-box;\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul,\r\nli,\r\nh1,\r\nh6 {\r\n    margin: 0;\r\n    padding: 0;\r\n}\r\n\r\nul {\r\n    list-style-type: none;\r\n}\r\n\r\n* {\r\n    box-sizing: border-box;\r\n}\r\n\r\n/* Layout */\r\n.page-wrapper {\r\n    max-width: 100vw;\r\n    min-height: 100vh;\r\n    margin: 0;\r\n    padding: 0;\r\n    display: grid;\r\n    grid-template-rows: auto 1fr auto;\r\n    grid-template-columns: auto 1fr;\r\n}\r\n\r\n.header {\r\n    padding: 1.5rem 3rem;\r\n    grid-column: span 2;\r\n    background-color: #304FFE;\r\n    font-size: 3rem;\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    gap: 1rem;\r\n}\r\n\r\n.sidebar {\r\n    background-color: #ECEFF1;\r\n    padding: 3rem;\r\n}\r\n\r\n.content {\r\n    background-color: #FBFBFB;\r\n}\r\n\r\n.footer {\r\n    padding: 1.25rem 0;\r\n    background-color: #E8EAF6;\r\n    text-align: center;\r\n    grid-column: span 2;\r\n}\r\n\r\n/* Header */\r\n.page-title {\r\n    color: #FBFBFB;\r\n    font-size: inherit;\r\n    margin: 0;\r\n    padding: 0;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n}\r\n\r\n.page-logo {\r\n    font-size: inherit;\r\n    color: #FBFBFB;\r\n    margin: 0;\r\n}\r\n\r\n/* Sidebar */\r\n.sidebar-task,\r\n.sidebar-project,\r\n.sidebar-project-items {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n}\r\n\r\n.sidebar-task {\r\n    margin: 0 0 2rem;\r\n}\r\n\r\n.sidebar-title {\r\n    font-size: 1.5rem;\r\n    font-family: inherit;\r\n    font-weight: bold;\r\n    margin: 0 0 1rem;\r\n}\r\n\r\n.nav-item {\r\n    font-size: 1rem;\r\n    font-family: inherit;\r\n    margin: 0 0 1rem;\r\n    border: none;\r\n    background-color: transparent;\r\n    overflow: hidden;\r\n    display: inline-block;\r\n    text-align: left;\r\n    cursor: pointer;\r\n    padding: 0.5rem 4rem 0.5rem 2rem;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.nav-item:hover,\r\n.nav-item:active,\r\n.nav-item.active {\r\n    background-color: #E0E0E0;\r\n}\r\n\r\n.sidebar-project {\r\n    margin: 2rem 0 0;\r\n}\r\n\r\n.nav-icon {\r\n    margin-right: 0.5rem;\r\n}\r\n\r\n.project-form {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    gap: 1rem;\r\n    margin-bottom: 2rem;\r\n}\r\n\r\n.form-control {\r\n    font-size: 1rem;\r\n    font-family: inherit;\r\n    color: #333;\r\n    background-color: #fff;\r\n    border: 1px solid #ccc;\r\n    border-radius: 4px;\r\n    padding: 8px 12px;\r\n    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);\r\n    transition: border-color 0.3s, box-shadow 0.3s;\r\n}\r\n\r\n.form-control:focus {\r\n    outline: none;\r\n    border-color: #007bff;\r\n    box-shadow: 0 2px 4px rgba(0, 123, 255, 0.3);\r\n}\r\n\r\n.group-btn {\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    justify-content: center;\r\n    gap: 1rem;\r\n}\r\n\r\n.add-btn,\r\n.cancel-btn {\r\n    display: inline-block;\r\n    padding: 0.5rem 1rem;\r\n    font-size: 1rem;\r\n    overflow: hidden;\r\n    outline: none;\r\n    border: 0;\r\n    cursor: pointer;\r\n    color: #FBFBFB;\r\n    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08);\r\n    text-transform: capitalize;\r\n    transition: background 0.3s ease, box-shadow 0.3s ease-in-out;\r\n}\r\n\r\n.add-btn {\r\n    background-color: #00C853;\r\n}\r\n\r\n.add-btn:hover,\r\n.add-btn:hover:active {\r\n    background-color: #00E676;\r\n    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.cancel-btn {\r\n    background-color: #DD2C00;\r\n}\r\n\r\n.cancel-btn:hover,\r\n.cancel-btn:active {\r\n    background-color: #FF3D00;\r\n    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15), 0 2px 5px rgba(0, 0, 0, 0.1);\r\n}\r\n\r\n.action-btn-icon {\r\n    margin: 0 0.5rem 0 0;\r\n}\r\n\r\n.project-item {\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    padding: 0.5rem 0.5rem 0.5rem 1rem;\r\n    justify-content: space-between;\r\n    align-items: center;\r\n    gap: 2rem;\r\n    font-size: 1rem;\r\n}\r\n\r\n.project-item-body, \r\n.project-item-actions {\r\n    display: inline-block;\r\n}\r\n\r\n.project-action-btn {\r\n    display: inline-block;\r\n    visibility: hidden;\r\n    cursor: pointer;\r\n    border: none;\r\n    background-color: transparent;\r\n    margin-right: 0.5rem;\r\n    font-size: 1.25rem;\r\n}\r\n\r\n/* Content */\r\n.content {\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    align-items: start;\r\n    padding: 3rem 6rem;\r\n}\r\n\r\n.content-title {\r\n    font-size: 2rem;\r\n    margin: 0 0 2rem;\r\n}\r\n\r\n.content-title::first-letter {\r\n    text-transform: uppercase;\r\n}\r\n\r\n.add-task-btn {\r\n    display: inline-block;\r\n    overflow: hidden;\r\n    cursor: pointer;\r\n    background-color: #ECEFF1;\r\n    padding: 0.75rem 6rem 0.75rem 1rem;\r\n    border: none;\r\n    outline: none;\r\n    margin: 1rem 0;\r\n    font-size: 1.25rem;\r\n    text-align: left;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.add-task-btn:hover,\r\n.add-task-btn:active {\r\n    background-color: #E0E0E0;\r\n}\r\n\r\n.add-task-icon {\r\n    margin-right: 1rem;\r\n}\r\n\r\n.insert-task-form {\r\n    width: 90%;\r\n    margin: 2rem auto;\r\n    display: flex;\r\n    flex-flow: column wrap;\r\n    background-color: #ECEFF1;\r\n    border-radius: 1rem;\r\n    padding: 2rem 3rem;\r\n    gap: 1.5rem;\r\n}\r\n\r\n.task-details,\r\n.task-metadata {\r\n    display: flex;\r\n    justify-content: center;\r\n    flex-flow: row wrap;\r\n    gap: 2rem;\r\n}\r\n\r\n.insert-task-form .form-control {\r\n    flex-grow: 1;\r\n}\r\n\r\n.insert-task-form .group-btn {\r\n    gap: 3rem;\r\n}\r\n\r\n/* Task */\r\n.task-container {\r\n    width: 100%;\r\n    margin: 0;\r\n}\r\n\r\n.task {\r\n    width: 80%;\r\n    display: flex;\r\n    flex-flow: row wrap;\r\n    align-items: center;\r\n    background-color: #ECEFF1;\r\n    color: #332D2D;\r\n    font-size: 1rem;\r\n    padding: 0.5rem 1.5rem;\r\n    margin: 1rem 0;\r\n    border-radius: 1rem;\r\n}\r\n\r\n.task.critical-priority {\r\n    background-color: #FFEBEE;\r\n}\r\n\r\n.task.high-priority {\r\n    background-color: #FFF3E0;\r\n}\r\n\r\n.task.medium-priority {\r\n    background-color: #FFFDE7;\r\n}\r\n\r\n.task.low-priority {\r\n    background-color: #E3F2FD;\r\n}\r\n\r\n.task.completed {\r\n    background-color: #DCEDC8;\r\n}\r\n\r\n.task-status {\r\n    margin-right: 2rem;\r\n}\r\n\r\n.task-status-checkbox {\r\n    appearance: none; /* Hide the default look of the checkbox*/\r\n    cursor: pointer;\r\n    width: 1.5rem; \r\n    height: 1.5rem; \r\n    border: 2px solid #304FFE;\r\n    border-radius: 0.5rem; \r\n    transition: border-color 0.3s ease; \r\n}\r\n\r\n.task-status-checkbox:hover {\r\n    background-color: white;\r\n}\r\n\r\n.task-status-checkbox:checked {\r\n    background-color: #14A44D; \r\n    border-color: #14A44D;\r\n}\r\n\r\n.task-body {\r\n    margin-right: auto;\r\n}\r\n\r\n.task-title,\r\n.task-description {\r\n    margin: 0;\r\n    font-size: 1rem;\r\n}\r\n\r\n.task.completed .task-title,\r\n.task.completed .task-description {\r\n    text-decoration: line-through;\r\n}\r\n\r\n.task-title {\r\n    font-weight: bold;\r\n    margin-bottom: 0.5rem;\r\n}\r\n\r\n.task-description {\r\n    font-weight: normal;\r\n}\r\n\r\n.task-action {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.task-action-date,\r\n.task-action-btn {\r\n    cursor: pointer;\r\n    padding: 0.5rem 1rem;\r\n    border: none;\r\n    background-color: transparent;\r\n    overflow: hidden;\r\n    transition: background 0.3s ease;\r\n}\r\n\r\n.task-action-date {\r\n    font-size: 1rem;\r\n    border-radius: 0.25rem;\r\n}\r\n\r\n.task-action-btn {\r\n    display: inline-block;\r\n    margin-left: 1rem;\r\n    border-radius: 0.5rem;\r\n}\r\n\r\n.task.completed .task-action-date,\r\n.task.completed .edit-btn {\r\n    opacity: 0.5;\r\n}\r\n\r\n.task-action-date:hover,\r\n.task-action-date:active,\r\n.task-action-btn:hover,\r\n.task-action-btn:active {\r\n    background-color: white;\r\n}\r\n\r\n.task.completed .task-action-date:hover,\r\n.task.completed .edit-btn:hover {\r\n    background-color: transparent;\r\n    cursor: default;\r\n}\r\n\r\n.task-icon {\r\n    font-size: 1.5rem;\r\n}\r\n\r\n/* Modal */\r\n.task-modal {\r\n    width: min(800px, 98vw);\r\n    background-color: #FBFBFB;\r\n    border: none;\r\n    box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);\r\n    padding: 1rem;\r\n}\r\n\r\n.task-modal .modal-header {\r\n    display: flex;\r\n    align-items: center;\r\n}\r\n\r\n.task-modal .close-btn {\r\n    text-align: center;\r\n    flex-grow: 0;\r\n    margin-left: auto;\r\n    cursor: pointer;\r\n    border: none;\r\n    background-color: transparent;\r\n    color: #9E9E9E;\r\n    font-size: 1.5rem;\r\n    transition: color 0.3s ease;\r\n}\r\n\r\n.task-modal .close-btn:hover,\r\n.task-modal .close-btn:active {\r\n    color: #262626;\r\n}\r\n\r\n.task-modal .modal-title {\r\n    font-weight: normal;\r\n    font-size: 1.5rem;\r\n    margin: 0;\r\n    text-align: center;\r\n    flex-grow: 1;\r\n}\r\n\r\n.task-modal .modal-title::first-letter {\r\n    text-transform: uppercase;\r\n}\r\n\r\n::backdrop {\r\n    background-color: #CFD8DC;\r\n    opacity: 0.5;\r\n}\r\n\r\n/* Footer */\r\n.footer-text {\r\n    font-size: 1rem;\r\n    font-weight: normal;\r\n    color: #757575;\r\n    font-family: inherit;\r\n}\r\n\r\n/* Animation */\r\n.btn {\r\n    position: relative;\r\n    overflow: hidden;\r\n}\r\n\r\n.btn span {\r\n    position: absolute;\r\n    border-radius: 50%;\r\n    background-color: rgba(255, 255, 255, 0.8);\r\n    width: 100px;\r\n    height: 100px;\r\n    margin-top: -50px;\r\n    margin-left: -50px;\r\n    animation: ripple 1s;\r\n    opacity: 0;\r\n}\r\n\r\n/* Add animation */\r\n@keyframes ripple {\r\n    from {\r\n        opacity: 1;\r\n        transform: scale(0);\r\n    }\r\n\r\n    to {\r\n        opacity: 0;\r\n        transform: scale(10);\r\n    }\r\n}\r\n"],"sourceRoot":""}]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
@@ -1416,13 +1448,13 @@ function projectDOM() {
 
         const sendButton = utilities.createButton({
             name: action,
-            buttonClass: ['add-btn'],
+            buttonClass: ['btn', 'add-btn'],
             iconClass: ['mdi', iconType, 'action-btn-icon'],
             clickHandler: () => handleSendProjectButton(action, form)
         });
         const cancelButton = utilities.createButton({
             name: 'Cancel',
-            buttonClass: ['cancel-btn'],
+            buttonClass: ['btn', 'cancel-btn'],
             iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
             clickHandler: () => handleCancelProjectButton(form)
         });
@@ -1609,13 +1641,13 @@ function projectDOM() {
 
         const sendButton = utilities.createButton({
             name: 'Add',
-            buttonClass: ['add-btn'],
+            buttonClass: ['btn', 'add-btn'],
             iconClass: ['mdi', 'mdi-send', 'action-btn-icon'],
             clickHandler: () => handleSendTaskButton(event)
         });
         const cancelButton = utilities.createButton({
             name: 'Cancel',
-            buttonClass: ['cancel-btn'],
+            buttonClass: ['btn', 'cancel-btn'],
             iconClass: ['mdi', 'mdi-cancel', 'action-btn-icon'],
             clickHandler: () => handleCancelTaskButton(event)
         });
@@ -1671,7 +1703,7 @@ function projectDOM() {
             utilities.removeElement(addButton);
             const sendButton = utilities.createButton({
                 name: 'Edit',
-                buttonClass: ['add-btn'],
+                buttonClass: ['btn', 'add-btn'],
                 iconClass: ['mdi', 'mdi-pencil', 'action-btn-icon'],
                 clickHandler: () => handleSendTaskButton(event)
             });
@@ -1866,9 +1898,14 @@ function projectDOM() {
 
         const addTaskButton = utilities.createButton({
             name: 'Add Task',
-            buttonClass: ['add-task-btn'],
+            buttonClass: ['btn', 'add-task-btn'],
             iconClass: ['mdi', 'mdi-plus', 'add-task-icon'],
-            clickHandler: () => createAndOpenModal('add-task-modal', 'Add new task')
+            clickHandler: () => {
+                utilities.rippleEffect(event.target);
+                setTimeout(() => {
+                    createAndOpenModal('add-task-modal', 'Add new task');
+                }, 500);
+            }
         });
 
         utilities.clearPageContent(content);
@@ -1992,7 +2029,8 @@ function projectDOM() {
         }
 
         // Close modal and update page content
-        closeModal(modal.id);
+        utilities.rippleEffect(event.target);
+        setTimeout(() => closeModal(modal.id), 500);
         if (projects.some(item => item.name.toLowerCase() === pageTitle)) {
             pageContent(taskProject);
         } else {
@@ -2013,7 +2051,8 @@ function projectDOM() {
         const button = event.target;
         const modal = button.closest('.task-modal');
 
-        closeModal(modal.id);
+        utilities.rippleEffect(event.target);
+        setTimeout(() => closeModal(modal.id), 500);
     };
 
     const handleSendProjectButton = (action, form) => {
@@ -2032,10 +2071,12 @@ function projectDOM() {
         if (action === 'add') {
             const project = projectManager.createProject(projectName);
             projectManager.addProject(project);
-            utilities.removeElement(form);
+            utilities.rippleEffect(event.target);
+            setTimeout(() => utilities.removeElement(form), 500);
         } else if (action === 'edit') {
             projectManager.editProject(index, projectName);
-            utilities.removeElement(form);
+            utilities.rippleEffect(event.target);
+            setTimeout(() => utilities.removeElement(form), 500);
             // Check if the current project is edited and refresh the page
             if (pageTitle === projects[index].name) {
                 navItemId = `${projectName.toLowerCase()}-btn`;
@@ -2047,11 +2088,14 @@ function projectDOM() {
         }
 
         // Update sidebar content
-        sidebarContent();
-        utilities.setActiveSidebarButton(navItemId);
+        setTimeout(() => {
+            sidebarContent();
+            utilities.setActiveSidebarButton(navItemId);
+        }, 500);
     };
 
     const handleCancelProjectButton = (form) => {
+        utilities.rippleEffect(event.target);
         setTimeout(() => utilities.removeElement(form), 500);
     };
 
@@ -2468,6 +2512,30 @@ function DOMHandler() {
         }
     };
 
+     // Add ripple effect to buttons
+     const rippleEffect = (btn) => {
+        const ripple = document.createElement("span");
+
+        ripple.classList.add("ripple");
+
+        btn.appendChild(ripple);
+
+        // Get position of X
+        const x = btn.clientX - btn.offsetLeft;
+
+        // Get position of Y 
+        const y = btn.clientY - btn.offsetTop;
+
+        // Position the span element 
+        ripple.style.left = `${x}px`;
+        ripple.style.top = `${y}px`;
+
+        // Remove span after 0.3s 
+        setTimeout(() => {
+            ripple.remove();
+        }, 300);
+    };
+
     return {
         clearPageContent,
         setActiveSidebarButton,
@@ -2477,7 +2545,8 @@ function DOMHandler() {
         createSelectElement,
         createOptionElement,
         removeElement,
-        createDOMElement
+        createDOMElement,
+        rippleEffect
     };
 }
 
