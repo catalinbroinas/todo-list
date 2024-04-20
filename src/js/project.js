@@ -329,7 +329,11 @@ function ProjectManager() {
 
 function projectDOM() {
     const projectManager = ProjectManager();
+    const projects = projectManager.getProjects();
+    const defaultProjectName = projectManager.getDefaultProjectName();
     const utilities = DOMHandler();
+    const content = document.querySelector('#content');
+
     let projectIndex = null;
     let taskIndex = null;
 
@@ -348,7 +352,6 @@ function projectDOM() {
     const getCurrentProjectIndex = (element) => {
         const navItem = element.closest('.nav-item');
         const itemName = navItem.textContent.trim();
-        const projects = projectManager.getProjects();
 
         if (projects) {
             return projects.findIndex(item => item.name === itemName);
@@ -511,7 +514,6 @@ function projectDOM() {
     };
 
     const createTaskForm = () => {
-        const projects = projectManager.getProjects();
         const projectName = document.querySelector('.content-title').textContent;
 
         const form = utilities.createDOMElement({
@@ -848,8 +850,6 @@ function projectDOM() {
 
     const sidebarContent = () => {
         const sideBar = document.querySelector('#sidebar-project-items');
-        const projects = projectManager.getProjects();
-        const defaultProjectName = projectManager.getDefaultProjectName();
 
         utilities.clearPageContent(sideBar);
 
@@ -863,7 +863,7 @@ function projectDOM() {
     };
 
     const pageContent = (projectName) => {
-        const content = document.querySelector('#content');
+
         const pageTitle = utilities.addTitle(projectName);
         const tasks = displayTasks(projectName);
 
@@ -889,9 +889,8 @@ function projectDOM() {
     };
 
     const displayAll = () => {
-        const content = document.querySelector('#content');
+
         const existingTask = content.querySelectorAll('.task-container');
-        const projects = projectManager.getProjects();
 
         // Clear page content
         if (existingTask) {
@@ -917,9 +916,8 @@ function projectDOM() {
             return false;
         }
 
-        const content = document.querySelector('#content');
+
         const existingTask = content.querySelectorAll('.task-container');
-        const projects = projectManager.getProjects();
         const today = new Date();
 
         // Clear page content
@@ -963,7 +961,6 @@ function projectDOM() {
     const handleSendTaskButton = (event) => {
         const button = event.target;
         const modal = button.closest('.task-modal');
-        const projects = projectManager.getProjects();
         const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
 
         // Set values by input form
@@ -1030,7 +1027,6 @@ function projectDOM() {
         const projectName = document.querySelector('#set-name-project').value.trim();
         const pageTitle = document.querySelector('.content-title').textContent.trim();
         const string = StringMethods();
-        const projects = projectManager.getProjects();
         const index = getProjectIndex();
 
         // Set the value based on the id in the sidebar element
@@ -1126,7 +1122,6 @@ function projectDOM() {
 
     const handleDeleteTaskButton = (event) => {
         const button = event.target.closest('.remove-btn');
-        const projects = projectManager.getProjects();
         const pageTitle = document.querySelector('.content-title').textContent.toLowerCase();
 
         // Get current index of the task
@@ -1157,7 +1152,6 @@ function projectDOM() {
 
     const handleEditTaskButton = (event) => {
         const button = event.target.closest('.edit-btn');
-        const projects = projectManager.getProjects();
 
         // Get current index of the task
         const indexOfTask = getCurrentTaskIndex(button);
@@ -1214,8 +1208,6 @@ function projectDOM() {
     }
 
     const handleTaskStatus = (event) => {
-        const projects = projectManager.getProjects();
-
         // Verify if the clicked element is a checkbox input
         if (event.target.type === 'checkbox') {
             const checkbox = event.target;
@@ -1254,8 +1246,6 @@ function projectDOM() {
     };
 
     const handleTaskDate = (event) => {
-        const projects = projectManager.getProjects();
-
         if (event.target.type === 'date') {
             const taskDate = event.target;
 
