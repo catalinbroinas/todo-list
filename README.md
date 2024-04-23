@@ -8,3 +8,5 @@ Technologies used:
  * Javascript
  * Webpack
  * date-fns
+
+<a href="https://catalinbroinas.github.io/todo-list/">Live Demo</a>
