@@ -95,7 +95,7 @@ ul {
 }
 
 .nav-item {
-    width: 280px;;
+    width: 280px;
     font-size: 1rem;
     font-family: inherit;
     margin: 0 0 1rem;
@@ -208,7 +208,7 @@ ul {
     font-size: 1rem;
 }
 
-.project-item-body, 
+.project-item-body,
 .project-item-actions {
     display: inline-block;
 }
@@ -296,13 +296,13 @@ ul {
 .task {
     width: 80%;
     display: flex;
-    flex-flow: row wrap;
+    flex-flow: row nowrap;
     align-items: center;
     background-color: #ECEFF1;
     color: #332D2D;
     font-size: 1rem;
     padding: 0.5rem 1.5rem;
-    margin: 1rem 0;
+    margin: 0 0 1rem;
     border-radius: 1rem;
 }
 
@@ -331,13 +331,14 @@ ul {
 }
 
 .task-status-checkbox {
-    appearance: none; /* Hide the default look of the checkbox*/
+    appearance: none;
+    /* Hide the default look of the checkbox*/
     cursor: pointer;
-    width: 1.5rem; 
-    height: 1.5rem; 
+    width: 1.5rem;
+    height: 1.5rem;
     border: 2px solid #304FFE;
-    border-radius: 0.5rem; 
-    transition: border-color 0.3s ease; 
+    border-radius: 0.5rem;
+    transition: border-color 0.3s ease;
 }
 
 .task-status-checkbox:hover {
@@ -345,7 +346,7 @@ ul {
 }
 
 .task-status-checkbox:checked {
-    background-color: #14A44D; 
+    background-color: #14A44D;
     border-color: #14A44D;
 }
 
@@ -423,7 +424,7 @@ ul {
 
 /* Modal */
 .task-modal {
-    width: min(800px, 98vw);
+    width: min(1000px, 98vw);
     background-color: #FBFBFB;
     border: none;
     box-shadow: 0 6px 10px rgba(0, 0, 0, 0.15);
@@ -505,5 +506,233 @@ ul {
     to {
         opacity: 0;
         transform: scale(10);
+    }
+}
+
+/* HD+ Devices */
+@media only screen and (max-width: 1910px) {
+    .sidebar {
+        padding: 2rem 0.5rem;
+    }
+
+    .task {
+        width: 90%;
+    }
+
+    .content {
+        padding: 2rem 4rem;
+    }
+}
+
+/* HD Devices */
+@media only screen and (max-width: 1590px) {
+    .sidebar {
+        padding: 2rem 0.5rem;
+    }
+
+    .task {
+        width: 100%;
+    }
+
+    .content {
+        padding: 2rem 4rem;
+    }
+}
+
+/* Large Devices */
+@media only screen and (max-width: 1199px) {
+
+    /* Layout */
+    .sidebar {
+        padding: 1.5rem 0.5rem;
+    }
+
+    .footer {
+        padding: 1rem 0;
+    }
+
+    /* Sidebar */
+    .sidebar-task {
+        margin: 0 0 1rem;
+    }
+
+    .sidebar-title {
+        font-size: 1.25rem;
+        margin: 0.75rem 2rem;
+    }
+
+    .nav-item,
+    .project-item {
+        width: 220px;
+        font-size: 0.75rem;
+        margin: 0 0 0.7rem;
+    }
+
+    .nav-item {
+        padding: 0.35rem 3rem 0.35rem 1.5rem;
+    }
+
+    .project-item {
+        padding: 0.35rem 0.25rem 0.35rem 0.75rem;
+        gap: 1rem;
+    }
+
+    .project-action-btn {
+        font-size: 1rem;
+    }
+
+    .project-form {
+        margin: 0 0.75rem 1rem;
+    }
+
+    .form-control {
+        font-size: 0.75rem;
+        padding: 6px 10px;
+    }
+
+    .add-btn,
+    .cancel-btn {
+        padding: 0.5rem 1rem;
+        font-size: 0.75rem;
+    }
+
+    /* Content */
+    .content {
+        padding: 1.5rem 3rem;
+    }
+
+    .content-title {
+        font-size: 1.5rem;
+    }
+
+    .add-task-btn {
+        padding: 0.5rem 4rem 0.5rem 1rem;
+        font-size: 1rem;
+    }
+
+    .insert-task-form {
+        width: 100%;
+        margin: 1.5rem auto;
+        padding: 1.5rem 2rem;
+        gap: 1rem;
+    }
+
+    .task-details,
+    .task-metadata {
+        gap: 1.5rem;
+    }
+
+    .insert-task-form .group-btn {
+        gap: 2rem;
+    }
+
+    /* Task */
+    .task {
+        width: 100%;
+        font-size: 0.75rem;
+        padding: 0.5rem 1rem;
+    }
+
+    .task-status-checkbox {
+        width: 1rem;
+        height: 1rem;
+    }
+
+    .task-title,
+    .task-description {
+        font-size: 0.75rem;
+    }
+
+    .task-action-date,
+    .task-action-btn {
+        padding: 0.35rem 0.7rem;
+    }
+
+    .task-action-date {
+        font-size: 0.75rem;
+    }
+    
+    .task-icon {
+        font-size: 1rem;
+    }
+
+    /* Footer */
+    .footer-text {
+        font-size: 0.75rem;
+    }
+}
+
+/* Medium Devices */
+@media only screen and (max-width: 991px) {
+    .sidebar-project {
+        margin: 0;
+    }
+
+    /* Content */
+    .content {
+        padding: 1rem;
+    }
+}
+
+/* Small Devices */
+@media only screen and (max-width: 767px) {
+    /* Layout */
+    .page-wrapper {
+        display: flex;
+        flex-flow: column wrap;
+    }
+
+    .header {
+        padding: 1rem 0;
+        font-size: 2rem;
+        justify-content: center;
+    }
+
+    .sidebar {
+        display: flex;
+        flex-flow: row nowrap;
+        padding: 2rem 0;
+    }
+
+    .content {
+        margin-bottom: auto;
+    }
+
+    /* Sidebar */
+    .sidebar-task, 
+    .sidebar-project {
+        flex-grow: 1;
+    }
+
+    .sidebar-task {
+        margin: 0;
+    }
+
+    .sidebar-title {
+        margin: 0 0 1rem;
+        text-align: center;
+    }
+
+    .nav-item,
+    .project-item {
+        width: 100%;
+    }
+
+    /* Content */
+    .content {
+        padding: 1rem 0;
+    }
+
+    /* Task */
+    .task {
+        display: grid;
+        grid-template-rows: auto auto;
+        grid-template-columns: auto 1fr;
+    }
+
+    .task-action {
+        grid-column: span 2;
+        margin-top: 0.5rem;
+        justify-content: center;
     }
 }
